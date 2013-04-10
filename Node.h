@@ -22,6 +22,6 @@ class Node{
         void setNodeIP(string ip);
         bool checkIfEntryExists(string fileKey);
         string getEntryValue(string fileKey);
-        void storeEntry(fileKey);
+        void storeEntry(string fileKey);
 };
 

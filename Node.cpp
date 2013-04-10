@@ -38,12 +38,12 @@ bool Node::checkIfEntryExists(string fileKey){
     return entryFound;
 }
 
-string getEntryValue(string fileKey){
+string Node::getEntryValue(string fileKey){
 
     string value;
 
     if(checkIfEntryExists(fileKey)){
-        value = this->entryList[fileKey];
+        value = this->entryList[fileKey].getFileValue();
     }
     else{
         // Entry doesn't exists on this node
