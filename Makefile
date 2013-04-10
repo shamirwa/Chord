@@ -1,5 +1,5 @@
-chord: Chord.cpp Chord.h Entry.cpp Entry.h Node.cpp Node.h
-	g++ -o chord Chord.cpp Entry.cpp Node.cpp 
+service: Service.h Chord.h Node.h Entry.h 
+	g++ -o service Service.cpp Chord.cpp Node.cpp Entry.cpp
 
 clean:
-	rm -rf chord
+	rm -rf service
