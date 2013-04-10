@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Entry.h"
 #include <vector>
+#include <string>
 
 using namespace std;
 
