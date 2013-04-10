@@ -9,7 +9,7 @@
 class Chord
 {
 		private:
-			Node localNode; //stores the local ip, local id and entry list of a node
+			Node* localNode; //stores the local ip, local id and entry list of a node
 
 		public:
 			Chord();
