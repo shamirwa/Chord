@@ -4,6 +4,8 @@
 
 #define ERR_NODE_NOT_SET "Node URL is not set yet!"
 
+#define ERR_IP_INVALID "IP address is invalid!"
+
 class MyException:public exception
 {
 

@@ -1,6 +1,19 @@
 #include "Chord.h"
 #include "Exception.h"
 
+
+/*
+ *	Method to throw an exception with the message 'msg'
+ *	
+ * */
+void throwException(string msg)
+{
+	myError.setErrorMessage(msg);
+	throw myError;
+}
+
+
+
 Chord::Chord(){
 	
 	this->localNode = NULL;	
@@ -22,23 +35,18 @@ void Chord::create(){
 	//is Node already connected	
 	if(this->localNode != NULL)
 	{
-		string msg = ERR_ALREADY_EXISTS;
-		myError.setErrorMessage(msg);
-		//throw myError(msg);
-		throw myError;
+		throwException(ERR_ALREADY_EXISTS);
 	}
 
 	//has NodeIP been set?
 	if(this->localNode->getNodeIP().length() == 0)
 	{	
-		string msg = ERR_NODE_NOT_SET;
-		myError.setErrorMessage(msg);
-		throw myError;
+		throwException(ERR_NODE_NOT_SET);
 	}
 
 	/*
 	 *
-	 * TO Do
+	 * TO DO
 	*/
 	//if necessary generate NodeId out of IP
 	if(this->localNode->getNodeID().length() == 0)
@@ -50,7 +58,16 @@ void Chord::create(){
 
 void Chord::join(string IP){
 
-		
+	//Check if IP is valid
+	if(IP.length() == 0)
+	{
+		throwException(ERR_IP_INVALID);
+	}
+
+	if(this->localNode != NULL)
+	{
+		throwException(ERR_ALREADY_EXISTS);
+	}
 
 }
 
@@ -72,12 +89,6 @@ void Chord::buildFingerTable(){
 void Chord::insert(string id,string fileContent){
 
 
-}
-
-
-int main(){
-	
-	return 0;
 }
 
 
