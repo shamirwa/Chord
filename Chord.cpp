@@ -21,7 +21,7 @@ void Chord::create(){
 			
 	if(this->localNode != NULL)
 	{
-		string msg = "Node already exists\n";
+		string msg = ERR_ALREADY_EXISTS;
 		myError.setErrorMessage(msg);
 		//throw myError(msg);
 		throw myError;

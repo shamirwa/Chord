@@ -1,5 +1,8 @@
 #include <exception>
 
+#define ERR_ALREADY_EXISTS "Cannot create network; node is already connected!\n"
+
+
 class MyException:public exception
 {
 
