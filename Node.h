@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Entry.h"
-#include <vector>
+#include <map>
 #include <string>
 
 using namespace std;
@@ -10,7 +10,8 @@ class Node{
     private:
         string localIP; // Self IP Address of the node
         string localID; // Self hash code of the node
-        vector<Entry> entryList; // List of entries
+        map<string, Entry> entryList; // map of entries keyed with the hashcode
+        map<string, Entry>::iterator myIter;
 
     public:
         Node();
@@ -19,5 +20,8 @@ class Node{
         const string getNodeIP();
         void setNodeID(string id);
         void setNodeIP(string ip);
+        bool checkIfEntryExists(string fileKey);
+        string getEntryValue(string fileKey);
+        void storeEntry(fileKey);
 };
 
