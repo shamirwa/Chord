@@ -18,7 +18,8 @@ Chord::Chord(string localID,string localIP) {
 Chord::~Chord() {}
 
 void Chord::create(){
-			
+		
+	//is Node already connected	
 	if(this->localNode != NULL)
 	{
 		string msg = ERR_ALREADY_EXISTS;
@@ -26,8 +27,24 @@ void Chord::create(){
 		//throw myError(msg);
 		throw myError;
 	}
-	
 
+	//has NodeIP been set?
+	if(this->localNode->getNodeIP().length() == 0)
+	{	
+		string msg = ERR_NODE_NOT_SET;
+		myError.setErrorMessage(msg);
+		throw myError;
+	}
+
+	/*
+	 *
+	 * TO Do
+	*/
+	//if necessary generate NodeId out of IP
+	if(this->localNode->getNodeID().length() == 0)
+	{
+				
+	}
 
 }
 
