@@ -1,5 +1,6 @@
 #include "Node.h"
 #include<map>
+#include "Successorlist.h"
 /*
  *
  * This class will handle the core functionality of the Chord Protocol. 
@@ -11,11 +12,12 @@ class Chord
 		private:
 			Node* localNode; //stores the local ip, local id and entry list of a node
 			Node* predecessor; //stores the predecessor of this node
-			Node* successor; //stores the successor of the node
+			SuccessorList successors; //stores the successors
+
 	
 		public:
 			Chord();
-			Chord(string localID,string localIP);
+			Chord(string localID,string localIP,int numSuccessor);
 			~Chord();
 			
 			void createHelp(); //Performs all necessary tasks for creating a new chord ring	
@@ -28,8 +30,10 @@ class Chord
 			void join(string IP); //joins an existing node with ip address "IP"
 			
 			void stabilize(); //runs the stabilize operations of this node
-			
-			Node* findSuccessor(string IP); //finds the successor of a given node with IP "IP"
+
+			string closestPrecedingNode(string id); //search the local table for the highest predecessor of id
+
+			string findSuccessor(string IP); //finds the successor of a given node with IP "IP"
 			
 			void leave(); //runs the leave operations for this node, updates information of adjacent nodes
 			

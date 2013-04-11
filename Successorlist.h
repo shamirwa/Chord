@@ -9,8 +9,8 @@ class SuccessorList{
     private:
         int maxNumSuccessors;
         int currentCount;
-        List<Node> successorList;
-        List<Node>::iterator myIterator;
+        list<Node> successorList;
+        list<Node>::iterator myIterator;
         string localID;
     
     public:
@@ -27,6 +27,9 @@ class SuccessorList{
         string getLocalID();
         int getCurrentSuccessorCount();
         int getMaxSuccessorCount();
+
+				//Added to pop the
+				Node getFirstSuccessor();
 };
 
 #endif

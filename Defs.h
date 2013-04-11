@@ -5,6 +5,8 @@
 
 #define NUMBER_OF_SUCCESSORS 5
 
+#define FINGER_TABLE_SIZE 160
+
 #define ERR_NODE_IP_NOT_SET "Node URL is not set yet!"
 
 #define ERR_NODE_ID_NOT_SET "Node ID is not set yet!"

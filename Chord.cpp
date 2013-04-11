@@ -2,6 +2,9 @@
 #include "Exception.h"
 #include "Defs.h"
 #include<string.h>
+
+
+
 /*
  *	Method to throw an exception with the message 'msg'
  *	
@@ -19,12 +22,14 @@ Chord::Chord(){
 	this->localNode = NULL;	
 }
 
-Chord::Chord(string localID,string localIP) {
+Chord::Chord(string localID,string localIP,int numSuccessor) {
 
 	this->localNode = NULL;
 	this->localNode = new Node;
 	this->localNode->setNodeID(localID);
 	this->localNode->setNodeIP(localIP);
+	this->successors.setLocalID(localID);
+	this->successors.setMaxNumSuccssor(numSuccessor);
 	
 }
 
@@ -37,7 +42,30 @@ void Chord::createHelp()
 
 }
 
-Node* Chord::findSuccessor(string IP)
+
+
+//searches the local table for the highest predecessor of id
+string Chord::closestPrecedingNode(string id)
+{
+	/*
+	int i;
+	for(i = FINGER_TABLE_SIZE-1 ; i >= 0 ; i--)
+	{
+		if(this->fingerTable.find(i) != this->fingerTable.end())
+		{
+				//check fingerTable(i)
+				string id = this->fingerTable[i]->first;
+
+		}
+
+	}
+		*/
+	
+
+}
+
+
+string Chord::findSuccessor(string IP)
 {
 		
 		//TO DO:
@@ -50,21 +78,27 @@ Node* Chord::findSuccessor(string IP)
 		//
 		
 		string localNodeID = this->localNode->getNodeID();
-		string successorID = this->successor->getNodeID();
+
+		string successorID = this->successors.getFirstSuccessor().getNodeID();
 	
-		//Lies between the two id's
+	/*
+		//Lies between the current node and successor node 
 		//
 		if(strcmp(localNodeID.c_str(),id.c_str()) < 0 && strcmp(successorID.c_str(),id.c_str()) > 0)
 		{
-			return this->successor; 	
+			return this->successorList[0].getNodeIP(); 	
 		}
-		
-		if(strcmp(localNodeID.c_str(),id.c_str()) > 0 && strcmp(successorID.c_str(),id.c_str()) < 0)
+		else if(strcmp(localNodeID.c_str(),id.c_str()) > 0 && strcmp(successorID.c_str(),id.c_str()) < 0)
 		{
-			return this->localNode;	
+			return this->localNode.getNodeIP();	
 		}
 		
-
+		else
+		{
+			Node* closestPrecedingNode = this->closestPrecedingNode(id);
+			return closestPrecedingNode->findSuccessor(id);
+		}
+		*/
 }
 
 
