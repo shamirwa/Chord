@@ -10,19 +10,26 @@ class Chord
 {
 		private:
 			Node* localNode; //stores the local ip, local id and entry list of a node
-
+			Node* predecessor; //stores the predecessor of this node
+			Node* successor; //stores the successor of the node
+	
 		public:
 			Chord();
 			Chord(string localID,string localIP);
 			~Chord();
 			
+			void createHelp(); //Performs all necessary tasks for creating a new chord ring	
+
+		
 			void create(); //creates a new chord network which is not connected to any other node
-			
+
+			void joinHelp(string IP); // Performs all necessary tasks for joining an existing Chord ring.
+
 			void join(string IP); //joins an existing node with ip address "IP"
 			
 			void stabilize(); //runs the stabilize operations of this node
 			
-			void findSuccessor(string id); //finds the successor of a given node with id "id"
+			Node* findSuccessor(string IP); //finds the successor of a given node with IP "IP"
 			
 			void leave(); //runs the leave operations for this node, updates information of adjacent nodes
 			
