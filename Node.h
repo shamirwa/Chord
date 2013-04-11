@@ -1,3 +1,5 @@
+#ifndef _NODE_H
+#define _NODE_H
 #include <iostream>
 #include "Entry.h"
 #include <map>
@@ -22,6 +24,8 @@ class Node{
         void setNodeIP(string ip);
         bool checkIfEntryExists(string fileKey);
         string getEntryValue(string fileKey);
-        void storeEntry(string fileKey);
+        void storeEntry(string fileKey, string fileValue);
 };
 
+
+#endif

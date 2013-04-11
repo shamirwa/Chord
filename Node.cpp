@@ -53,3 +53,17 @@ string Node::getEntryValue(string fileKey){
 
     return value;
 }
+
+void Node::storeEntry(string fileKey, string fileValue){
+
+    Entry newEntry(fileKey, fileValue); 
+    // Check if an entry exists with this key
+    if(checkIfEntryExists(fileKey)){
+        cout << FILE_ALREADY_STORED << endl;
+        return;
+    }
+    else{
+        this->entryList[fileKey] = newEntry;
+    }
+
+}

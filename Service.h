@@ -1,3 +1,6 @@
+#ifndef _SERVICE_H
+#define _SERVICE_H
+
 #include <stdio.h>
 #include <string>
 #include <string.h>
@@ -33,3 +36,5 @@ void generalInfoLog(char msg[]);
                 in the chord network
 */
 string getLocalHashID(string nodeIP);
+
+#endif

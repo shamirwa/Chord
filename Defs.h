@@ -1,3 +1,5 @@
+#ifndef _DEFS_H_
+#define _DEFS_H_
 
 #define ERR_ALREADY_EXISTS "Cannot create network; node is already connected!\n"
 
@@ -14,3 +16,9 @@
 #define WRONG_NUM_SUCCESSORS "NUMBER_OF_SUCCESSORS intialized with wrong value!"
 
 #define ERR_NODE_NULL "Error: Node is null"
+
+#define FILE_NOT_FOUND "Error: File not found"
+
+#define FILE_ALREADY_STORED "Error: File is already stored in the node"
+
+#endif
