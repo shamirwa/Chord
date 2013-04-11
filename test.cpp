@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <openssl/evp.h>
 #include <string.h>
+#include <string>
+
+using namespace std;
 
 //#define EVP_MAX_MD_SIZE 36
 
@@ -38,9 +41,18 @@ int main(int argc, char *argv[])
     EVP_MD_CTX_cleanup(&mdctx);
 
     printf("Digest Length is: %d\n", md_len);
-    printf("Digest is: ");
-    for(i = 0; i < md_len; i++) printf("%02x", md_value[i]);
+    printf("Digest is: \n");
+    char x;
+    string code = reinterpret_cast<const char*>(md_value);
+    for(i = 0; i < md_len; i++){
+        x = md_value[i];
+        
+        //printf("%d-", md_value[i]);
+        printf("%c", x);
+    }
     printf("\n");
+
+    printf("%s\n", code.c_str());
 
     return 0;
 }

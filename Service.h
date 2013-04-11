@@ -26,15 +26,4 @@ void functionEntryLog(char msg[]);
 void generalInfoLog(char msg[]);
 
 
-
-/* Function to get the hash code for the node IP
-   Input: nodeIP - IP address of the node for which hash key needs
-                    to be computed
-   Returns: string - hashKey generated for the passed IP address
-
-   Description: This hashKey is the unique identifier of a node
-                in the chord network
-*/
-string getLocalHashID(string nodeIP);
-
 #endif

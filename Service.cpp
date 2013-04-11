@@ -1,5 +1,6 @@
 #include "Service.h"
 #include "Chord.h"
+#include "Defs.h"
 
 void functionEntryLog(char msg[]){
     if(functionDebug){
@@ -11,14 +12,6 @@ void generalInfoLog(char msg[]){
     if(infoDebug){
         printf("%s\n", msg);
     }
-}
-
-string getLocalHashID(string nodeIP){
-
-    string genKey("TODO");
-
-    return genKey;
-
 }
 
 int main(int argc, char* argv[]){
@@ -75,10 +68,11 @@ int main(int argc, char* argv[]){
     }
 
     // Compute the local id of this node using SHA1 hash function
+    // Defined in Defs.h
     selfID = getLocalHashID(selfIP);
 
     // Create an object of the chord class
-    Chord myChordInstance(selfID, selfIP);
+    Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR);
 
     // Check if this is the first node or not
     if(!isFirstNode){
