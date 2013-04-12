@@ -3,7 +3,7 @@
 
 SuccessorList::SuccessorList(){
     maxNumSuccessors = 0;
-    currentCount = 0;
+    this->successors.clear();
 }
 
 SuccessorList::SuccessorList(int capacity, string myLocalKey){
@@ -15,6 +15,18 @@ SuccessorList::SuccessorList(int capacity, string myLocalKey){
 
 SuccessorList::~SuccessorList(){
 
+    if(this->successors.size() != 0){
+        for(myIterator = successors.begin();
+            myIterator != successors.end();
+            ++myIterator)
+        {
+            if(*myIterator){
+                delete(*myIterator);
+            }
+        }
+    }
+
+    successors.clear();
 }
 
 void SuccessorList::setMaxNumSuccssor(int maxSuccCount){
@@ -25,35 +37,82 @@ void SuccessorList::setLocalID(string id){
     localID = id;
 }
 
-bool SuccessorList::checkIfSuccessorExists(Node successor){
+bool SuccessorList::checkIfSuccessorExists(Node* successor){
 
     bool isNodePresent = false;
 
     // Check if a node with the same IP exists in the
     // successor list. If its already there then just
     // update the ID of the node
-    for(this->myIterator = this->successorList.begin();
-        this->myIterator != this->successorList.end();
-        ++(this->myIterator)){
+    for(myIterator = successors.begin();
+        myIterator != successors.end();
+        ++myIterator){
 
-        if(this->myIterator->localIP == successor.localIP){
-            cout << "Node " << successor.localIP << " found in the successor list" << endl;
+        if((*myIterator)->getNodeIP() == successor->getNodeIP()){
+            cout << "Node " << successor->getNodeIP() << " found in the successor list" << endl;
             cout << "Updating the localID of the successor" <<endl;
-            this->myIterator->localID = successor.localID;
+            (*myIterator)->setNodeID(successor->getNodeID());
 
             isNodePresent = true;
             break;
         }
     }
 
-    if(!isNodePresent){
-        successorList
+    return isNodePresent;
 }
 
+Node* SuccessorList::getFirstSuccessor(){
+    // Returns the first successor
+    // First checks the count of the successor present in the list
+    if(successors.size() > 0){
+
+        return successors.front();
+    }
+    else{
+        cout << "List of successor is empty\n";
+    }
 
 
-void SuccessorList::storeSuccessor(Node newSuccessor){
+}
 
+void SuccessorList::storeSuccessor(Node* newSuccessor){
 
+    // Right now just store the successor node in the list
+    // Later we can check if we need to comparethe index before insert
+    if(checkIfSuccessorExists(newSuccessor)){
+        cout << "Successor is already present in the list\n";
+    }
+    else{
+        successors.push_back(newSuccessor);
+    }
+}
 
+string SuccessorList::getLocalID(){
+
+    return localID;
+}
+
+int SuccessorList::getCurrentSuccessorCount(){
+    
+    return successors.size();
+}
+
+int SuccessorList::getMaxSuccessorCount(){
+    return maxNumSuccessors;
+}
+
+void SuccessorList::removeSuccessor(string ipToFind){
+
+    for(myIterator = successors.begin();
+        myIterator != successors.end();
+        ++myIterator)
+    {
+
+        if((*myIterator) && 
+            (*myIterator)->getNodeIP() == ipToFind){
+
+            cout << "Successor found in the list. So now remove\n";
+            delete(*myIterator);
+        }
+    }
 }

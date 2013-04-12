@@ -1,0 +1,5 @@
+service: Defs.h Chord.h Service.h
+	g++ -o service Service.cpp Chord.cpp Node.cpp Entry.cpp Successorlist.cpp -lcrypto
+
+clean:
+	rm -rf service

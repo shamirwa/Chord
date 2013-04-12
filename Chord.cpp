@@ -1,8 +1,8 @@
+
+
 #include "Chord.h"
 #include "Exception.h"
 #include "Defs.h"
-#include<string.h>
-
 
 
 /*
@@ -79,7 +79,7 @@ string Chord::findSuccessor(string IP)
 		
 		string localNodeID = this->localNode->getNodeID();
 
-		string successorID = this->successors.getFirstSuccessor().getNodeID();
+		string successorID = this->successors.getFirstSuccessor()->getNodeID();
 	
 	/*
 		//Lies between the current node and successor node 
@@ -195,5 +195,4 @@ void Chord::insert(string id,string fileContent){
 
 
 }
-
 

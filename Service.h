@@ -19,11 +19,4 @@ using namespace std;
 #define infoDebug 1
 
 
-// Function to log the entry of a function
-void functionEntryLog(char msg[]);
-
-// Function to log the general information about the system
-void generalInfoLog(char msg[]);
-
-
 #endif

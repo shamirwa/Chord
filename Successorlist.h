@@ -8,9 +8,8 @@ class SuccessorList{
 
     private:
         int maxNumSuccessors;
-        int currentCount;
-        list<Node> successorList;
-        list<Node>::iterator myIterator;
+        list<Node*> successors;
+        list<Node*>::iterator myIterator;
         string localID;
     
     public:
@@ -20,16 +19,16 @@ class SuccessorList{
 
         void setMaxNumSuccssor(int maxSuccCount);
         void setLocalID(string id);
-        void storeSuccessor(Node newSuccessor);
-        bool checkIfSuccessorExists(Node successor);
-        void removeSuccessor(Node successor);
+        void storeSuccessor(Node* newSuccessor);
+        bool checkIfSuccessorExists(Node* successor);
+        void removeSuccessor(string ipToFind);
 
         string getLocalID();
         int getCurrentSuccessorCount();
         int getMaxSuccessorCount();
 
-				//Added to pop the
-				Node getFirstSuccessor();
+	    //Added to pop the
+	    Node* getFirstSuccessor();
 };
 
 #endif

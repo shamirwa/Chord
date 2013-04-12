@@ -1,6 +1,10 @@
-#include "Node.h"
-#include<map>
+#ifndef _CHORD_H
+#define _CHORD_H
+
+#include <map>
 #include "Successorlist.h"
+
+using namespace std;
 /*
  *
  * This class will handle the core functionality of the Chord Protocol. 
@@ -64,3 +68,6 @@ class Chord
 
 
 };
+
+
+#endif

@@ -2,21 +2,64 @@
 #include "Chord.h"
 #include "Defs.h"
 
-void functionEntryLog(char msg[]){
-    if(functionDebug){
+void functionEntryLog(const char msg[]){   
+    if(functionDebug){ 
         printf("Entered the function %s\n", msg);
     }
 }
 
-void generalInfoLog(char msg[]){
+void generalInfoLog(const char msg[]){ 
     if(infoDebug){
         printf("%s\n", msg);
     }
 }
 
+
+/* Function to get the hash code for the node IP                                     
+ * * Input: nodeIP - IP address of the node for which hash key needs                    
+ * * to be computed
+ * * Returns: string - hashKey generated for the passed IP address                      
+ * *       
+ * * Description: This hashKey is the unique identifier of a node                       
+ * * in the chord network                                                               
+ * */
+string getLocalHashID(string nodeIP){
+    functionEntryLog("getLocalHashID");
+
+    if(infoDebug){
+        printf("Computing the local hash id for node %s\n", nodeIP.c_str());
+    }
+
+    string digest;
+    EVP_MD_CTX mdctx;
+    const EVP_MD *md;
+    unsigned char md_value[EVP_MAX_MD_SIZE];
+    unsigned int md_len;
+    int i;
+
+    OpenSSL_add_all_digests();
+
+    md = EVP_get_digestbyname("SHA1");
+
+    if(!md){
+        generalInfoLog("Unknown message digest");
+    }
+
+    EVP_MD_CTX_init(&mdctx);
+    EVP_DigestInit_ex(&mdctx, md, NULL);
+    EVP_DigestUpdate(&mdctx, nodeIP.c_str(), nodeIP.length());
+    EVP_DigestFinal_ex(&mdctx, md_value, &md_len);
+    EVP_MD_CTX_cleanup(&mdctx);
+
+    digest = reinterpret_cast<const char*>(md_value);
+
+    return digest;
+}
+
+
 int main(int argc, char* argv[]){
 
-    bool isFirstNode = false;
+    bool isFirstNode = true;
     string bootstrapNode;
     string selfName;
     string selfIP;
@@ -24,12 +67,14 @@ int main(int argc, char* argv[]){
     struct in_addr **ipAddr;
     struct hostent* he;
 
+    Chord myVar;
+
     // Parse the command line arguments
     if(argc == 3){
         if(strcmp(argv[1], "--bsNode") == 0){
             bootstrapNode = argv[2];
         }
-        isFirstNode = true;
+        isFirstNode = false;
     }
 
     if(!isFirstNode){
@@ -70,6 +115,13 @@ int main(int argc, char* argv[]){
     // Compute the local id of this node using SHA1 hash function
     // Defined in Defs.h
     selfID = getLocalHashID(selfIP);
+    
+    /*
+    for(int i = 0; i<20; ++i){
+        printf("%d * ",selfID[i]);
+    }
+    printf("\n");
+    */
 
     // Create an object of the chord class
     Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR);
