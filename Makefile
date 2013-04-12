@@ -17,4 +17,4 @@ entry:	Entry.cpp Entry.h
 	g++ -c -g -o entry Entry.cpp
 
 clean:
-	rm -rf entry node slist chord service
+	rm -rf entry node slist chord service all

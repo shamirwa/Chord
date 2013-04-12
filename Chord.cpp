@@ -3,7 +3,7 @@
 #include "Chord.h"
 #include "Exception.h"
 #include "Defs.h"
-
+#include <utility>
 
 /*
  *	Method to throw an exception with the message 'msg'
@@ -38,7 +38,7 @@ Chord::~Chord() {}
 void Chord::createHelp()
 {
 	
-	//The map and ginger table are already instantiated so no work here
+	//The map and finger table are already instantiated so no work here
 
 }
 
@@ -47,21 +47,37 @@ void Chord::createHelp()
 //searches the local table for the highest predecessor of id
 string Chord::closestPrecedingNode(string id)
 {
-	/*
+	
+	string localNodeID = this->localNode->getNodeID();
+
 	int i;
+	
 	for(i = FINGER_TABLE_SIZE-1 ; i >= 0 ; i--)
 	{
 		if(this->fingerTable.find(i) != this->fingerTable.end())
 		{
-				//check fingerTable(i)
-				string id = this->fingerTable[i]->first;
+				//check fingerTable(i) if between localID,id
+				//
+				// pair has id,ip
+				pair<string,string> curr_id_ip = this->fingerTable[i];
+			  string curr_finger_id = curr_id_ip.first;
+				string curr_finger_ip = curr_id_ip.second;
 
+				fprintf(stderr,"%s\n",curr_id_ip.first.c_str());
+
+			if(strcmp(localNodeID.c_str(),id.c_str()) < 0 && strcmp(curr_finger_id.c_str(),id.c_str()) > 0)
+			{
+				return curr_finger_ip; 	
+			}
+			else if(strcmp(localNodeID.c_str(),id.c_str()) > 0 && strcmp(curr_finger_id.c_str(),id.c_str()) < 0)
+			{
+				return curr_finger_ip;	
+			}				
 		}
-
 	}
-		*/
 	
-
+	return this->localNode->getNodeIP();
+	
 }
 
 
@@ -81,24 +97,28 @@ string Chord::findSuccessor(string IP)
 
 		string successorID = this->successors.getFirstSuccessor()->getNodeID();
 	
-	/*
+	
 		//Lies between the current node and successor node 
 		//
 		if(strcmp(localNodeID.c_str(),id.c_str()) < 0 && strcmp(successorID.c_str(),id.c_str()) > 0)
 		{
-			return this->successorList[0].getNodeIP(); 	
+			return this->successors.getFirstSuccessor()->getNodeIP(); 	
 		}
 		else if(strcmp(localNodeID.c_str(),id.c_str()) > 0 && strcmp(successorID.c_str(),id.c_str()) < 0)
 		{
-			return this->localNode.getNodeIP();	
+			return this->localNode->getNodeIP();	
 		}
 		
 		else
 		{
-			Node* closestPrecedingNode = this->closestPrecedingNode(id);
-			return closestPrecedingNode->findSuccessor(id);
+			string closestPrecedingNodeIP = this->closestPrecedingNode(id);
+			/* TO DO:
+			 * Call the successor of the closestPrecedingNodeIP
+			 *
+			 *return closestPrecedingNode->findSuccessor(id);
+			 */
 		}
-		*/
+		
 }
 
 
