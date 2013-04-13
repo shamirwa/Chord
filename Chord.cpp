@@ -48,16 +48,15 @@ string Chord::closestPrecedingNode(string id)
 	
 	string localNodeID = this->localNode->getNodeID();
 
-	int i;
-	
-	for(i = FINGER_TABLE_SIZE-1 ; i >= 0 ; i--)
+	//Need a reverse iterator
+  std::map<int,pair<string,string> >::reverse_iterator finger_table_iterator;
+
+	for(finger_table_iterator=this->fingerTable.rbegin(); finger_table_iterator != this->fingerTable.rend(); ++finger_table_iterator)
 	{
-		if(this->fingerTable.find(i) != this->fingerTable.end())
-		{
 				//check fingerTable(i) if between localID,id
 				//
 				// pair has id,ip
-				pair<string,string> curr_id_ip = this->fingerTable[i];
+				pair<string,string> curr_id_ip = finger_table_iterator->second;
 			  string curr_finger_id = curr_id_ip.first;
 				string curr_finger_ip = curr_id_ip.second;
 
@@ -71,7 +70,6 @@ string Chord::closestPrecedingNode(string id)
 			{
 				return curr_finger_ip;	
 			}				
-		}
 	}
 	
 	return this->localNode->getNodeIP();
