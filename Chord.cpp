@@ -15,8 +15,6 @@ void throwException(string msg)
 	throw myError;
 }
 
-
-
 Chord::Chord(){
 	
 	this->localNode = NULL;	
@@ -128,7 +126,7 @@ string Chord::findSuccessor(string IP)
 void Chord::create(){
 		
 	//is Node already connected	
-	if(this->localNode != NULL)
+	if(this->localNode == NULL)
 	{
 		throwException(ERR_ALREADY_EXISTS);
 	}

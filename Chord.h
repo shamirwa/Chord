@@ -66,6 +66,7 @@ class Chord
 
 			void insertReplicas(string id); //Insert replica of a file with Key 'id'
 
+			char* ChordSend(string ip, string method);
 
 };
 
