@@ -1,7 +1,6 @@
 
 
 #include "Chord.h"
-#include "Exception.h"
 #include "Defs.h"
 #include <utility>
 #include <stdio.h>

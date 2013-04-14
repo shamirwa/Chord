@@ -1,3 +1,6 @@
+#ifndef _EXCEPTION_H
+#define _EXCEPTION_H
+
 #include <exception>
 
 class MyException:public exception
@@ -32,3 +35,5 @@ class MyException:public exception
 	}
 
 }myError;
+
+#endif

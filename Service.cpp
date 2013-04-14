@@ -1,7 +1,9 @@
 #include "Service.h"
 #include "Chord.h"
 #include "Defs.h"
+#include "myUtils.h"
 
+/*
 void functionEntryLog(const char msg[]){   
     if(functionDebug){ 
         printf("Entered the function %s\n", msg);
@@ -13,7 +15,7 @@ void generalInfoLog(const char msg[]){
         printf("%s\n", msg);
     }
 }
-
+*/
 
 /* Function to get the hash code for the node IP                                     
  * * Input: nodeIP - IP address of the node for which hash key needs                    
@@ -23,6 +25,7 @@ void generalInfoLog(const char msg[]){
  * * Description: This hashKey is the unique identifier of a node                       
  * * in the chord network                                                               
  * */
+/*
 string getLocalHashID(string nodeIP){
     functionEntryLog("getLocalHashID");
 
@@ -55,7 +58,7 @@ string getLocalHashID(string nodeIP){
 
     return digest;
 }
-
+*/
 
 int main(int argc, char* argv[]){
 
@@ -124,7 +127,7 @@ int main(int argc, char* argv[]){
     */
 
     // Create an object of the chord class
-    Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR);
+    Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR, 0, 0);
 
     // Check if this is the first node or not
     if(!isFirstNode){
