@@ -4,6 +4,7 @@
 #include "Exception.h"
 #include "Defs.h"
 #include <utility>
+#include <stdio.h>
 
 /*
  *	Method to throw an exception with the message 'msg'
@@ -20,7 +21,7 @@ Chord::Chord(){
 	this->localNode = NULL;	
 }
 
-Chord::Chord(string localID,string localIP,int numSuccessor) {
+Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,int serverSocket) {
 
 	this->localNode = NULL;
 	this->localNode = new Node;
@@ -28,6 +29,8 @@ Chord::Chord(string localID,string localIP,int numSuccessor) {
 	this->localNode->setNodeIP(localIP);
 	this->successors.setLocalID(localID);
 	this->successors.setMaxNumSuccssor(numSuccessor);
+	this->clientSocket = clientSocket;
+	this->serverSocket = serverSocket;
 	
 }
 
@@ -118,9 +121,6 @@ string Chord::findSuccessor(string IP)
 }
 
 
-
-
-
 void Chord::create(){
 		
 	//is Node already connected	
@@ -166,6 +166,13 @@ void Chord::joinHelp(string IP)
 			throwException(ERR_NODE_NULL);
 	
 		this->predecessor = NULL;
+
+		//Get successor
+		string IP ; //==find_successor(IP)
+
+		buildFingerTable(IP);
+
+		
 
 
 }

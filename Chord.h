@@ -17,11 +17,13 @@ class Chord
 			Node* localNode; //stores the local ip, local id and entry list of a node
 			Node* predecessor; //stores the predecessor of this node
 			SuccessorList successors; //stores the successors
+			int clientSocket;
+			int serverSocket;
+			
 
-	
 		public:
 			Chord();
-			Chord(string localID,string localIP,int numSuccessor);
+			Chord(string localID,string localIP,int numSuccessor,int clientSocket,int serverSocket);
 			~Chord();
 			
 			void createHelp(); //Performs all necessary tasks for creating a new chord ring	
@@ -54,7 +56,7 @@ class Chord
 			*/
 			map<int,pair<string,string> > fingerTable; 
 		
-			void buildFingerTable(); //Builds the finger table
+			void buildFingerTable(string IP); //Builds the finger table
 
 			void insert(string id, string fileContent); //Inserts a new data object into the network with the Key 'id' and Value 'fileContent'
 
