@@ -160,9 +160,9 @@ void Chord::joinHelp(string IP)
 		this->predecessor = NULL;
 
 		//Get successor
-		string IP ; //==find_successor(IP)
+		string succIP ; //==find_successor(IP)
 
-		buildFingerTable(IP);
+		buildFingerTable(succIP);
 
 		
 
@@ -201,7 +201,7 @@ void Chord::ping(){
 
 }
 
-void Chord::buildFingerTable(){
+void Chord::buildFingerTable(string IP){
 
 
 }
