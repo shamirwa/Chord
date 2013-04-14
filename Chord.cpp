@@ -5,16 +5,8 @@
 #include "Defs.h"
 #include <utility>
 #include <stdio.h>
+#include "myUtils.h"
 
-/*
- *	Method to throw an exception with the message 'msg'
- *	
- * */
-void throwException(string msg)
-{
-	myError.setErrorMessage(msg);
-	throw myError;
-}
 
 Chord::Chord(){
 	
