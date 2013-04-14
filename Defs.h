@@ -13,6 +13,8 @@ using namespace std;
 
 #define FINGER_TABLE_SIZE 160
 
+#define ID_SIZE 20
+
 #define ERR_NODE_IP_NOT_SET "Node URL is not set yet!"
 
 #define ERR_NODE_ID_NOT_SET "Node ID is not set yet!"
@@ -31,5 +33,5 @@ using namespace std;
 
 #define NUM_SUCCESSOR 1 // Number of successors to store in the list
 
-
+#define ID_WITH_DIFF_LENGTH "ID's with different length cannot be compared"
 #endif
