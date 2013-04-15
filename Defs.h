@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#define ERR_ALREADY_EXISTS "Cannot create network; node is already connected!\n"
+#define ERR_NODE_NOT_EXISTS "Cannot create network; node is not present!\n"
 
 #define NUMBER_OF_SUCCESSORS 5
 
@@ -33,4 +33,9 @@ using namespace std;
 #define NUM_SUCCESSOR 1 // Number of successors to store in the list
 
 #define ID_WITH_DIFF_LENGTH "ID's with different length cannot be compared"
+
+#define CLIENT_PORT 2345
+
+#define SERVER_PORT 1234
+
 #endif

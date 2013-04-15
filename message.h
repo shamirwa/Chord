@@ -9,7 +9,8 @@ typedef struct{
     char senderID[20]; // Id of the sender
     uint32_t numParameters;
     int* paramLenArray;
-    char* parameters;
+    char* parameters; // First parameter is the command name(or function name), second
+                      // parameter is IP address and then any other function parameters
 }command;
 
 

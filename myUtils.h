@@ -1,6 +1,18 @@
 #ifndef _UTILITY_H
 #define _UTILITY_H
 #include <string>
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <sys/wait.h>
+#include <signal.h>
+
 
 using namespace std;
 
