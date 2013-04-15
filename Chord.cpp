@@ -25,7 +25,9 @@ Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,int
 	
 }
 
-Chord::~Chord() {}
+Chord::~Chord() {
+	delete this->localNode;
+}
 
 void Chord::createHelp()
 {
@@ -117,7 +119,7 @@ void Chord::create(){
 	//is Node already connected	
 	if(this->localNode == NULL)
 	{
-		throwException(ERR_ALREADY_EXISTS);
+		throwException(ERR_NODE_NOT_EXISTS);
 	}
 
 	//has NodeIP been set?
@@ -126,14 +128,10 @@ void Chord::create(){
 		throwException(ERR_NODE_IP_NOT_SET);
 	}
 
-	/*
-	 *
-	 * TO DO
-	*/
 	//if necessary generate NodeId out of IP
 	if(this->localNode->getNodeID().length() == 0)
 	{
-		throwException(ERR_NODE_ID_NOT_SET);		
+		this->localNode->setNodeID(getLocalHashID(this->localNode->getNodeIP());
 	}
 	
 	this->createHelp();
@@ -176,9 +174,9 @@ void Chord::join(string IP){
 		throwException(ERR_IP_INVALID);
 	}
 
-	if(this->localNode != NULL)
+	if(this->localNode == NULL)
 	{
-		throwException(ERR_ALREADY_EXISTS);
+		throwException(ERR_NODE_NOT_EXISTS);
 	}
 	
 	this->joinHelp(IP);
