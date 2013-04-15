@@ -38,4 +38,6 @@ using namespace std;
 
 #define SERVER_PORT 1234
 
+#define FIND_SUCCESSOR 0
+
 #endif

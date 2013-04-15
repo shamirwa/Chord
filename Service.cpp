@@ -95,7 +95,77 @@ int main(int argc, char* argv[]){
         myChordInstance.create();
     }
 
+    // SELECT with both client and server socket
+    /****** COMMUNICATION VARIABLES ********/
+    struct sockaddr_in rcvrAddrUDP;
+    struct sockaddr_in senderProcAddrUDP;
+    struct sockaddr_in myInfoUDP;
 
+    // To store the address of the process from whom a message is received
+    memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
+    socklen_t senderLenUDP = sizeof(senderProcAddrUDP);
+
+    // store the info for sending the message to a process. rcvrAddr will have all the info
+    // about the process whom we are sending the message
+    memset((char*)&rcvrAddrUDP, 0, sizeof(rcvrAddrUDP));
+    rcvrAddrUDP.sin_family = AF_INET;
+    rcvrAddrUDP.sin_port = htons(SERVER_PORT);
+
+    // Store the info to bind receiving port with the socket.
+    memset((char*)&myInfoUDP, 0, sizeof(myInfoUDP));
+    myInfoUDP.sin_family = AF_INET;
+    myInfoUDP.sin_port = htons(SERVER_PORT);
+    myInfoUDP.sin_addr.s_addr = htonl(INADDR_ANY);
+
+
+    // bind the UDP receiver socket
+    if(bind(serverSocket, (struct sockaddr*) &myInfoUDP, sizeof(myInfoUDP)) == -1){
+        generalInfoLog("Bind failed for receiving socket \n");
+        exit(1);
+    }
+
+    if(bind(clientSocket, (struct sockaddr*) &myInfoUDP, sizeof(myInfoUDP)) == -1){
+        generalInfoLog("Bind failed for client socket\n");
+        exit(1);
+    }
+
+    fd_set read_fds; // set of read fds.
+    
+    FD_ZERO(&read_fds); // clear the read fd set
+
+    // Add the UDP socket to the master list too
+    FD_SET(serverSocket, &read_fds);
+    FD_SET(clientSocket, &read_fds);
+
+    int fdmax = (serverSocket > clientSocket ? serverSocket : clientSocket);
+
+    int selectReturnValue;
+    for(;;){
+
+        selectReturnValue = -1;
+        selectReturnValue = select(fdmax + 1, &read_fds, NULL, NULL, NULL);
+
+        if(selectReturnValue == -1){
+            generalInfoLog("Error returned from the select\n");
+            continue;
+        }
+        else{
+            // Run through the existing connections for the data to be read
+            for(int i = 0; i<=fdmax; i++){
+                if(FD_ISSET(i, &read_fds)){ // We got one active fd
+                
+                    if(i == clientSocket){
+
+                        //handleClientRequest();
+                    }
+                    else if(i == serverSocket){
+
+                        //handleServerMessage();
+                    }
+                }
+            }// ENd of fd set for loop
+        }
+    }// ENd of infinite loop
 
     return 0;
 }

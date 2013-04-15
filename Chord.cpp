@@ -5,7 +5,7 @@
 #include <utility>
 #include <stdio.h>
 #include "myUtils.h"
-
+#include "message.h"
 
 Chord::Chord(){
 	
@@ -131,7 +131,7 @@ void Chord::create(){
 	//if necessary generate NodeId out of IP
 	if(this->localNode->getNodeID().length() == 0)
 	{
-		this->localNode->setNodeID(getLocalHashID(this->localNode->getNodeIP());
+		this->localNode->setNodeID(getLocalHashID(this->localNode->getNodeIP()));
 	}
 	
 	this->createHelp();
@@ -139,7 +139,7 @@ void Chord::create(){
 
 void Chord::joinHelp(string IP)
 {
-	
+        /*	
 		//create local repository for successors
 		if (NUMBER_OF_SUCCESSORS >=1)
 		{
@@ -149,15 +149,18 @@ void Chord::joinHelp(string IP)
 		{
 			throwException(WRONG_NUM_SUCCESSORS);
 		}
+        */
 
 		//check if local node exists
-		if(this->localNode == NULL)
-			throwException(ERR_NODE_NULL);
-	
 		this->predecessor = NULL;
 
 		//Get successor
 		string succIP ; //==find_successor(IP)
+
+        // Send the bootstrap node a request to find my successor
+        sendRequestToServer(FIND_SUCCESSOR, IP);
+
+        // wait for the response message
 
 		buildFingerTable(succIP);
 
@@ -206,5 +209,101 @@ void Chord::buildFingerTable(string IP){
 void Chord::insert(string id,string fileContent){
 
 
+}
+
+void Chord::sendRequestToServer(int method, string rcvrIP){
+
+    string commandName;
+    char* msgBuffer = NULL;
+    long messageLen = 0;
+
+    switch(method){
+
+        case 0:
+            {
+                // create the message to send
+                commandName = "findSuccessor";
+                command* findSuccMsg = new command;
+                findSuccMsg->type = SERVER_REQ;
+                memcpy(findSuccMsg->senderID, localNode->getNodeID().c_str(), 20);
+                findSuccMsg->numParameters = 2;
+
+                int* paramLen = new int[2];
+                paramLen[0] = commandName.length();
+                paramLen[1] = ID_SIZE;
+
+                char* params = new char[paramLen[0] + paramLen[1]];
+                memcpy(params, commandName.c_str(), paramLen[0]);
+                memcpy(params + paramLen[0], localNode->getNodeID().c_str(), paramLen[1]);
+
+                // Allocate a large buffer to serialize the parameters
+                messageLen = sizeof(command) + paramLen[0] + paramLen[1] + sizeof(int)*2;
+                msgBuffer = new char[messageLen];
+                memcpy(msgBuffer, findSuccMsg, sizeof(command));
+                memcpy(msgBuffer + sizeof(command), paramLen, sizeof(int) * 2);
+                memcpy(msgBuffer + sizeof(command) + sizeof(int) *2, params, (paramLen[0] + paramLen[1]));
+
+
+
+                
+            }
+
+    default:
+        generalInfoLog("Error while sending. Unkonwn command request found\n");
+    }
+
+    // check if socket is open for the servers
+    if(getServerSocket() == -1){
+        // Need to open a socket
+        if((serverSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+            printf("Error while opening socket to send the message\n");
+            exit(1);
+        }
+    }
+
+    struct sockaddr_in receiverAddr;
+
+    memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
+    receiverAddr.sin_family = AF_INET;
+    receiverAddr.sin_port = htons(SERVER_PORT);
+
+    if(inet_aton(rcvrIP.c_str(), &receiverAddr.sin_addr) == 0){
+        printf("INET_ATON Failed\n");
+    }
+
+    if(sendto(getServerSocket(), msgBuffer, messageLen, 0,
+                (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
+
+        fprintf(stderr, "%s: Failed to send the message type %d to leader: %s",
+                localNode->getNodeIP().c_str(), method, rcvrIP.c_str());
+        fflush(stderr);
+    }
+    else{
+        fprintf(stderr, "%s: successfully sent the message type %d to %s\n",
+                localNode->getNodeIP().c_str(), method, rcvrIP.c_str());
+        fflush(stderr);
+    }
+
+}
+
+
+int Chord::getServerSocket(){
+
+    return serverSocket;
+}
+
+int Chord::getClientSocket(){
+
+    return clientSocket;
+}
+
+void Chord::setServerSocket(int servSock){
+
+    serverSocket = servSock;
+}
+
+void Chord::setClientSocket(int cliSock){
+    
+    clientSocket = cliSock;
 }
 

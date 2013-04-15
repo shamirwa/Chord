@@ -68,7 +68,15 @@ class Chord
 
 			void insertReplicas(string id); //Insert replica of a file with Key 'id'
 
-			char* ChordSend(string ip, string method);
+			void sendRequestToServer(int method, string rcvrIP);
+
+            int getServerSocket();
+
+            int getClientSocket();
+
+            void setServerSocket(int servSock);
+
+            void setClientSocket(int cliSock);
 
 };
 
