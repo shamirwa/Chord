@@ -12,7 +12,7 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 #include <signal.h>
-
+#include "Node.h"
 
 using namespace std;
 
@@ -26,5 +26,6 @@ bool isInInterval(string ID, string fromID, string toID);
 string getLocalHashID(string nodeIP);
 void functionEntryLog(const char msg[]);
 void generalInfoLog(const char msg[]);
+Node* buildSuccessorNode(string IP, string ID);
 
 #endif

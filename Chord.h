@@ -56,7 +56,7 @@ class Chord
 			*/
 			map<int,pair<string,string> > fingerTable; 
 		
-			void buildFingerTable(string IP); //Builds the finger table
+			void buildFingerTable(string IP, string ID); //Builds the finger table
 
 			void insert(string id, string fileContent); //Inserts a new data object into the network with the Key 'id' and Value 'fileContent'
 
@@ -69,6 +69,8 @@ class Chord
 			void insertReplicas(string id); //Insert replica of a file with Key 'id'
 
 			void sendRequestToServer(int method, string rcvrIP);
+
+            void handleResponseFromServer(char* msgRcvd, int rcvdNumBytes, string& response);
 
             int getServerSocket();
 

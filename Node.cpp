@@ -1,7 +1,9 @@
 #include "Node.h"
 #include "Defs.h"
 
-Node::Node(){}
+Node::Node(){
+    entryList.clear();
+    }
 
 Node::~Node(){}
 

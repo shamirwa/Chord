@@ -82,8 +82,11 @@ void SuccessorList::storeSuccessor(Node* newSuccessor){
     if(checkIfSuccessorExists(newSuccessor)){
         cout << "Successor is already present in the list\n";
     }
-    else{
+    else if(successors.size() < maxNumSuccessors){
         successors.push_back(newSuccessor);
+    }
+    else{
+        cout << " Successor list is already full\n";
     }
 }
 

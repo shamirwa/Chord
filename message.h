@@ -17,7 +17,10 @@ typedef struct{
     uint32_t numParameters; // Number of parameters for the command
     int* paramLenArray; // Length of each parameter
     char* parameters; // First parameter is the command name(or function name), second
-                      // parameter is IP address and then any other function parameters
+                      // parameter is IP address and then any other function parameters.
+                      // It might so happen that my message is forwarded to third node. So
+                      // now that node knows my IP and can directly send the response message
+                      // to me.
 }command;
 
 typedef struct{

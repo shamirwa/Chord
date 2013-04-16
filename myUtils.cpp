@@ -106,3 +106,11 @@ string getLocalHashID(string nodeIP){
     return digest;
 }
 
+Node* buildSuccessorNode(string IP, string ID){
+
+    Node* successorNode = new Node;
+    successorNode->setNodeID(ID);
+    successorNode->setNodeIP(IP);
+
+    return successorNode;
+}

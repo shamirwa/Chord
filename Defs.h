@@ -40,4 +40,6 @@ using namespace std;
 
 #define FIND_SUCCESSOR 0
 
+#define MAX_MSG_SIZE 5000
+
 #endif
