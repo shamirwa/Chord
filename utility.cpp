@@ -1,5 +1,6 @@
 #include "utility.h"
 #include "Exception.h"
+#include "Defs.h"
 
 using namespace std;
 
@@ -52,4 +53,18 @@ bool isInInterval(string ID, string fromID, string toID)
     }
     
 }
+
+string addPowerOfTwo(int powerOfTwo,string ID)
+{
+		
+		if(powerOfTwo < 0 || powerOfTwo >= (FINGER_TABLE_SIZE)) {
+		
+					
+				
+		}
+	
+
+
+}
+
 

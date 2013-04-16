@@ -39,7 +39,7 @@ class Chord
 
 			string closestPrecedingNode(string id); //search the local table for the highest predecessor of id
 
-			string findSuccessor(string IP); //finds the successor of a given node with IP "IP"
+			string findSuccessor(string IP, char* message); //finds the successor of a given node with IP "IP"
 			
 			void leave(); //runs the leave operations for this node, updates information of adjacent nodes
 			
@@ -68,17 +68,19 @@ class Chord
 
 			void insertReplicas(string id); //Insert replica of a file with Key 'id'
 
-			void sendRequestToServer(int method, string rcvrIP);
+			void sendRequestToServer(int method, string rcvrIP, char* message = NULL);
 
-            void handleResponseFromServer(char* msgRcvd, int rcvdNumBytes, string& response);
+      void handleResponseFromServer(char* msgRcvd, int rcvdNumBytes, string& response);
+      
+			void handleRequestFromServer(string senderIP, char* msgRcvd);
 
-            int getServerSocket();
+      int getServerSocket();
 
-            int getClientSocket();
+      int getClientSocket();
 
-            void setServerSocket(int servSock);
+      void setServerSocket(int servSock);
 
-            void setClientSocket(int cliSock);
+      void setClientSocket(int cliSock);
 
 };
 

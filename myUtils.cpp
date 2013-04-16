@@ -1,6 +1,7 @@
 #include "myUtils.h"
 #include "Exception.h"
 #include <openssl/evp.h>
+#include "Defs.h"
 
 using namespace std;
 
@@ -113,4 +114,37 @@ Node* buildSuccessorNode(string IP, string ID){
     successorNode->setNodeIP(IP);
 
     return successorNode;
+}
+
+
+string addPowerOfTwo(int powerOfTwo,string ID)
+{
+
+		functionEntryLog("addPowerOfTwo");
+		
+		if(powerOfTwo < 0 || powerOfTwo >= (FINGER_TABLE_SIZE)) {
+		
+			generalInfoLog("The power of two is out of range! It must be in the interval");
+				
+		}
+
+		int indexOfByte = ID.length() - 1 - (powerOfTwo / 8);
+
+		char toAdd[] = { 1, 2, 4, 8, 16, 32, 64, -128 };
+	
+		char valueToAdd = toAdd[powerOfTwo % 8];
+
+		char oldValue;
+
+		do
+		{
+				oldValue = ID[indexOfByte];
+				ID[indexOfByte] += valueToAdd;
+				valueToAdd = 1;
+				
+
+		}while(oldValue < 0 && ID[indexOfByte] >= 0 && indexOfByte-- > 0);
+		
+		return ID;
+
 }

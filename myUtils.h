@@ -27,5 +27,6 @@ string getLocalHashID(string nodeIP);
 void functionEntryLog(const char msg[]);
 void generalInfoLog(const char msg[]);
 Node* buildSuccessorNode(string IP, string ID);
+string	addPowerOfTwo(int powerOfTwo,string ID); 
 
 #endif
