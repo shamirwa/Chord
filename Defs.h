@@ -39,7 +39,11 @@ using namespace std;
 #define SERVER_PORT 1234
 
 #define FIND_SUCCESSOR 0
+#define GET_PREDECESSOR 1
+#define NOTIFY_SUCCESSOR 2
 
 #define MAX_MSG_SIZE 5000
+
+#define STABILIZE_TIMEOUT 2000000      // 2 seconds
 
 #endif

@@ -29,6 +29,7 @@ class SuccessorList{
 
 	    //Added to pop the
 	    Node* getFirstSuccessor();
+        void storeFirstSuccessor(Node* firstSucc);
 };
 
 #endif

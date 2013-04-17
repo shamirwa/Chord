@@ -75,6 +75,27 @@ Node* SuccessorList::getFirstSuccessor(){
 
 }
 
+void SuccessorList::storeFirstSuccessor(Node* firstSucc){
+
+    if(successors.size() > 0){
+        Node* currSucc = successors.front();
+        successors.pop_front();
+
+        delete currSucc;
+
+        // store the new succ
+        successors.push_front(firstSucc);
+
+    }
+    else if(successors.size() == 0){
+        successors.push_front(firstSucc);
+
+    }
+
+}
+
+
+
 void SuccessorList::storeSuccessor(Node* newSuccessor){
 
     // Right now just store the successor node in the list

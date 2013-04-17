@@ -16,5 +16,4 @@ using namespace std;
 #define VM 1
 #define debug 1
 
-
 #endif

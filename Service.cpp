@@ -3,6 +3,7 @@
 #include "Defs.h"
 #include "myUtils.h"
 #include "message.h"
+#include <sys/time.h>
 
 
 int main(int argc, char* argv[]){
@@ -15,7 +16,9 @@ int main(int argc, char* argv[]){
     struct in_addr **ipAddr;
     struct hostent* he;
     int clientSocket, serverSocket;
-
+    
+    // Stabilize Variable
+    struct timeval stabilizeTimer, endTime, selectTimer;
 
     // Parse the command line arguments
     if(argc == 3){
@@ -147,15 +150,48 @@ int main(int argc, char* argv[]){
 
     int fdmax = (serverSocket > clientSocket ? serverSocket : clientSocket);
 
+    // start the stabilize timer
+    gettimeofday(&stabilizeTimer, NULL);
+
+
     int selectReturnValue;
     for(;;){
 
+
+        // Check for stabilize timer expiry
+        gettimeofday(&endTime, NULL);
+        long diff = ((endTime.tv_sec * 1000000 + endTime.tv_usec) -
+                                ((stabilizeTimer.tv_sec * 1000000) + (stabilizeTimer.tv_usec)));
+
+        if(diff > STABILIZE_TIMEOUT){
+            generalInfoLog("stabilizeTimer has expired\n");
+            selectTimer.tv_sec = 0;
+            selectTimer.tv_usec = 0;
+        }
+        else{
+            diff = STABILIZE_TIMEOUT - diff;
+            long int sec  =  diff / 1000000;
+            long int msec = diff - (sec * 1000000);
+            selectTimer.tv_sec = sec;
+            selectTimer.tv_usec = msec;
+
+        }
+
+
         selectReturnValue = -1;
-        selectReturnValue = select(fdmax + 1, &read_fds, NULL, NULL, NULL);
+        selectReturnValue = select(fdmax + 1, &read_fds, NULL, NULL, &selectTimer);
 
         if(selectReturnValue == -1){
             generalInfoLog("Error returned from the select\n");
             continue;
+        }
+        else if(selectReturnValue == 0){
+            // Stabilize timer has expired
+
+            myChordInstance.stabilize();
+
+            // Reset the timer
+            gettimeofday(&stabilizeTimer, NULL);
         }
         else{
             cout << "Received MEssage\n";
@@ -190,7 +226,7 @@ int main(int argc, char* argv[]){
                             uint32_t type = *msgType;
 
                             if(type == SERVER_REQ){		
-                                myChordInstance.handleRequestFromServer(maxMessage);
+                                myChordInstance.handleRequestFromServer(maxMessage, recvRet);
                             }
                             else{
                                 cout << "SERVICE: Invalid message received: " << type << endl;

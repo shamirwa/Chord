@@ -22,6 +22,7 @@ Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,int
     this->successors.setMaxNumSuccssor(numSuccessor);
     this->clientSocket = clientSocket;
     this->serverSocket = serverSocket;
+    this->predecessor = NULL;
 
 }
 
@@ -69,7 +70,7 @@ string Chord::closestPrecedingNode(string id)
 }
 
 
-string Chord::findSuccessor(string senderIPFromMsg, char* message)
+string Chord::findSuccessor(string senderIPFromMsg, char* message, long messageLen)
 {
     functionEntryLog("findSuccessor");
 
@@ -103,7 +104,7 @@ string Chord::findSuccessor(string senderIPFromMsg, char* message)
         }
         else{
             // Forward this message to the preceding Node
-            sendRequestToServer(FIND_SUCCESSOR, closestPrecedingNodeIP, "NULL", message);
+            sendRequestToServer(FIND_SUCCESSOR, closestPrecedingNodeIP, "NULL", message, messageLen);
         }
     }
 }
@@ -299,7 +300,8 @@ void Chord::insert(string id,string fileContent){
 
 }
 
-void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend, char* message){
+void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend, 
+                                char* message, long msgLen){
 
     functionEntryLog("CHORD: sendRequestToServer");
 
@@ -311,33 +313,43 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend, char
 
         case 0:
             {
+                generalInfoLog("In case 0");
+                
                 // create the message to send
                 commandName = "findSuccessor";
 
                 if(!message){
-                    command* findSuccMsg = new command;
-                    findSuccMsg->type = SERVER_REQ;
-                    memcpy(findSuccMsg->senderID, idToSend.c_str(), 20);
-                    findSuccMsg->numParameters = 2;
-
-                    int* paramLen = new int[2];
-                    paramLen[0] = commandName.length();
-                    paramLen[1] = localNode->getNodeIP().length();
-
-                    char* params = new char[paramLen[0] + paramLen[1]];
-                    memcpy(params, commandName.c_str(), paramLen[0]);
-                    memcpy(params + paramLen[0], localNode->getNodeIP().c_str(), paramLen[1]);
-
-                    // Allocate a large buffer to serialize the parameters
-                    messageLen = sizeof(command) + paramLen[0] + paramLen[1] + sizeof(int)*2;
-                    msgBuffer = new char[messageLen];
-                    memcpy(msgBuffer, findSuccMsg, sizeof(command));
-                    memcpy(msgBuffer + sizeof(command), paramLen, sizeof(int) * 2);
-                    memcpy(msgBuffer + sizeof(command) + sizeof(int) *2, params, (paramLen[0] + paramLen[1]));
+                   msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
+                                                localNode->getNodeIP(), messageLen);
                 }
                 else{
                     msgBuffer = message;
+                    messageLen = msgLen;
                 }
+
+                break;
+            }
+
+        case 1:
+            {
+                generalInfoLog("In case 1");
+
+                // create the message to send
+                commandName = "getPredecessor";
+                msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
+                                             localNode->getNodeIP(), messageLen);
+
+                break;
+            }
+
+        case 2:
+            {
+                generalInfoLog("In case 2");
+
+                // create the message to send
+                commandName = "notifySucc";
+                msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
+                                             localNode->getNodeIP(), messageLen);
 
                 break;
             }
@@ -433,10 +445,14 @@ void Chord::handleResponseFromServer(char* msgRcvd, string& responseID, string& 
         responseID = rcvdMsg->senderID;
         responseIP = respIP;
     }
+    else if(strcmp(commandName,"getPredecessor") == 0){
+        responseID = rcvdMsg->senderID;
+        responseIP = respIP;
+    }
 
 }
 
-void Chord::handleRequestFromServer(char* msgRcvd)
+void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
 {
     functionEntryLog("CHORD: handleRequestFromServer");
 
@@ -467,9 +483,71 @@ void Chord::handleRequestFromServer(char* msgRcvd)
 
     // Check if response is for FIND_SUCCESSOR
     if(strcmp(commandName, "findSuccessor") == 0){
-        findSuccessor(senderIP, msgRcvd);	
+        findSuccessor(senderIP, msgRcvd, messageLen);	
     }
+    else if(strcmp(commandName, "getPredecessor") == 0){
 
+        if(getPredecessor()){
+            sendResponseToServer(GET_PREDECESSOR, getPredecessor()->getNodeID(), 
+                    getPredecessor()->getNodeIP(), senderIP); 
+        }
+        else{
+            sendResponseToServer(GET_PREDECESSOR, "NULL", "NULL", senderIP);
+        }
+    }
+    else if(strcmp(commandName, "notifySucc") == 0){
+
+        // This is received since stabilize is running on one of the node
+        string senderID = rcvdMsg->senderID;
+
+        if(!getPredecessor() || 
+                isInInterval(senderID, getPredecessor()->getNodeID(), localNode->getNodeID()))
+        {
+           setPredecessor(senderIP, senderID); 
+        }
+
+    }
+    
+
+}
+
+char* Chord::getMessageToSend(int msgType, string cmnd, string idToSend, string ipToSend,
+                        long& msgLength)
+{
+    functionEntryLog("CHORD: getMessageToSend");
+
+    // create the message to send
+    command* Msg = new command;
+    Msg->type = msgType;
+    memcpy(Msg->senderID, idToSend.c_str(), 20);
+    Msg->numParameters = 2;
+
+    int* paramLen = new int[2];
+    paramLen[0] = cmnd.length();
+    paramLen[1] = ipToSend.length();
+
+    char* params = new char[paramLen[0] + paramLen[1]];
+    memcpy(params, cmnd.c_str(), paramLen[0]);
+    memcpy(params + paramLen[0], ipToSend.c_str(), paramLen[1]);
+
+    // Allocate a large buffer to serialize the parameters
+    char* msgBuffer = NULL;
+    long messageLen = 0;
+    messageLen = sizeof(command) + paramLen[0] + paramLen[1] + sizeof(int)*2;
+    msgBuffer = new char[messageLen];
+    memcpy(msgBuffer, Msg, sizeof(command));
+    memcpy(msgBuffer + sizeof(command), paramLen, sizeof(int) * 2);
+    memcpy(msgBuffer + sizeof(command) + sizeof(int) *2, params, (paramLen[0] + paramLen[1]));
+
+
+    // Delete the memory allocated for paramLen and params
+    delete[] paramLen;
+    delete[] params;
+    delete Msg;
+
+    // Return the message buffer
+    msgLength = messageLen;
+    return msgBuffer;
 }
 
 void Chord::sendResponseToServer(int method, string responseID, string responseIP, string receiverIP){
@@ -484,29 +562,23 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
 
         case 0:
             {
+                generalInfoLog("In case 0");
+
                 // create the message to send
                 commandName = "findSuccessor";
+                msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID, 
+                                            responseIP, messageLen);
 
-                command* findSuccMsg = new command;
-                findSuccMsg->type = SERVER_RES;
-                memcpy(findSuccMsg->senderID, responseID.c_str(), 20);
-                findSuccMsg->numParameters = 2;
+                break;
+            }
+        case 1:
+            {
+                generalInfoLog("In case 1");
 
-                int* paramLen = new int[2];
-                paramLen[0] = commandName.length();
-                paramLen[1] = responseIP.length();
-
-                char* params = new char[paramLen[0] + paramLen[1]];
-                memcpy(params, commandName.c_str(), paramLen[0]);
-                memcpy(params + paramLen[0], responseIP.c_str(), paramLen[1]);
-
-                // Allocate a large buffer to serialize the parameters
-                messageLen = sizeof(command) + paramLen[0] + paramLen[1] + sizeof(int)*2;
-                msgBuffer = new char[messageLen];
-                memcpy(msgBuffer, findSuccMsg, sizeof(command));
-                memcpy(msgBuffer + sizeof(command), paramLen, sizeof(int) * 2);
-                memcpy(msgBuffer + sizeof(command) + sizeof(int) *2, params, (paramLen[0] + paramLen[1]));
-
+                // create the message to send
+                commandName = "getPredecessor";
+                msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID,
+                                            responseIP, messageLen);
                 break;
             }
 
@@ -548,3 +620,69 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
 
 }
 
+void Chord::stabilize(){
+    functionEntryLog("CHORD: stabilize");
+
+    // Send message to my successor to get his predecessor node
+    string succIP = successors.getFirstSuccessor()->getNodeIP();
+    string succID = successors.getFirstSuccessor()->getNodeID();
+
+    sendRequestToServer(GET_PREDECESSOR, succIP, localNode->getNodeID());
+
+    // wait for response message to come
+    char* maxMessage = new char[MAX_MSG_SIZE];
+    struct sockaddr_in senderProcAddrUDP;
+
+    // To store the address of the process from whom a message is received
+    memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
+    socklen_t senderLenUDP = sizeof(senderProcAddrUDP);
+
+    int recvRet = 0;
+
+    recvRet = recvfrom(serverSocket, maxMessage, MAX_MSG_SIZE,
+            0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
+
+    string predIP;// = inet_ntoa(senderProcAddrUDP.sin_addr);
+    string predID;
+
+    if(recvRet > 0){
+        handleResponseFromServer(maxMessage, predID, predIP);
+
+        if(isInInterval(predID, localNode->getNodeID(), succID)){
+        
+            // Store this successor as the first successor
+            Node* firstSucc = new Node;
+            firstSucc->setNodeID(predID);
+            firstSucc->setNodeIP(predIP);
+
+            successors.storeFirstSuccessor(firstSucc);
+        }
+
+        // Notify the successor and don't wait for any response
+        succIP = successors.getFirstSuccessor()->getNodeIP();
+        succID = successors.getFirstSuccessor()->getNodeID();
+
+        sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
+
+    }
+    else{
+        fprintf(stderr, "Error while receiving in Stabilize\n");
+    }
+}
+
+Node* Chord::getPredecessor(){
+
+    return predecessor;
+}
+
+void Chord::setPredecessor(string predIP, string predID)
+{
+    if(getPredecessor()){
+        Node* currPred = getPredecessor();
+        delete currPred;
+    }
+
+    Node* newPred = new Node;
+    newPred->setNodeIP(predIP);
+    newPred->setNodeID(predID);
+}
