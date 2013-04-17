@@ -74,13 +74,13 @@ int main(int argc, char* argv[]){
         generalInfoLog("Error when trying to open the socket for servers\n");
         exit(1);
     }
-   
+
     /*
-    for(int i = 0; i<20; ++i){
-        printf("%d * ",selfID[i]);
-    }
-    printf("\n");
-    */
+       for(int i = 0; i<20; ++i){
+       printf("%d * ",selfID[i]);
+       }
+       printf("\n");
+       */
 
     // Create an object of the chord class
     Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR, clientSocket, serverSocket);
@@ -101,7 +101,7 @@ int main(int argc, char* argv[]){
     struct sockaddr_in rcvrAddrUDP;
     struct sockaddr_in senderProcAddrUDP;
     struct sockaddr_in myInfoUDP,myInfoUDP2;
-		
+
 
     // To store the address of the process from whom a message is received
     memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]){
     myInfoUDP.sin_port = htons(SERVER_PORT);
     myInfoUDP.sin_addr.s_addr = htonl(INADDR_ANY);
 
-		// Store the info to bind receiving port with the socket.
+    // Store the info to bind receiving port with the socket.
     memset((char*)&myInfoUDP2, 0, sizeof(myInfoUDP2));
     myInfoUDP2.sin_family = AF_INET;
     myInfoUDP2.sin_port = htons(CLIENT_PORT);
@@ -138,7 +138,7 @@ int main(int argc, char* argv[]){
     }
 
     fd_set read_fds; // set of read fds.
-    
+
     FD_ZERO(&read_fds); // clear the read fd set
 
     // Add the UDP socket to the master list too
@@ -158,44 +158,44 @@ int main(int argc, char* argv[]){
             continue;
         }
         else{
-						cout << "Received MEssage\n";
+            cout << "Received MEssage\n";
             // Run through the existing connections for the data to be read
             for(int i = 0; i<=fdmax; i++){
                 if(FD_ISSET(i, &read_fds)){ // We got one active fd
-                
+
                     if(i == clientSocket){
 
                         //handleClientRequest();
                     }
                     else if(i == serverSocket){
 
-														// Received a message from server
-														char* maxMessage = new char[MAX_MSG_SIZE];
-														struct sockaddr_in senderProcAddrUDP;
+                        // Received a message from server
+                        char* maxMessage = new char[MAX_MSG_SIZE];
+                        struct sockaddr_in senderProcAddrUDP;
 
-														// To store the address of the process from whom a message is received
-														memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
-														socklen_t senderLenUDP = sizeof(senderProcAddrUDP);
-														
-														int recvRet = 0;
-														
-														recvRet = recvfrom(serverSocket, maxMessage, MAX_MSG_SIZE,
-														0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
-														
-														string senderIP = inet_ntoa(senderProcAddrUDP.sin_addr);
-														
-														if(recvRet > 0){
-															// Get the type of the message
-															uint32_t* msgType = (uint32_t*)(maxMessage);
-															uint32_t type = *msgType;
+                        // To store the address of the process from whom a message is received
+                        memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
+                        socklen_t senderLenUDP = sizeof(senderProcAddrUDP);
 
-															if(type == SERVER_REQ){		
-																	myChordInstance.handleRequestFromServer(senderIP, maxMessage);
-															}
-															else{
-																cout << "SERVICE: Invalid message received: " << type << endl;
-															}
-													}				
+                        int recvRet = 0;
+
+                        recvRet = recvfrom(serverSocket, maxMessage, MAX_MSG_SIZE,
+                                0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
+
+                        //string senderIP = inet_ntoa(senderProcAddrUDP.sin_addr);
+
+                        if(recvRet > 0){
+                            // Get the type of the message
+                            uint32_t* msgType = (uint32_t*)(maxMessage);
+                            uint32_t type = *msgType;
+
+                            if(type == SERVER_REQ){		
+                                myChordInstance.handleRequestFromServer(maxMessage);
+                            }
+                            else{
+                                cout << "SERVICE: Invalid message received: " << type << endl;
+                            }
+                        }				
                     }
                 }
             }// ENd of fd set for loop
