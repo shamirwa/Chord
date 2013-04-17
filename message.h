@@ -34,9 +34,11 @@ typedef struct{
 	int lengthFileName;
 	int lengthCommandName;
 	int lengthFileData;
+	int lengthClientIP;
 	char* fileName;
 	char* command;
 	char* data;
+	char* clientIP;
 }ClientRequest;
 
 
