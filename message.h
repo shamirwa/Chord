@@ -29,4 +29,15 @@ typedef struct{
     uint32_t result; // 0 for failure and 1 for success
 }ClientResponse;
 
+typedef struct{
+	uint32_t type;
+	int lengthFileName;
+	int lengthCommandName;
+	int lengthFileData;
+	char* fileName;
+	char* command;
+	char* data;
+}ClientRequest;
+
+
 #endif
