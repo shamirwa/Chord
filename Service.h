@@ -14,6 +14,5 @@ using namespace std;
 
 #define XINU 0
 #define VM 1
-#define debug 1
 
 #endif

@@ -1,0 +1,6389 @@
+This the first node to create the chord network
+Host Name: moore10.cs.purdue.edu, IP Address: 128.10.12.140 
+Entered the function getLocalHashID
+Computing the local hash id for node 128.10.12.140
+Local Hash ID length: 20
+Server Socket: 4
+Client Socket: 3
+Entered the function Chord: create
+Max Socket: 4
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:S
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:T
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:V
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:Z
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:b
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:r
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:í
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:“
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F;R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F<R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F>R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√FBR
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√FJR
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√FZR
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√FzR
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F∫R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F :R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F!:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F#:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F':R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F/:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F?:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F_:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√Fü:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√G:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√H:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√J:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√N:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√V:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√f:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√Ü:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√∆:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√.F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√NF:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√éF:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√ F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√(F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√8F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√XF:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√òF:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+ÕƒF:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ≈F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ«F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+ÕÀF:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ”F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ„F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+ŒF:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+ŒCF:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Œ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+œ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+—√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+’√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+›√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Ì√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+M√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+	Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+!Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+AÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+ÅÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ûÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ûÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ûÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ûÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ûÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û*Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ûJÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ûäÕ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ü
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_†
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_¢
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_¶
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_Æ
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_æ
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_ﬁ
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘`
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘`û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘aû
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘cû
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘gû
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘oû
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘üû
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘ﬂû
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˙_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˚_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˝_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØT_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØT	_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØT_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØT9_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØTy_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØT˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØU˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØW˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØ[˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØc˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØs˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØì˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØ”˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂ∞S˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂ±S˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂ≥S˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂ∑S˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂøS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂœS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂÔS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÊ/S˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÊØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÁØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÈØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÌØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïıØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FñØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?Fñ%ØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FñeØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FñÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FóÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FôÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FùÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?F•ÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FµÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?F’ÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?GÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?GïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?HïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?JïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?NïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?VïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?fïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?ÜïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?∆ïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o@FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: oAFïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: oCFïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: oGFïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: oOFïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o_FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: oFïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: oøFïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: p?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: q?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: s?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: w?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: ?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: è?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: Ø?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: Ô?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Entered the function CHORD: stabilize
+I am the successor of myself
+No information regarding predecessor received
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: notifySucc
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.140
+After stabilize:
+Self ID:  1”¥œú6Ly¡£‡O«ó7â¢›  Self IP: 128.10.12.140
+No predecessor yet
+Successor ID:  1”¥œú6Ly¡£‡O«ó7â¢› and Successor IP: 128.10.12.140
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Num params: 2
+Received message from 128.10.12.140
+Received request for notify
+Sender ID received msg  1”¥œú6Ly¡£‡O«ó7â¢›
+Sender ID received msg  1”¥œú6Ly¡£‡O«ó7â¢›
+Length is 20
+updating my predecessor as  1”¥œú6Ly¡£‡O«ó7â¢› *  128.10.12.140
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for getPredecessor
+Entered the function CHORD: sendResponseToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 14
+Param 0 Len: 13
+Sending message of length: 83
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for notify
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Length is 20
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+updating my predecessor as o?FïÂØS˘_û
+Õ√F:R *  128.10.12.142
+Entered the function CHORD: stabilize
+I am the successor of myself
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Return true in cond 1 isInInterval
+stabilize: storing the first successor
+Self Id:  1”¥œú6Ly¡£‡O«ó7â¢›
+Received Id: o?FïÂØS˘_û
+Õ√F:R
+Successor Id:  1”¥œú6Ly¡£‡O«ó7â¢›
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: notifySucc
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.142
+After stabilize:
+Self ID:  1”¥œú6Ly¡£‡O«ó7â¢›  Self IP: 128.10.12.140
+Predecessor ID: o?FïÂØS˘_û
+Õ√F:R and Predecessor IP: 128.10.12.142
+Successor ID: o?FïÂØS˘_û
+Õ√F:R and Successor IP: 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for getPredecessor
+Entered the function CHORD: sendResponseToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 14
+Param 0 Len: 13
+Sending message of length: 83
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for notify
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Length is 20
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Return false in cond 3 isInInterval
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.142
+Waiting for response
+Response Message Received
+Entered the function CHORD: handleResponseFromServer
+Received response for getPredecessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 21
+Length toCompareID: 20
+Return false in cond 2 isInInterval
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: notifySucc
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.142
+After stabilize:
+Self ID:  1”¥œú6Ly¡£‡O«ó7â¢›  Self IP: 128.10.12.140
+Predecessor ID: o?FïÂØS˘_û
+Õ√F:R and Predecessor IP: 128.10.12.142
+Successor ID: o?FïÂØS˘_û
+Õ√F:R and Successor IP: 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for getPredecessor
+Entered the function CHORD: sendResponseToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 14
+Param 0 Len: 13
+Sending message of length: 83
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for notify
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Length is 20
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Return false in cond 3 isInInterval
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶A
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶B
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶D
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶H
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶P
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶`
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶Ä
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶¿
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dßß@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß®@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß™@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dßÆ@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß∂@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß∆@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dßÊ@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d®&@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d®¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d©¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d´¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dØ¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d∑¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d«¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dÁ¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: e'¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: eß¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: fß¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: hß¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: lß¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dß¶@
+Num params: 2
+Received message from 128.10.12.144
+Received request for findSuccessor
+Entered the function findSuccessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 5
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+Sending response with self successor id
+Entered the function CHORD: sendResponseToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: findSuccessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 13
+Param 0 Len: 13
+Sending message of length: 82
+128.10.12.140: successfully sent the message type 3 to 128.10.12.144
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.142
+Waiting for response
+Response Message Received
+Entered the function CHORD: handleResponseFromServer
+Received response for getPredecessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 21
+Length toCompareID: 20
+Return false in cond 2 isInInterval
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: notifySucc
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.142
+After stabilize:
+Self ID:  1”¥œú6Ly¡£‡O«ó7â¢›  Self IP: 128.10.12.140
+Predecessor ID: o?FïÂØS˘_û
+Õ√F:R and Predecessor IP: 128.10.12.142
+Successor ID: o?FïÂØS˘_û
+Õ√F:R and Successor IP: 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for getPredecessor
+Entered the function CHORD: sendResponseToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 14
+Param 0 Len: 13
+Sending message of length: 83
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for notify
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Length is 20
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Return false in cond 3 isInInterval
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.142
+Waiting for response
+Response Message Received
+Entered the function CHORD: handleResponseFromServer
+Received response for getPredecessor
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 10
+Length toCompareID: 20
+Entered the function comapreTo
+Diff length ID
+Length id1: 10
+Length toCompareID: 20
+Return true in cond 2 isInInterval
+stabilize: storing the first successor
+Self Id:  1”¥œú6Ly¡£‡O«ó7â¢›
+Received Id: dß¶@FÊΩ
+Successor Id: o?FïÂØS˘_û
+Õ√F:R
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: notifySucc
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.144
+After stabilize:
+Self ID:  1”¥œú6Ly¡£‡O«ó7â¢›  Self IP: 128.10.12.140
+Predecessor ID: o?FïÂØS˘_û
+Õ√F:R and Predecessor IP: 128.10.12.142
+Successor ID: dß¶@FÊΩ and Successor IP: 128.10.12.144
+System is stabilized
+---------------------------
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for getPredecessor
+Entered the function CHORD: sendResponseToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 14
+Param 0 Len: 13
+Sending message of length: 83
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for notify
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Length is 20
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Return false in cond 3 isInInterval
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.144
+Waiting for response
+Response Message Received
+Entered the function CHORD: handleResponseFromServer
+Received response for getPredecessor
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 20
+Length toCompareID: 10
+Entered the function comapreTo
+Diff length ID
+Length id1: 20
+Length toCompareID: 10
+Entered the function comapreTo
+Diff length ID
+Length id1: 21
+Length toCompareID: 20
+Return false in cond 2 isInInterval
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: notifySucc
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.144
+After stabilize:
+Self ID:  1”¥œú6Ly¡£‡O«ó7â¢›  Self IP: 128.10.12.140
+Predecessor ID: o?FïÂØS˘_û
+Õ√F:R and Predecessor IP: 128.10.12.142
+Successor ID: dß¶@FÊΩ and Successor IP: 128.10.12.144
+System is stabilized
+---------------------------
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for getPredecessor
+Entered the function CHORD: sendResponseToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID: o?FïÂØS˘_û
+Õ√F:R
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.142
+SenderID in msg: o?FïÂØS˘_û
+Õ√F:R
+Param 0 Len: 14
+Param 0 Len: 13
+Sending message of length: 83
+128.10.12.140: successfully sent the message type 3 to 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID: o?FïÂØS˘_û
+Õ√F:R
+Num params: 2
+Received message from 128.10.12.142
+Received request for notify
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Sender ID received msg o?FïÂØS˘_û
+Õ√F:R
+Length is 20
+Entered the function isInInterval
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Entered the function comapreTo
+Return false in cond 3 isInInterval
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.144
+Waiting for response
+Response Message Received
+Entered the function CHORD: handleResponseFromServer
+Received response for getPredecessor
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 20
+Length toCompareID: 10
+Entered the function comapreTo
+Diff length ID
+Length id1: 20
+Length toCompareID: 10
+Entered the function comapreTo
+Diff length ID
+Length id1: 21
+Length toCompareID: 20
+Return false in cond 2 isInInterval
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID:  1”¥œú6Ly¡£‡O«ó7â¢›
+Length of ID: 20
+Command: notifySucc
+IP to send: 128.10.12.140
+SenderID in msg:  1”¥œú6Ly¡£‡O«ó7â¢›
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.140: successfully sent the message type 2 to 128.10.12.144
+After stabilize:
+Self ID:  1”¥œú6Ly¡£‡O«ó7â¢›  Self IP: 128.10.12.140
+Predecessor ID: o?FïÂØS˘_û
+Õ√F:R and Predecessor IP: 128.10.12.142
+Successor ID: dß¶@FÊΩ and Successor IP: 128.10.12.144
+System is stabilized
+---------------------------

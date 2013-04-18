@@ -19,6 +19,7 @@ using namespace std;
 
 #define functionDebug 1
 #define infoDebug 1
+#define debug 1
 
 void throwException(string msg);
 bool isIdEqual(string id1, string id2);
@@ -28,5 +29,6 @@ void functionEntryLog(const char msg[]);
 void generalInfoLog(const char msg[]);
 Node* buildSuccessorNode(string IP, string ID);
 string	addPowerOfTwo(int powerOfTwo,string ID); 
+void printMessageDetails(char* msg);
 
 #endif

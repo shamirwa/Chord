@@ -37,9 +37,13 @@ class Chord
 
         void stabilize(); //runs the stabilize operations of this node
 
+        string getLocalIP();
+
+        string getLocalID();
+
         string closestPrecedingNode(string id); //search the local table for the highest predecessor of id
 
-        string findSuccessor(string IP, char* message, long messageLen); //finds the successor of a given node with IP "IP"
+        void findSuccessor(string IP, char* message, long messageLen); //finds the successor of a given node with IP "IP"
 
         void leave(); //runs the leave operations for this node, updates information of adjacent nodes
 
@@ -86,6 +90,8 @@ class Chord
         void setClientSocket(int cliSock);
 
         Node* getPredecessor();
+
+        Node* getFirstSuccessor();
 
         void setPredecessor(string predIP, string predID);
 

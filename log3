@@ -1,0 +1,1569 @@
+Joining the chord network using the bootstrap node: 128.10.12.140
+Host Name: moore14.cs.purdue.edu, IP Address: 128.10.12.144 
+Entered the function getLocalHashID
+Computing the local hash id for node 128.10.12.144
+Local Hash ID length: 4
+Server Socket: 4
+Client Socket: 3
+Entered the function CHORD: join
+Entered the function CHORD: joinHelp
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.140
+Waiting for response message at socket: 4
+Response message received
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function CHORD: buildFingerTable
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦A
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦A
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦A
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦B
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦B
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦B
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦D
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦D
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦D
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦H
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦H
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦H
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦P
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦P
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦P
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦`
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦`
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦`
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦€
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦€
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦€
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦À
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦À
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦À
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§§@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§§@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§§@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¨@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¨@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¨@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§ª@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§ª@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§ª@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§®@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§®@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§®@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¶@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¶@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¶@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§Æ@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§Æ@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§Æ@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§æ@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§æ@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§æ@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d¨&@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d¨&@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d¨&@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d¨¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d¨¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d¨¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d©¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d©¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d©¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d«¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d«¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d«¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d¯¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d¯¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d¯¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d·¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d·¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d·¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: dÇ¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: dÇ¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dÇ¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: dç¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: dç¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: dç¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: e'¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: e'¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: e'¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: e§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: e§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: e§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: f§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: f§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: f§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: h§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: h§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: h§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: l§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: l§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: l§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Return true in cond 2 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: t§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: t§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: t§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Response ip rcvd: 128.10.12.140
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Return true in cond 3 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: „§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: „§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: „§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Response ip rcvd: 128.10.12.140
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Return true in cond 3 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: ¤§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: ¤§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: ¤§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Response ip rcvd: 128.10.12.140
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Return true in cond 3 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: ä§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: ä§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: ä§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Response ip rcvd: 128.10.12.140
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Return true in cond 3 isInInterval
+Entered the function addPowerOfTwo
+Entered the function CHORD: sendRequestToServer
+In case 0
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: findSuccessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@
+Param 0 Len: 13
+Param 0 Len: 13
+Message Len: 82
+Entered the function printMessageDetails
+Type: 2
+Sender ID: d§¦@
+Num params: 2
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Entered the function CHORD: handleResponseFromServer
+Received response for findSuccessor
+Response id rcvd: o?F•å¯Sù_ž
+ÍÃF:R
+Response ip rcvd: 128.10.12.142
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Return false in cond 2 isInInterval
+Added reference to finger table entries 0 31
+Successfully built the finger table
+Max Socket: 4
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: getPredecessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Waiting for response
+Response Message Received
+Entered the function CHORD: handleResponseFromServer
+Received response for getPredecessor
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 21
+Length toCompareID: 4
+Return false in cond 2 isInInterval
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: notifySucc
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+After stabilize:
+Self ID: d§¦@  Self IP: 128.10.12.144
+No predecessor yet
+Successor ID: o?F•å¯Sù_ž
+ÍÃF:R and Successor IP: 128.10.12.142
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Num params: 2
+Received message from 128.10.12.140
+Received request for notify
+Sender ID received msg  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Sender ID received msg  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Length is 20
+updating my predecessor as  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý *  128.10.12.140
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: getPredecessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@¨|)]
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Waiting for response
+Response Message Received
+Entered the function CHORD: handleResponseFromServer
+Received response for getPredecessor
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 10
+Length toCompareID: 4
+Return false in cond 2 isInInterval
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: notifySucc
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+After stabilize:
+Self ID: d§¦@  Self IP: 128.10.12.144
+Predecessor ID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý and Predecessor IP: 128.10.12.140
+Successor ID: o?F•å¯Sù_ž
+ÍÃF:R and Successor IP: 128.10.12.142
+System is stabilized
+---------------------------
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Num params: 2
+Received message from 128.10.12.140
+Received request for getPredecessor
+Entered the function CHORD: sendResponseToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.140
+SenderID in msg:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Param 0 Len: 14
+Param 0 Len: 13
+Sending message of length: 83
+128.10.12.144: successfully sent the message type 3 to 128.10.12.140
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Num params: 2
+Received message from 128.10.12.140
+Received request for notify
+Sender ID received msg  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Sender ID received msg  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Length is 20
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 20
+Length toCompareID: 4
+Entered the function comapreTo
+Diff length ID
+Length id1: 20
+Length toCompareID: 4
+Entered the function comapreTo
+Return false in cond 2 isInInterval
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: getPredecessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+Waiting for response
+Response Message Received
+Entered the function CHORD: handleResponseFromServer
+Received response for getPredecessor
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 4
+Length toCompareID: 21
+Entered the function comapreTo
+Diff length ID
+Length id1: 10
+Length toCompareID: 4
+Return false in cond 2 isInInterval
+Entered the function CHORD: sendRequestToServer
+In case 2
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: notifySucc
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@
+Param 0 Len: 10
+Param 0 Len: 13
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142
+After stabilize:
+Self ID: d§¦@  Self IP: 128.10.12.144
+Predecessor ID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý and Predecessor IP: 128.10.12.140
+Successor ID: o?F•å¯Sù_ž
+ÍÃF:R and Successor IP: 128.10.12.142
+System is stabilized
+---------------------------
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Num params: 2
+Received message from 128.10.12.140
+Received request for getPredecessor
+Entered the function CHORD: sendResponseToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 3
+SenderID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Length of ID: 20
+Command: getPredecessor
+IP to send: 128.10.12.140
+SenderID in msg:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Param 0 Len: 14
+Param 0 Len: 13
+Sending message of length: 83
+128.10.12.144: successfully sent the message type 3 to 128.10.12.140
+Received MEssage
+Entered the function CHORD: handleRequestFromServer
+Entered the function printMessageDetails
+Type: 2
+Sender ID:  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Num params: 2
+Received message from 128.10.12.140
+Received request for notify
+Sender ID received msg  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Sender ID received msg  1Ó´Ïœ6LyÁ£àOÇ—7‰¢Ý
+Length is 20
+Entered the function isInInterval
+Entered the function comapreTo
+Diff length ID
+Length id1: 20
+Length toCompareID: 4
+Entered the function comapreTo
+Diff length ID
+Length id1: 20
+Length toCompareID: 4
+Entered the function comapreTo
+Return false in cond 2 isInInterval
+Entered the function CHORD: stabilize
+Entered the function CHORD: sendRequestToServer
+In case 1
+Entered the function CHORD: getMessageToSend
+Sending Message details
+Type: 2
+SenderID: d§¦@
+Length of ID: 4
+Command: getPredecessor
+IP to send: 128.10.12.144
+SenderID in msg: d§¦@
+Param 0 Len: 14
+Param 0 Len: 13
+128.10.12.144: successfully sent the message type 2 to 128.10.12.142

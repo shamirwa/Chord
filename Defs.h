@@ -44,6 +44,6 @@ using namespace std;
 
 #define MAX_MSG_SIZE 5000
 
-#define STABILIZE_TIMEOUT 2000000      // 2 seconds
+#define STABILIZE_TIMEOUT 12000000      // 2 seconds
 
 #endif
