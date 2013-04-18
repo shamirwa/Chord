@@ -155,6 +155,7 @@ int main(int argc,char **argv)
 								selfIP = inet_ntoa(*ipAddr[XINU]);
 				}
 
+				cout<<"Self IP is: "<<selfIP<<endl;
 
 				int command;
 
