@@ -62,10 +62,13 @@ int main(int argc, char* argv[]){
     if(debug){
         printf("Host Name: %s, IP Address: %s \n", selfName.c_str(), selfIP.c_str());
     }
-
+ 
     // Compute the local id of this node using SHA1 hash function
     // Defined in Defs.h
     selfID = getLocalHashID(selfIP);
+
+    printf("Local Hash ID length: %ld\n", selfID.length());
+    fflush(NULL);
 
     // ******* COMMUNICATION VARIABLES ******//
     if((clientSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
@@ -78,27 +81,9 @@ int main(int argc, char* argv[]){
         exit(1);
     }
 
-    /*
-       for(int i = 0; i<20; ++i){
-       printf("%d * ",selfID[i]);
-       }
-       printf("\n");
-       */
-
-    // Create an object of the chord class
-    Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR, clientSocket, serverSocket);
-
-    // Check if this is the first node or not
-    if(!isFirstNode){
-        // This node is not the first node to join. SO call the join method with the
-        // bootstrap node
-        myChordInstance.join(bootstrapNode);
-    }
-    else{
-        // This is the first node to join/ Call the create method
-        myChordInstance.create();
-    }
-
+    printf("Server Socket: %d\n", serverSocket);
+    printf("Client Socket: %d\n", clientSocket);
+    
     // SELECT with both client and server socket
     /****** COMMUNICATION VARIABLES ********/
     struct sockaddr_in rcvrAddrUDP;
@@ -139,16 +124,84 @@ int main(int argc, char* argv[]){
         generalInfoLog("Bind failed for client socket\n");
         exit(1);
     }
+    /*
+       for(int i = 0; i<20; ++i){
+       printf("%d * ",selfID[i]);
+       }
+       printf("\n");
+       */
 
-    fd_set read_fds; // set of read fds.
+    // Create an object of the chord class
+    Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR, clientSocket, serverSocket);
+
+    // Check if this is the first node or not
+    if(!isFirstNode){
+        // This node is not the first node to join. SO call the join method with the
+        // bootstrap node
+        myChordInstance.join(bootstrapNode);
+    }
+    else{
+        // This is the first node to join/ Call the create method
+        myChordInstance.create();
+    }
+    
+    
+    // SELECT with both client and server socket
+    /****** COMMUNICATION VARIABLES ********/
+    /*
+    struct sockaddr_in rcvrAddrUDP;
+    struct sockaddr_in senderProcAddrUDP;
+    struct sockaddr_in myInfoUDP,myInfoUDP2;
+
+
+    // To store the address of the process from whom a message is received
+    memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
+    socklen_t senderLenUDP = sizeof(senderProcAddrUDP);
+
+    // store the info for sending the message to a process. rcvrAddr will have all the info
+    // about the process whom we are sending the message
+    memset((char*)&rcvrAddrUDP, 0, sizeof(rcvrAddrUDP));
+    rcvrAddrUDP.sin_family = AF_INET;
+    rcvrAddrUDP.sin_port = htons(SERVER_PORT);
+
+    // Store the info to bind receiving port with the socket.
+    memset((char*)&myInfoUDP, 0, sizeof(myInfoUDP));
+    myInfoUDP.sin_family = AF_INET;
+    myInfoUDP.sin_port = htons(SERVER_PORT);
+    myInfoUDP.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    // Store the info to bind receiving port with the socket.
+    memset((char*)&myInfoUDP2, 0, sizeof(myInfoUDP2));
+    myInfoUDP2.sin_family = AF_INET;
+    myInfoUDP2.sin_port = htons(CLIENT_PORT);
+    myInfoUDP2.sin_addr.s_addr = htonl(INADDR_ANY);
+
+
+    // bind the UDP receiver socket
+    if(bind(serverSocket, (struct sockaddr*) &myInfoUDP, sizeof(myInfoUDP)) == -1){
+        generalInfoLog("Bind failed for receiving socket \n");
+        exit(1);
+    }
+
+    if(bind(clientSocket, (struct sockaddr*) &myInfoUDP2, sizeof(myInfoUDP2)) == -1){
+        generalInfoLog("Bind failed for client socket\n");
+        exit(1);
+    }
+    */
+
+    fd_set read_fds, master; // set of read fds.
 
     FD_ZERO(&read_fds); // clear the read fd set
+    FD_ZERO(&master); // clear the read fd set
 
     // Add the UDP socket to the master list too
     FD_SET(serverSocket, &read_fds);
     FD_SET(clientSocket, &read_fds);
 
     int fdmax = (serverSocket > clientSocket ? serverSocket : clientSocket);
+    master = read_fds;
+    
+   printf("Max Socket: %d\n", fdmax);
 
     // start the stabilize timer
     gettimeofday(&stabilizeTimer, NULL);
@@ -157,6 +210,8 @@ int main(int argc, char* argv[]){
     int selectReturnValue;
     for(;;){
 
+        
+        read_fds = master;
 
         // Check for stabilize timer expiry
         gettimeofday(&endTime, NULL);
@@ -190,6 +245,39 @@ int main(int argc, char* argv[]){
 
             myChordInstance.stabilize();
 
+            if(debug){
+                printf("After stabilize:\n");
+
+                printf("Self ID: %s  Self IP: %s\n",myChordInstance.getLocalID().c_str(), myChordInstance.getLocalIP().c_str());
+                if(!myChordInstance.getPredecessor()){
+                    printf("No predecessor yet\n");
+                }
+                else{
+                    printf("Predecessor ID: %s and Predecessor IP: %s\n", myChordInstance.getPredecessor()->getNodeID().c_str(),
+                                                                          myChordInstance.getPredecessor()->getNodeIP().c_str());
+                }
+
+                if(!myChordInstance.getFirstSuccessor()){
+                    printf("No successor yet\n");
+                }
+                else{
+                    printf("Successor ID: %s and Successor IP: %s\n", myChordInstance.getFirstSuccessor()->getNodeID().c_str(),
+                                                                    myChordInstance.getFirstSuccessor()->getNodeIP().c_str());
+                }
+
+                if(myChordInstance.getFirstSuccessor() && myChordInstance.getPredecessor()){
+
+                    if(myChordInstance.getLocalID().compare(myChordInstance.getPredecessor()->getNodeID()) != 0 &&
+                       myChordInstance.getPredecessor()->getNodeID().compare(myChordInstance.getFirstSuccessor()->getNodeID()) != 0 &&
+                       myChordInstance.getLocalID().compare(myChordInstance.getFirstSuccessor()->getNodeID()) != 0){
+
+                        printf("System is stabilized\n");
+                        printf("---------------------------\n");
+                    }
+                }
+
+                fflush(NULL);
+            }
             // Reset the timer
             gettimeofday(&stabilizeTimer, NULL);
         }
@@ -231,7 +319,9 @@ int main(int argc, char* argv[]){
                             else{
                                 cout << "SERVICE: Invalid message received: " << type << endl;
                             }
-                        }				
+                        }
+
+                        delete[] maxMessage;
                     }
                 }
             }// ENd of fd set for loop

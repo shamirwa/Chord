@@ -69,6 +69,7 @@ Node* SuccessorList::getFirstSuccessor(){
         return successors.front();
     }
     else{
+        return NULL;
         cout << "List of successor is empty\n";
     }
 

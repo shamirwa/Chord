@@ -2,6 +2,7 @@
 #include "Exception.h"
 #include <openssl/evp.h>
 #include "Defs.h"
+#include "message.h"
 
 using namespace std;
 
@@ -15,22 +16,31 @@ void throwException(string msg)
 void functionEntryLog(const char msg[]){
     if(functionDebug){
         printf("Entered the function %s\n", msg);
+        fflush(NULL);
     }
 }
 
 void generalInfoLog(const char msg[]){
     if(infoDebug){
         printf("%s\n", msg);
+        fflush(NULL);
     }
 }
 
 int compareTo(string id1, string toCompareID)
 {
+    functionEntryLog("comapreTo");
+
     if(id1.length() != toCompareID.length()){
+        printf("Diff length ID\n");
+        printf("Length id1: %ld\n", id1.length());
+        printf("Length toCompareID: %ld\n", toCompareID.length());
         // Throw exception
     }
 
-    for(int i = 0; i < id1.length(); ++i){
+    int minLen = min(id1.length(), toCompareID.length());
+
+    for(int i = 0; i < minLen; ++i){
 
         if((char)(id1[i] - 128) < (char)(toCompareID[i] - 128)){
             return -1;
@@ -53,23 +63,53 @@ bool isIdEqual(string id1, string id2)
 
 bool isInInterval(string ID, string fromID, string toID)
 {
+
+    functionEntryLog("isInInterval");
+
+    bool result = false;
+    int cond = 0;
+
     // Check if both interval bounds are equal or not
     if(isIdEqual(fromID, toID)){
 
         // Every ID is contained in the interval except of two bounds
-        return (!isIdEqual(ID, fromID));
+        result = (!isIdEqual(ID, fromID));
+        cond = 1;
+        if(result){
+            printf("Return true in cond %d isInInterval\n", cond);
+        }
+        else{
+            printf("Return false in cond %d isInInterval\n", cond);
+        }
+
+
+        return result;
+
     }
 
     // If intervals doesn't cross zero then compare from
     // both the from and to ID's
     if(compareTo(fromID ,toID) < 0){
-        return (compareTo(ID, fromID) > 0 && compareTo(ID, toID) < 0);
+
+        result = (compareTo(ID, fromID) > 0 && compareTo(ID, toID) < 0);
+        cond = 2;
+
     }
 
     else{
 
-        return (compareTo(ID, fromID) > 0 || compareTo(ID, toID) < 0);
+        result = (compareTo(ID, fromID) > 0 || compareTo(ID, toID) < 0);
+        cond = 3;
     }
+
+    if(result){
+        printf("Return true in cond %d isInInterval\n", cond);
+    }
+    else{
+        printf("Return false in cond %d isInInterval\n", cond);
+    }
+
+    return result;
     
 }
 
@@ -146,5 +186,18 @@ string addPowerOfTwo(int powerOfTwo,string ID)
 		}while(oldValue < 0 && ID[indexOfByte] >= 0 && indexOfByte-- > 0);
 		
 		return ID;
+
+}
+
+void printMessageDetails(char* msg)
+{
+    functionEntryLog("printMessageDetails");
+
+    command* cmndMsg = (command*)msg;
+    
+    //printf("Total Message: %s\n", msg);
+    printf("Type: %d\n", cmndMsg->type);
+    printf("Sender ID: %s\n", cmndMsg->senderID);
+    printf("Num params: %d\n", cmndMsg->numParameters);
 
 }

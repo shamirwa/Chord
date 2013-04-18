@@ -19,4 +19,4 @@ entry:	Entry.cpp Entry.h
 utils:	myUtils.cpp myUtils.h Exception.h
 	g++ -c -g -o utils myUtils.cpp -lcrypto
 clean:
-	rm -rf entry node slist chord service all
+	rm -rf entry node slist chord service utils all
