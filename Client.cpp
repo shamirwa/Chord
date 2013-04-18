@@ -17,6 +17,10 @@
 #define EXISTS "exists"
 #define LS "ls"
 #define DELETE "delete"
+#define XINU 0
+#define VM 1
+#define debug 1
+
 
 using namespace std;
 
@@ -45,7 +49,7 @@ void recieveOutputFromServer()
 }
 
 
-void sendRequestToServer(string commandName,string receiverIP,string filename,string data)
+void sendRequestToServer(string commandName,string receiverIP,string filename,string data,string myIP)
 {
 				//Socket variables for client
 				int n;
@@ -79,17 +83,18 @@ void sendRequestToServer(string commandName,string receiverIP,string filename,st
 				req->lengthFileName = filename.length();
 				req->lengthCommandName = commandName.length();
 				req->lengthFileData = data.length();
+				req->lengthClientIP= myIP.length();
 
 				char* msgBuffer = NULL;
 				long messageLen = 0;
-				messageLen = sizeof(ClientRequest) + filename.length() + commandName.length() + data.length();
+				messageLen = sizeof(ClientRequest) + filename.length() + commandName.length() + data.length() + myIP.length();
 
 				msgBuffer = new char[messageLen];
 				memcpy(msgBuffer,req,sizeof(ClientRequest));
 				memcpy(msgBuffer+sizeof(ClientRequest),filename.c_str(),filename.length());
 				memcpy(msgBuffer+sizeof(ClientRequest)+filename.length(),commandName.c_str(),commandName.length());
 				memcpy(msgBuffer+sizeof(ClientRequest)+filename.length()+commandName.length(),data.c_str(),data.length());
-
+				memcpy(msgBuffer+sizeof(ClientRequest)+filename.length()+commandName.length()+data.length(),myIP.c_str(),myIP.length());
 
 				struct sockaddr_in receiverAddr;
 
@@ -121,6 +126,36 @@ void sendRequestToServer(string commandName,string receiverIP,string filename,st
 
 int main(int argc,char **argv)
 {
+				// Get self hostname
+				char myName[100];
+				gethostname(myName, 100);
+				string selfName;
+				struct hostent* he;
+
+				selfName = myName;
+
+				if((he = gethostbyname(selfName.c_str())) == NULL){
+								fprintf(stderr, "Unable to get the ip address of the host: %s\n",
+																selfName.c_str());
+								exit(1);
+				}
+				
+				struct in_addr **ipAddr;
+				
+				string selfIP;
+
+				//Store the ip address
+				ipAddr = (struct in_addr**)he->h_addr_list;
+				selfIP = inet_ntoa(*ipAddr[XINU]);
+
+				if(selfIP.find("127") == 0){
+								selfIP = inet_ntoa(*ipAddr[VM]);
+				}
+				else{
+								selfIP = inet_ntoa(*ipAddr[XINU]);
+				}
+
+				cout<<"Self IP is: "<<selfIP<<endl;
 
 				int command;
 
@@ -135,7 +170,7 @@ int main(int argc,char **argv)
 				{
 								cout<<"Please enter the operation (0-4) you intend to do: "<<endl;
 								cin >> command;
-
+				
 								switch(command)
 								{
 												case 0:
@@ -154,7 +189,7 @@ int main(int argc,char **argv)
 																				string data = DATA;				
 																				string commandName = PUT;		
 
-																				sendRequestToServer(commandName,serverIP,filename,data);
+																				sendRequestToServer(commandName,serverIP,filename,data,selfIP);
 																				recieveOutputFromServer();
 																				break;
 																}
@@ -174,7 +209,7 @@ int main(int argc,char **argv)
 																				string data = "";				
 																				string commandName = GET;		
 
-																				sendRequestToServer(commandName,serverIP,filename,data);
+																				sendRequestToServer(commandName,serverIP,filename,data,selfIP);
 																				recieveOutputFromServer();
 																				break;
 																}
@@ -194,7 +229,7 @@ int main(int argc,char **argv)
 																				string data = "";				
 																				string commandName = EXISTS;		
 
-																				sendRequestToServer(commandName,serverIP,filename,data);
+																				sendRequestToServer(commandName,serverIP,filename,data,selfIP);
 																				recieveOutputFromServer();
 
 																				break;
@@ -212,7 +247,7 @@ int main(int argc,char **argv)
 																				string data = "";				
 																				string commandName = LS;		
 
-																				sendRequestToServer(commandName,serverIP,filename,data);
+																				sendRequestToServer(commandName,serverIP,filename,data,selfIP);
 																				recieveOutputFromServer();
 																				
 																				break;
@@ -233,7 +268,7 @@ int main(int argc,char **argv)
 																				string data = "";				
 																				string commandName = DELETE;		
 
-																				sendRequestToServer(commandName,serverIP,filename,data);
+																				sendRequestToServer(commandName,serverIP,filename,data,selfIP);
 																				recieveOutputFromServer();
 																				break;
 																}
