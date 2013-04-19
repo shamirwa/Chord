@@ -73,7 +73,7 @@ class Chord
         void insertReplicas(string id); //Insert replica of a file with Key 'id'
 
         void sendRequestToServer(int method, string rcvrIP, string idToSend, char* message = NULL, 
-                                long msgLen = 0);
+                long msgLen = 0);
 
         void sendResponseToServer(int method, string responseID, string responseIP, string receiverIP);
 
@@ -96,12 +96,12 @@ class Chord
         void setPredecessor(string predIP, string predID);
 
         char* getMessageToSend(int msgType, string cmnd, string idToSend, string ipToSend,
-                                long& msgLength);
+                long& msgLength);
 
-			map<string, Entry> getAllEntries();
+        map<string, Entry> getAllEntries();
 
-			char* makeBufferToSend(long& msgLength);
-			
+        char* makeBufferToSend(long& msgLength);
+
 
 };
 
