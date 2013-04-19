@@ -50,6 +50,9 @@ typedef struct{
     //number of entries to be stored at the successor before leaving
     int nEntries;
 
+    //length of predecessor's IP
+    int lengthPredIP;
+
     //array of length of each key
     int* lengthKeys;
 
@@ -61,6 +64,8 @@ typedef struct{
 
     //array of values
     char** values;
+
+    char* predIP;
 
 }LeaveMsg;
 
@@ -75,7 +80,7 @@ typedef struct{
     //successors IP
     char* succIP;
 
-    //no need to send successors ID as it can be computed
+    //no need to send successors ID as it can be computed at other end
     
 }LeaveMsgForPredecessor;
 

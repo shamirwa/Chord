@@ -258,22 +258,101 @@ void Chord::join(string IP)
 
 map<string,Entry> Chord::getAllEntries()
 {
+    generalInfoLog("CHORD: getAllEntries");            
+
     return localNode->getAllEntries();
 }
 
-char* Chord::makeBufferToSend(long& msgLength)
+char* Chord::makeBufferToSend(long& msgLength,string predID)
 {
+    generalInfoLog("CHORD: makeBufferToSend");    
 
     map<string,Entry> entriesToBeSent = this->getAllEntries();
 
     int sumKeyLengths = 0;
     int sumValueLengths = 0;
+    int i = 0, totalSize = 0, lenArraySize = 0, paramSize = 0;
 
-    LeaveMsg* leaveMsg = new LeaveMsg; 
+   // LeaveMsg* leaveMsg = new LeaveMsg; 
+    command* leaveMsg = new command;
+    msgLength = sizeof(command);
 
+    leaveMsg->type = SERVER_REQ;
+    memcpy(leaveMsg->senderID,predID.c_str(),predID.length());
+
+    leaveMsg->numParameters = entriesToBeSent.size() + 2;
+
+    lenArraySize = sizeof(int) * (leaveMsg->numParameters);
+    int* lenArray = new int[lenArraySize];
+    string commandName = "leaving";
+
+    lenArray[i++] = commandName.length();
+    totalSize = commandName.length();
+    lenArray[i++] = localNode->getNodeIP().length();
+    totalSize += localNode->getNodeIP().length();
+   
+    map<string,Entry>::iterator myIter = entriesToBeSent.begin();
+    for(; myIter!= entriesToBeSent.end();myIter++)
+    {
+        // Store the length of each value
+        lenArray[i] = myIter->second.getFileValue().length();
+        totalSize += ID_SIZE;
+        totalSize += lenArray[i++];
+    }
+
+
+    // Size of all param lengths
+    msgLength += lenArraySize;
+
+    paramSize = totalSize;
+    msgLength += paramSize;
+
+    char* params = new char[paramSize];
+
+    memcpy(params, commandName.c_str(), commandName.length());
+    memcpy(params + commandName.length(), localNode->getNodeIP().c_str(),
+            localNode->getNodeIP().length());
+    
+    i = 2;
+    totalSize = lenArray[0] + lenArray[1];
+
+    for(myIter = entriesToBeSent.begin();
+        myIter!= entriesToBeSent.end();myIter++){
+
+        // Store all the keys
+        memcpy(params + totalSize, myIter->second.getFileKey().c_str(),
+                ID_SIZE);
+        totalSize += ID_SIZE;
+        
+        // Store all the values
+        memcpy(params + totalSize, myIter->second.getFileValue().c_str(),
+                lenArray[i]);
+        totalSize += lenArray[i++];
+    }
+   
+    // Allocate the large buffer to serialize
+    char* maxBuff = new char[msgLength];
+    int addLen = sizeof(command);
+    memcpy(maxBuff,leaveMsg,sizeof(command));
+    
+    memcpy(maxBuff + addLen, lenArray, lenArraySize);
+    addLen += lenArraySize;
+
+    memcpy(maxBuff + addLen, params, paramSize);
+
+    // Delete the memory
+    delete leaveMsg;
+    delete[] lenArray;
+    delete[] params;
+
+    generalInfoLog("Buffer to be sent is made");
+    return maxBuff;
+
+/*
     leaveMsg->type = LEAVE_ENTRIES_MSG;
 
     leaveMsg->nEntries = entriesToBeSent.size();
+    leaveMsg->lengthPredIP = predIP.length();
 
     leaveMsg->lengthKeys =(int*) malloc(sizeof(int)*(leaveMsg->nEntries));	
     leaveMsg->lengthValues=(int*) malloc(sizeof(int)*(leaveMsg->nEntries));
@@ -319,20 +398,26 @@ char* Chord::makeBufferToSend(long& msgLength)
 
     memcpy(maxBuff,leaveMsg,sizeof(leaveMsg));
 
-    memcpy(maxBuff,leaveMsg->lengthKeys,sizeof(int)*leaveMsg->nEntries);
+    memcpy(maxBuff+sizeof(leaveMsg),leaveMsg->lengthKeys,sizeof(int)*(leaveMsg->nEntries));
 
-    memcpy(maxBuff,leaveMsg->lengthValues,sizeof(int)*leaveMsg->nEntries);
+    memcpy(maxBuff+sizeof(leaveMsg)+sizeof(int)*(leaveMsg->nEntries),leaveMsg->lengthValues,sizeof(int)*(leaveMsg->nEntries));
 
-    memcpy(maxBuff,leaveMsg->keys,sizeof(char)*sumKeyLengths);
+    memcpy(maxBuff+sizeof(leaveMsg)+2*sizeof(int)*(leaveMsg->nEntries),leaveMsg->keys,sizeof(char)*sumKeyLengths);
 
-    memcpy(maxBuff,leaveMsg->values,sizeof(char)*sumValueLengths);
+    memcpy(maxBuff+sizeof(leaveMsg)+2*sizeof(int)*leaveMsg->nEntries+sizeof(char)*sumKeyLengths,leaveMsg->values,sizeof(char)*sumValueLengths);
+
+    memcpy(maxBuff+sizeof(leaveMsg)+2*sizeof(int)*leaveMsg->nEntries+sizeof(char)*sumKeyLengths+sizeof(char)*sumValueLengths,predIP.c_str(),predIP.length());
+
 
     delete leaveMsg->lengthValues;
     delete leaveMsg->lengthKeys;
     delete leaveMsg->keys;
     delete leaveMsg->values;
 
+    generalInfoLog("Buffer to be sent is made");
+
     return maxBuff;
+   */
 }
 
 void Chord::leave(){
@@ -343,11 +428,85 @@ void Chord::leave(){
     Node* predecessor = this->getPredecessor();
     Node* successor   = this->getFirstSuccessor();
 
+    if(!predecessor || !successor){
+        cout << "I am the only node. BYE\n";
+        return;
+    }
+
     //transfer all its keys to the successor
     long msgLength;
-    char* buffToSend = makeBufferToSend(msgLength);
+    char* buffToSend = makeBufferToSend(msgLength,predecessor->getNodeID());
 
     sendRequestToServer(LEAVE_MSG_FOR_SUCCESSOR,successor->getNodeIP(), successor->getNodeID(),buffToSend,msgLength);
+
+    //Prepare message for Predecessor
+    msgLength = 0;
+    string commandName = "changeSuccessor";
+    command* leaveMessageForPred = new command;
+    msgLength += sizeof(command);
+    
+    leaveMessageForPred->type = SERVER_REQ;
+    memcpy(leaveMessageForPred->senderID, successor->getNodeID().c_str(),
+            successor->getNodeID().length());
+    leaveMessageForPred->numParameters = 2;
+
+    int* lenArray = new int[2];
+    lenArray[0] = commandName.length();
+    lenArray[1] = successor->getNodeIP().length();
+    msgLength += sizeof(int) * 2;
+
+    char* params = new char[lenArray[0] + lenArray[1]];
+    msgLength += lenArray[0] + lenArray[1];
+
+    memcpy(params, commandName.c_str(), commandName.length());
+    memcpy(params + commandName.length(), successor->getNodeIP().c_str(),
+            lenArray[1]);
+
+    char* buffForPred = new char[msgLength];
+    int addLen = sizeof(command);
+
+    memcpy(buffForPred, leaveMessageForPred, addLen);
+    memcpy(buffForPred + addLen, lenArray, sizeof(int) * 2);
+    addLen += sizeof(int) * 2;
+    memcpy(buffForPred + addLen, params, lenArray[0] + lenArray[1]);
+
+    delete leaveMessageForPred;
+    delete[] lenArray;
+    delete[] params;
+
+    generalInfoLog("Buffer to be sent is made");
+
+    //send Message to Predecessor
+
+    sendRequestToServer(LEAVE_MSG_FOR_PREDECESSOR,predecessor->getNodeIP(),
+         predecessor->getNodeID(),buffForPred, msgLength);
+
+
+
+
+    /*
+    LeaveMsgForPredecessor* leaveMessageForPred = new LeaveMsgForPredecessor;
+
+    leaveMessageForPred->type = LEAVE_MSG_FOR_PREDECESSOR;
+    int lengthPred = successor->getNodeIP().length();
+    leaveMessageForPred->lengthSuccIP = lengthPred;
+    leaveMessageForPred->succIP = (char *)malloc(sizeof(char)*lengthPred);
+    memcpy(leaveMessageForPred->succIP,successor->getNodeIP().c_str(),lengthPred);
+    long size = sizeof(LeaveMsgForPredecessor)+ sizeof(char)*lengthPred;
+
+    char* buffForPred = (char *)malloc(sizeof(char)*size);
+    memcpy(buffForPred,leaveMessageForPred,sizeof(LeaveMsgForPredecessor));
+    memcpy(buffForPred+sizeof(LeaveMsgForPredecessor),leaveMessageForPred->succIP,lengthPred);
+
+    generalInfoLog("Buffer to be sent is made");
+
+    delete leaveMessageForPred->succIP;   
+    
+
+    //send Message to Predecessor
+
+    sendRequestToServer(LEAVE_MSG_FOR_PREDECESSOR,predecessor->getNodeIP(),predecessor->getNodeID(),buffForPred,size);
+    */
 
 }
 
@@ -503,13 +662,38 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
 
                 break;
             }
-       
-        case 5:
+         case 3:
             {
-                generalInfoLog("In case 5");
+                generalInfoLog("In case 3");
+                
+                if(!message){
+                    cout<<"Message was NULL " <<endl;    
+                }                
+                else{
+                    msgBuffer = message;
+                    messageLen = msgLen;
+                }
 
-                // Received the message to store the file
+                useServerSock = true;
+                useStabSock = false;
+                break;
+            }
+         case 4:
+            {
+                generalInfoLog("In case 4");
+                
+                if(!message){
+                    cout<<"Message was NULL " <<endl;    
+                }                
+                else{
+                    msgBuffer = message;
+                    messageLen = msgLen;
+                }
 
+                useServerSock = true;
+                useStabSock = false;
+                break;
+            }
         default:
             generalInfoLog("Error while sending. Unkonwn command request found\n");
     }
@@ -665,11 +849,12 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
     memcpy(rcvdMsg, msgRcvd, sizeof(command));
 
     int paramCount = rcvdMsg->numParameters;
+
     int* paramLenArr = new int[paramCount];
     memcpy(paramLenArr, msgRcvd + sizeof(command), sizeof(int) * paramCount);
 
     int totalParamsSize = 0;
-
+    
     for(int i = 0; i<paramCount; i++){
         totalParamsSize += paramLenArr[i];
     }
@@ -695,6 +880,12 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
     if(debug){
         printf("Received message from %s\n", sendIP);
         fflush(NULL);
+    }
+    
+    string senderID = rcvdMsg->senderID;
+
+    if(senderID.length() > 20){
+        senderID.erase(20, 1);
     }
 
     // Check if response is for FIND_SUCCESSOR
@@ -738,11 +929,53 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         }
 
     }
+    else if(strcmp(commandName, "leaving") == 0){
+    
+        totalParamsSize = 0;
+        delete[] parameters;
+
+        // Find the actual size
+        for(int i = 0; i < paramCount; i++){
+            totalParamsSize += paramLenArr[i];
+        }
+        // Add for the space of keys
+        totalParamsSize += (ID_SIZE * (paramCount - 2));
+
+        parameters = new char[totalParamsSize];
+        memcpy(parameters, msgRcvd + sizeof(command) + sizeof(int)*paramCount, totalParamsSize);
+
+        // Store the entries
+        int skipLen = paramLenArr[0] + paramLenArr[1];
+        char* key = new char[ID_SIZE];
+        char* value;
+        for(int j = 0; j < (paramCount - 2); j++){
+
+            value = new char[paramLenArr[j+2]];
+            memcpy(key, parameters + skipLen, ID_SIZE);
+            skipLen += ID_SIZE;
+
+            memcpy(value, parameters + skipLen, paramLenArr[j+2]);
+            skipLen += paramLenArr[j+2];
+
+            localNode->storeEntry(key, value);
+        }
+        
+        // Store the new predecessor
+        setPredecessor(senderIP, senderID);
+        
+    }
+    else if(strcmp(commandName, "changeSuccessor") == 0){
+        
+        Node* succ = new Node;
+        succ->setNodeID(senderID);
+        succ->setNodeIP(senderIP);
+
+        successors.storeSuccessor(succ);
+
+    }
     else{
         generalInfoLog("Unknown request received\n");
     }
-
-
 }
 
 char* Chord::getMessageToSend(int msgType, string cmnd, string idToSend, string ipToSend,

@@ -103,7 +103,7 @@ class Chord
 
         map<string, Entry> getAllEntries();
 
-        char* makeBufferToSend(long& msgLength);
+        char* makeBufferToSend(long& msgLength,string predID);
 
 
 };
