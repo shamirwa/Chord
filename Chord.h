@@ -101,6 +101,11 @@ class Chord
         char* getMessageToSend(int msgType, string cmnd, string idToSend, string ipToSend,
                                 long& msgLength);
 
+			map<string, Entry> getAllEntries();
+
+			char* makeBufferToSend(long& msgLength);
+			
+
 };
 
 

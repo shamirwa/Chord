@@ -3,11 +3,11 @@
 
 #include <stdlib.h>
 
-#define CLIENT_REQ 0
+#define CLIENT_REQ  0
 #define CLIENT_RESP 1
-#define SERVER_REQ 2
-#define SERVER_RES 3
-
+#define SERVER_REQ  2
+#define SERVER_RES  3
+#define LEAVE_ENTRIES_MSG   4
 
 
 typedef struct{
@@ -40,6 +40,30 @@ typedef struct{
 	char* data;
 	char* clientIP;
 }ClientRequest;
+
+typedef struct{
+	
+	uint32_t type;
+	
+	//number of entries to be stored at the successor before leaving
+	int nEntries;
+	
+	//array of length of each key
+	int* lengthKeys;
+
+	//array of length of each value
+	int* lengthValues;
+
+	//array of keys
+	char** keys;
+
+	//array of values
+	char** values;
+
+}LeaveMsg;
+
+
+
 
 
 #endif
