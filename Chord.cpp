@@ -258,11 +258,14 @@ void Chord::join(string IP)
 
 map<string,Entry> Chord::getAllEntries()
 {
+    generalInfoLog("CHORD: getAllEntries");            
+
     return localNode->getAllEntries();
 }
 
 char* Chord::makeBufferToSend(long& msgLength)
 {
+    generalInfoLog("CHORD: makeBufferToSend");    
 
     map<string,Entry> entriesToBeSent = this->getAllEntries();
 
