@@ -503,6 +503,12 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
 
                 break;
             }
+       
+        case 5:
+            {
+                generalInfoLog("In case 5");
+
+                // Received the message to store the file
 
         default:
             generalInfoLog("Error while sending. Unkonwn command request found\n");
@@ -1093,7 +1099,7 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
 
     // Check for command name
     if(strcmp(cmnd, PUT) == 0){
-        handleClientPutMessage();
+        handleClientPutMessage(file, data, ip, msgRcvd, messageLen);
     }
     else if(strcmp(cmnd, GET) == 0){
         handleClientGetMessage();
@@ -1109,3 +1115,52 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
     }
 }
 
+void Chord::handleClientPutMessage(string fileName, string fileValue, string clientIP, 
+                                    char* msg, long msgLen)
+{
+    functionEntryLog("handleClientPutMessage");
+
+    // get the local hash id for this file
+    string fileID = getLocalHashID(fileName);
+
+    string successorID = successors.getFirstSuccessor();
+
+    // find the successor of this fileID
+    //Lies between the current node and successor node 
+    //
+    if(isInInterval(fileID, localNodeID, successorID))
+    {
+        // Send the file to my successor to store it
+        if(debug){
+            printf("Sending file to successor\n");
+            fflush(NULL);
+        }
+        sendRequestToServer(STORE_FILE, clientIP, "NULL", msg, msgLen);
+
+    }
+    else
+    {
+        string closestPrecedingNodeIP = this->closestPrecedingNode(senderID);
+
+        if(closestPrecedingNodeIP.compare(localNode->getNodeIP()) == 0){
+
+            // I am the only node in the network
+            // Send my ID  SEND RESPONSE TO SERVER
+            if(debug){
+                printf("Sending response with self id. No preceeding node\n");
+                fflush(NULL);
+            }
+
+            sendResponseToServer(FIND_SUCCESSOR, localNodeID, localNodeIP, senderIPFromMsg);
+        }
+        else{
+            if(debug){
+                printf("Forwarding the message to the preceeding node\n");
+                fflush(NULL);
+            }
+            // Forward this message to the preceding Node
+            sendRequestToServer(FIND_SUCCESSOR, closestPrecedingNodeIP, "NULL", message, messageLen);
+        }
+    }   
+
+}

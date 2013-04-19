@@ -45,6 +45,7 @@ using namespace std;
 #define NOTIFY_SUCCESSOR 2
 #define LEAVE_MSG_FOR_SUCCESSOR 3
 #define LEAVE_MSG_FOR_PREDECESSOR 4
+#define STORE_FILE 5
 
 #define MAX_MSG_SIZE 5000
 

@@ -256,11 +256,7 @@ int main(int argc, char* argv[]){
             for(int i = 0; i<=fdmax; i++){
                 if(FD_ISSET(i, &read_fds)){ // We got one active fd
 
-                    if(i == clientSocket){
-
-                        //handleClientRequest();
-                    }
-                    else if(i == serverSocket){
+                    if(i == serverSocket){
 
                         cout << "Received a request from server\n";
 
