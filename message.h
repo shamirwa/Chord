@@ -30,17 +30,7 @@ typedef struct{
 }ClientResponse;
 
 typedef struct{
-<<<<<<< HEAD
-    uint32_t type;
-    int lengthFileName;
-    int lengthCommandName;
-    int lengthFileData;
-    int lengthClientIP;
-    char* fileName;
-    char* command;
-    char* data;
-    char* clientIP;
-=======
+
 	uint32_t type; // Always 0
 	int lengthFileName;
 	int lengthCommandName;
@@ -50,7 +40,7 @@ typedef struct{
 	char* command;
 	char* data;
 	char* clientIP;
->>>>>>> 5182b6a98be9bdbd91aece2311327d64f2aa11c2
+
 }ClientRequest;
 
 typedef struct{
