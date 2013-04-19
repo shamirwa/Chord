@@ -17,10 +17,10 @@ typedef struct{
     uint32_t numParameters; // Number of parameters for the command
     int* paramLenArray; // Length of each parameter
     char* parameters; // First parameter is the command name(or function name), second
-                      // parameter is IP address and then any other function parameters.
-                      // It might so happen that my message is forwarded to third node. So
-                      // now that node knows my IP and can directly send the response message
-                      // to me.
+    // parameter is IP address and then any other function parameters.
+    // It might so happen that my message is forwarded to third node. So
+    // now that node knows my IP and can directly send the response message
+    // to me.
 }command;
 
 typedef struct{
@@ -30,6 +30,7 @@ typedef struct{
 }ClientResponse;
 
 typedef struct{
+
 	uint32_t type; // Always 0
 	int lengthFileName;
 	int lengthCommandName;
@@ -39,29 +40,44 @@ typedef struct{
 	char* command;
 	char* data;
 	char* clientIP;
+
 }ClientRequest;
 
 typedef struct{
-	
-	uint32_t type;
-	
-	//number of entries to be stored at the successor before leaving
-	int nEntries;
-	
-	//array of length of each key
-	int* lengthKeys;
 
-	//array of length of each value
-	int* lengthValues;
+    uint32_t type;
 
-	//array of keys
-	char** keys;
+    //number of entries to be stored at the successor before leaving
+    int nEntries;
 
-	//array of values
-	char** values;
+    //array of length of each key
+    int* lengthKeys;
+
+    //array of length of each value
+    int* lengthValues;
+
+    //array of keys
+    char** keys;
+
+    //array of values
+    char** values;
 
 }LeaveMsg;
 
+typedef struct{
+
+    uint32_t type;
+
+    //successors IP length
+    
+    int lengthSuccIP;
+
+    //successors IP
+    char* succIP;
+
+    //no need to send successors ID as it can be computed
+    
+}LeaveMsgForPredecessor;
 
 
 

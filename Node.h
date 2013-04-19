@@ -25,7 +25,7 @@ class Node{
         bool checkIfEntryExists(string fileKey);
         string getEntryValue(string fileKey);
         void storeEntry(string fileKey, string fileValue);
-				map<string,Entry> getAllEntries();
+        map<string,Entry> getAllEntries();
 
 };
 

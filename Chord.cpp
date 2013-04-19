@@ -826,6 +826,7 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
                 commandName = "findSuccessor";
                 msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID, 
                         responseIP, messageLen);
+                
                 useServSock = true;
                 useStabSock = false;
                 break;
