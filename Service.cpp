@@ -141,6 +141,7 @@ int main(int argc, char* argv[]){
     // Create an object of the chord class
     Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR, clientSocket, serverSocket, stabilizeSocket);
 
+
     // Check if this is the first node or not
     if(!isFirstNode){
         // This node is not the first node to join. SO call the join method with the
