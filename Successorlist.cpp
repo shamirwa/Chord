@@ -105,7 +105,23 @@ void SuccessorList::storeSuccessor(Node* newSuccessor){
         cout << "Successor is already present in the list\n";
     }
     else if(successors.size() < maxNumSuccessors){
-        successors.push_back(newSuccessor);
+
+        //Find the correct position of the newSuccessor
+        list<Node*>::iterator myIter;
+        myIter = successors.begin();
+
+        while(myIter != successors.end())
+        {
+            if(isInInterval(newSuccessor->getNodeID(),localNode->getNodeID(),(*myIter)->getNodeID()))
+            {
+                   cout<< "Found position for the new successor"; 
+                   successors.insert(myIter,newSuccessor);
+                   break;
+            }
+            ++myIter;
+        }
+        if(myIter == successors.end())
+            successors.push_back(newSuccessor);
     }
     else{
         cout << " Successor list is already full\n";
