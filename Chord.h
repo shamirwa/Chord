@@ -105,6 +105,15 @@ class Chord
 
         char* makeBufferToSend(long& msgLength,string predID);
 
+        void storeFileAndSendResponse(string fileID, string fileValue, string clientIP);
+
+        void handleClientPutMessage(string fileName, string fileValue, string clientIP,
+                                            char* msg, long msgLen);
+
+        char* getStoreFileMsg(string clientIP, string fileKey,
+                string fileValue, long& msgSize);
+
+        void sendResponseToClient(int method, string receiverIP);
 
 };
 

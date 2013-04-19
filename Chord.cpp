@@ -694,6 +694,23 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 useStabSock = false;
                 break;
             }
+        case 5:
+            {
+                generalInfoLog("In case 5");
+
+                if(!message){
+                    cout << "Message was NULL " << endl;
+                }
+                else{
+                    msgBuffer = message;
+                    messageLen = msgLen;
+                }
+
+                useServerSock = true;
+                useStabSock = false;
+
+                break;
+            }
         default:
             generalInfoLog("Error while sending. Unkonwn command request found\n");
     }
@@ -972,6 +989,24 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
 
         successors.storeSuccessor(succ);
 
+    }
+    else if(strcmp(commandName, "storeFile") == 0){
+
+        char* fileID = new char[paramLenArr[2] + 1];
+        memcpy(fileID, parameters + paramLenArr[0] + paramLenArr[1], paramLenArr[2]);
+        fileID[paramLenArr[2]] = '\0';
+
+        string key = fileID;
+        if(key.length() > 20){
+            key.erase(20, 1);
+        }
+
+        char* fileValue = new char[paramLenArr[3] + 1];
+        memcpy(fileValue, parameters + paramLenArr[0] + paramLenArr[1] + paramLenArr[2], paramLenArr[3]);
+        fileValue[paramLenArr[3]] = '\0';
+
+        // Store and send response to client
+        storeFileAndSendResponse(key, fileValue, senderIP);
     }
     else{
         generalInfoLog("Unknown request received\n");
@@ -1348,6 +1383,80 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
     }
 }
 
+char* Chord::getStoreFileMsg(string clientIP, string fileKey, 
+        string fileValue, long& msgSize)
+{
+    functionEntryLog("getStoreFileMsg");
+
+    if(debug){
+        printf("Sending Message details\n");
+        printf("Type: SERV_REQ \n");
+        printf("SenderID: %s\n", localNode->getNodeID().c_str());
+        printf("Length of ID: %ld\n", localNode->getNodeID().length());
+        printf("IP to send: %s\n", clientIP.c_str());
+        fflush(NULL);
+    }
+
+    string cmnd = "storeFile";
+
+    // create the message to send
+    command* Msg = new command;
+    Msg->type = SERVER_REQ;
+    memcpy(Msg->senderID, localNode->getNodeID().c_str(), localNode->getNodeID().length());
+    Msg->numParameters = 4;
+
+    printf("SenderID in msg: %s\n", Msg->senderID);
+
+    int* paramLen = new int[Msg->numParameters];
+    paramLen[0] = cmnd.length();
+    paramLen[1] = clientIP.length();
+    paramLen[2] = fileKey.length();
+    paramLen[3] = fileValue.length();
+
+    int totalParamLen = 0;
+    for(int i = 0; i<Msg->numParameters; i++){
+        totalParamLen += paramLen[i];
+    }
+
+    char* params = new char[totalParamLen];
+    int skipLen = paramLen[0];
+    memcpy(params, cmnd.c_str(), paramLen[0]);
+    memcpy(params + skipLen, clientIP.c_str(), paramLen[1]);
+    skipLen += paramLen[1];
+    memcpy(params + skipLen, fileKey.c_str(), fileKey.length());
+    skipLen += fileKey.length();
+    memcpy(params + skipLen, fileValue.c_str(), fileValue.length());
+
+    /*
+       if(debug){
+       int len = paramLen[0] + paramLen[1];
+
+       printf("Parameters: %s\n", params);
+       for(int i = 0; i<len; ++i){
+       printf("%c\n", params[i]);
+       }
+       }*/
+
+    // Allocate a large buffer to serialize the parameters
+    char* msgBuffer = NULL;
+    long messageLen = 0;
+    messageLen = sizeof(command) + totalParamLen  + sizeof(int) * Msg->numParameters;
+    msgBuffer = new char[messageLen];
+    memcpy(msgBuffer, Msg, sizeof(command));
+    memcpy(msgBuffer + sizeof(command), paramLen, sizeof(int) * Msg->numParameters);
+    memcpy(msgBuffer + sizeof(command) + sizeof(int) * Msg->numParameters, params, totalParamLen);
+
+
+    // Delete the memory allocated for paramLen and params
+    delete[] paramLen;
+    delete[] params;
+    delete Msg;
+
+    // Return the message buffer
+    msgSize = messageLen;
+    return msgBuffer;
+}
+
 void Chord::handleClientPutMessage(string fileName, string fileValue, string clientIP, 
                                     char* msg, long msgLen)
 {
@@ -1356,7 +1465,9 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
     // get the local hash id for this file
     string fileID = getLocalHashID(fileName);
 
-    string successorID = successors.getFirstSuccessor();
+    string successorID = successors.getFirstSuccessor()->getNodeID();
+
+    string localNodeID = localNode->getNodeID();
 
     // find the successor of this fileID
     //Lies between the current node and successor node 
@@ -1368,12 +1479,16 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
             printf("Sending file to successor\n");
             fflush(NULL);
         }
-        sendRequestToServer(STORE_FILE, clientIP, "NULL", msg, msgLen);
+
+        char* messageToSend = getStoreFileMsg(clientIP, fileID, fileValue, msgLen);
+
+        // Send the request to successor to store this file
+        sendRequestToServer(STORE_FILE, clientIP, "NULL", messageToSend, msgLen);
 
     }
     else
     {
-        string closestPrecedingNodeIP = this->closestPrecedingNode(senderID);
+        string closestPrecedingNodeIP = this->closestPrecedingNode(fileID);
 
         if(closestPrecedingNodeIP.compare(localNode->getNodeIP()) == 0){
 
@@ -1383,8 +1498,9 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
                 printf("Sending response with self id. No preceeding node\n");
                 fflush(NULL);
             }
-
-            sendResponseToServer(FIND_SUCCESSOR, localNodeID, localNodeIP, senderIPFromMsg);
+            
+            // Store and send the response to client
+            storeFileAndSendResponse(fileID, fileValue, clientIP);
         }
         else{
             if(debug){
@@ -1392,8 +1508,93 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
                 fflush(NULL);
             }
             // Forward this message to the preceding Node
-            sendRequestToServer(FIND_SUCCESSOR, closestPrecedingNodeIP, "NULL", message, messageLen);
+            sendRequestToServer(CLIENT_REQ, closestPrecedingNodeIP, "NULL", msg, msgLen);
         }
     }   
+
+}
+
+void Chord::storeFileAndSendResponse(string fileID, string fileValue, string clientIP){
+    functionEntryLog("storeFileAndSendResponse");
+
+    // Store the entry in the list
+    localNode->storeEntry(fileID, fileValue);
+
+    // Send Response to the client
+    sendResponseToClient(PUT_RESP, clientIP);
+}
+
+
+void Chord::sendResponseToClient(int method, string receiverIP){
+
+    functionEntryLog("CHORD: sendResponseToCLient");
+
+    ClientResponse* message = new ClientResponse;
+
+    message->type = CLIENT_RESP;
+
+    long messageLen = 0;
+
+    switch(method){
+
+        case 0:
+            {
+                generalInfoLog("In case 0");
+                message->numParameters = 0;
+                message->result = 1;
+                messageLen = sizeof(ClientResponse);
+
+                break;
+            }
+        case 1:
+            {
+                generalInfoLog("In case 1");
+
+                break;
+            }
+
+        default:
+            generalInfoLog("Error while sending. Unkonwn command request found\n");
+    }
+
+    // check if socket is open for the servers
+    if(getClientSocket() == -1){
+
+        printf("Opening socket again\n");
+        // Need to open a socket
+        if((clientSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+            printf("Error while opening socket to send the message\n");
+            exit(1);
+        }
+    }
+
+    struct sockaddr_in receiverAddr;
+
+    memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
+    receiverAddr.sin_family = AF_INET;
+
+    receiverAddr.sin_port = htons(CLIENT_PORT);
+
+    if(inet_aton(receiverIP.c_str(), &receiverAddr.sin_addr) == 0){
+        printf("INET_ATON Failed\n");
+    }
+
+    if(debug){
+        printf("Sending message of length: %ld\n", messageLen);
+        fflush(NULL);
+    }
+
+    if(sendto(clientSocket, message, messageLen, 0,
+                (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
+
+        printf("%s: Failed to send the message type %d to client: %s",
+                localNode->getNodeIP().c_str(), SERVER_RES, receiverIP.c_str());
+        fflush(NULL);
+    }
+    else{
+        printf("%s: successfully sent the message type %d to %s\n",
+                localNode->getNodeIP().c_str(), SERVER_RES, receiverIP.c_str());
+        fflush(NULL);
+    }
 
 }

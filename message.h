@@ -25,8 +25,10 @@ typedef struct{
 
 typedef struct{
     uint32_t type; // Always 1
-    char senderID[20]; // ID of the server sending the response
+    uint32_t numParameters; // Number of parameters
     uint32_t result; // 0 for failure and 1 for success
+    int* paramLenArray;
+    char* parameters;
 }ClientResponse;
 
 typedef struct{
