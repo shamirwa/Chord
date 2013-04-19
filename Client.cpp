@@ -11,12 +11,6 @@
 #include "myUtils.h"
 #include "message.h"
 
-#define DATA "Sample Data"
-#define PUT "put"
-#define GET "get"
-#define EXISTS "exists"
-#define LS "ls"
-#define DELETE "delete"
 #define XINU 0
 #define VM 1
 #define debug 1

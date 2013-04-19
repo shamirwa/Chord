@@ -16,7 +16,7 @@ Chord::Chord(){
 }
 
 Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,
-             int serverSocket, int stabilizeSocket){
+        int serverSocket, int stabilizeSocket){
 
     this->localNode = NULL;
     this->localNode = new Node;
@@ -214,7 +214,7 @@ void Chord::joinHelp(string IP)
         printf("Response message received\n");
         fflush(NULL);
     }
-    
+
     string succIP;// = inet_ntoa(senderProcAddrUDP.sin_addr);
 
     if(recvRet > 0){
@@ -258,101 +258,96 @@ void Chord::join(string IP)
 
 map<string,Entry> Chord::getAllEntries()
 {
-	return localNode->getAllEntries();
+    return localNode->getAllEntries();
 }
 
 char* Chord::makeBufferToSend(long& msgLength)
 {
-	
-				map<string,Entry> entriesToBeSent = this->getAllEntries();
 
-				int sumKeyLengths = 0;
-				int sumValueLengths = 0;
+    map<string,Entry> entriesToBeSent = this->getAllEntries();
 
-				LeaveMsg* leaveMsg = new LeaveMsg; 
+    int sumKeyLengths = 0;
+    int sumValueLengths = 0;
 
-				leaveMsg->type = LEAVE_ENTRIES_MSG;
+    LeaveMsg* leaveMsg = new LeaveMsg; 
 
-				leaveMsg->nEntries = entriesToBeSent.size();
+    leaveMsg->type = LEAVE_ENTRIES_MSG;
 
-				leaveMsg->lengthKeys =(int*) malloc(sizeof(int)*(leaveMsg->nEntries));	
-				leaveMsg->lengthValues=(int*) malloc(sizeof(int)*(leaveMsg->nEntries));
+    leaveMsg->nEntries = entriesToBeSent.size();
 
-				leaveMsg->keys = (char**)malloc(sizeof(char)*(leaveMsg->nEntries));	
+    leaveMsg->lengthKeys =(int*) malloc(sizeof(int)*(leaveMsg->nEntries));	
+    leaveMsg->lengthValues=(int*) malloc(sizeof(int)*(leaveMsg->nEntries));
 
-				leaveMsg->values = (char**)malloc(sizeof(char)*(leaveMsg->nEntries));	
+    leaveMsg->keys = (char**)malloc(sizeof(char)*(leaveMsg->nEntries));	
 
-				int iter = 0;
-				for(map<string,Entry>::iterator myIter = entriesToBeSent.begin(); myIter!= entriesToBeSent.end();myIter++)
-				{
-								Entry curEntry = myIter->second;
+    leaveMsg->values = (char**)malloc(sizeof(char)*(leaveMsg->nEntries));	
 
-								int lengthKey = curEntry.getFileKey().length();
+    int iter = 0;
+    for(map<string,Entry>::iterator myIter = entriesToBeSent.begin(); myIter!= entriesToBeSent.end();myIter++)
+    {
+        Entry curEntry = myIter->second;
 
-								sumKeyLengths += lengthKey;
+        int lengthKey = curEntry.getFileKey().length();
 
-								int lengthValue = curEntry.getFileValue().length();
+        sumKeyLengths += lengthKey;
 
-								sumValueLengths += lengthValue;
+        int lengthValue = curEntry.getFileValue().length();
 
-								leaveMsg->lengthKeys[iter] = lengthKey;
+        sumValueLengths += lengthValue;
 
-								leaveMsg->lengthValues[iter] = lengthValue;
+        leaveMsg->lengthKeys[iter] = lengthKey;
 
-								leaveMsg->keys[iter] = (char*)malloc(sizeof(char)*lengthKey);
+        leaveMsg->lengthValues[iter] = lengthValue;
 
-								memcpy(leaveMsg->keys[iter],curEntry.getFileKey().c_str(),lengthKey);
+        leaveMsg->keys[iter] = (char*)malloc(sizeof(char)*lengthKey);
 
-								leaveMsg->values[iter] = (char*)malloc(sizeof(char)*lengthValue);
+        memcpy(leaveMsg->keys[iter],curEntry.getFileKey().c_str(),lengthKey);
 
-								memcpy(leaveMsg->values[iter],curEntry.getFileValue().c_str(),lengthValue);
+        leaveMsg->values[iter] = (char*)malloc(sizeof(char)*lengthValue);
 
-								iter++;
-				}
+        memcpy(leaveMsg->values[iter],curEntry.getFileValue().c_str(),lengthValue);
 
-				//Make a big buffer and copy everything
-				long sizeMaxBuff = sizeof(LeaveMsg) + 2*sizeof(int)*leaveMsg->nEntries + sizeof(char)*sumValueLengths + sizeof(char)*sumKeyLengths;
+        iter++;
+    }
 
-				msgLength = sizeMaxBuff;	
+    //Make a big buffer and copy everything
+    long sizeMaxBuff = sizeof(LeaveMsg) + 2*sizeof(int)*leaveMsg->nEntries + sizeof(char)*sumValueLengths + sizeof(char)*sumKeyLengths;
 
-				char* maxBuff = (char*)(malloc(sizeof(char)*sizeMaxBuff));
+    msgLength = sizeMaxBuff;	
 
-				memcpy(maxBuff,leaveMsg,sizeof(leaveMsg));
+    char* maxBuff = (char*)(malloc(sizeof(char)*sizeMaxBuff));
 
-				memcpy(maxBuff,leaveMsg->lengthKeys,sizeof(int)*leaveMsg->nEntries);
+    memcpy(maxBuff,leaveMsg,sizeof(leaveMsg));
 
-				memcpy(maxBuff,leaveMsg->lengthValues,sizeof(int)*leaveMsg->nEntries);
+    memcpy(maxBuff,leaveMsg->lengthKeys,sizeof(int)*leaveMsg->nEntries);
 
-				memcpy(maxBuff,leaveMsg->keys,sizeof(char)*sumKeyLengths);
+    memcpy(maxBuff,leaveMsg->lengthValues,sizeof(int)*leaveMsg->nEntries);
 
-				memcpy(maxBuff,leaveMsg->values,sizeof(char)*sumValueLengths);
-		
-			delete leaveMsg->lengthValues;
-			delete leaveMsg->lengthKeys;
-			delete leaveMsg->keys;
-			delete leaveMsg->values;
+    memcpy(maxBuff,leaveMsg->keys,sizeof(char)*sumKeyLengths);
 
-			return maxBuff;
+    memcpy(maxBuff,leaveMsg->values,sizeof(char)*sumValueLengths);
+
+    delete leaveMsg->lengthValues;
+    delete leaveMsg->lengthKeys;
+    delete leaveMsg->keys;
+    delete leaveMsg->values;
+
+    return maxBuff;
 }
 
 void Chord::leave(){
 
-				functionEntryLog("CHORD: leave");
+    functionEntryLog("CHORD: leave");
 
-				//This node is about to leave
-				Node* predecessor = this->getPredecessor();
-				Node* successor   = this->getFirstSuccessor();
+    //This node is about to leave
+    Node* predecessor = this->getPredecessor();
+    Node* successor   = this->getFirstSuccessor();
 
-				//transfer all its keys to the successor
-				long msgLength;
-				char* buffToSend = makeBufferToSend(msgLength);
-				
-				sendRequestToServer(LEAVE_MSG_FOR_SUCCESSOR,successor->getNodeIP(), successor->getNodeID(),buffToSend,msgLength);
+    //transfer all its keys to the successor
+    long msgLength;
+    char* buffToSend = makeBufferToSend(msgLength);
 
-				
-
-
-
+    sendRequestToServer(LEAVE_MSG_FOR_SUCCESSOR,successor->getNodeIP(), successor->getNodeID(),buffToSend,msgLength);
 
 }
 
@@ -440,7 +435,7 @@ void Chord::insert(string id,string fileContent){
 }
 
 void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend, 
-                                char* message, long msgLen){
+        char* message, long msgLen){
 
     functionEntryLog("CHORD: sendRequestToServer");
 
@@ -455,19 +450,19 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
         case 0:
             {
                 generalInfoLog("In case 0");
-                
+
                 // create the message to send
                 commandName = "findSuccessor";
 
                 if(!message){
-                   msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
-                                                localNode->getNodeIP(), messageLen);
+                    msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
+                            localNode->getNodeIP(), messageLen);
 
-                   if(debug){
-                       printf("Message Len: %ld\n", messageLen);
-                       printMessageDetails(msgBuffer);
-                       fflush(NULL);
-                   }
+                    if(debug){
+                        printf("Message Len: %ld\n", messageLen);
+                        printMessageDetails(msgBuffer);
+                        fflush(NULL);
+                    }
                 }
                 else{
                     msgBuffer = message;
@@ -487,7 +482,7 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 // create the message to send
                 commandName = "getPredecessor";
                 msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
-                                             localNode->getNodeIP(), messageLen);
+                        localNode->getNodeIP(), messageLen);
 
                 useStabSock = true;
                 useServerSock = false;
@@ -501,8 +496,8 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 // create the message to send
                 commandName = "notifySucc";
                 msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
-                                             localNode->getNodeIP(), messageLen);
-                
+                        localNode->getNodeIP(), messageLen);
+
                 useServerSock = false;
                 useStabSock = true;
 
@@ -641,7 +636,7 @@ void Chord::handleResponseFromServer(char* msgRcvd, string& responseID, string& 
     }
     else if(strcmp(commandName,"getPredecessor") == 0){
         generalInfoLog("Received response for getPredecessor");
-        
+
         responseID = rcvdMsg->senderID;
         responseID[20] = '\0';
         responseIP = respIP;
@@ -732,20 +727,20 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         if(!getPredecessor() || 
                 isInInterval(senderID, getPredecessor()->getNodeID(), localNode->getNodeID()))
         {
-           printf("updating my predecessor as %s *  %s\n", senderID.c_str(), senderIP.c_str());
-           setPredecessor(senderIP, senderID); 
+            printf("updating my predecessor as %s *  %s\n", senderID.c_str(), senderIP.c_str());
+            setPredecessor(senderIP, senderID); 
         }
 
     }
     else{
         generalInfoLog("Unknown request received\n");
     }
-    
+
 
 }
 
 char* Chord::getMessageToSend(int msgType, string cmnd, string idToSend, string ipToSend,
-                        long& msgLength)
+        long& msgLength)
 {
     functionEntryLog("CHORD: getMessageToSend");
 
@@ -782,14 +777,14 @@ char* Chord::getMessageToSend(int msgType, string cmnd, string idToSend, string 
     memcpy(params + paramLen[0], ipToSend.c_str(), paramLen[1]);
 
     /*
-    if(debug){
-        int len = paramLen[0] + paramLen[1];
-        
-        printf("Parameters: %s\n", params);
-        for(int i = 0; i<len; ++i){
-            printf("%c\n", params[i]);
-        }
-    }*/
+       if(debug){
+       int len = paramLen[0] + paramLen[1];
+
+       printf("Parameters: %s\n", params);
+       for(int i = 0; i<len; ++i){
+       printf("%c\n", params[i]);
+       }
+       }*/
 
     // Allocate a large buffer to serialize the parameters
     char* msgBuffer = NULL;
@@ -830,7 +825,7 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
                 // create the message to send
                 commandName = "findSuccessor";
                 msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID, 
-                                            responseIP, messageLen);
+                        responseIP, messageLen);
                 useServSock = true;
                 useStabSock = false;
                 break;
@@ -842,7 +837,7 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
                 // create the message to send
                 commandName = "getPredecessor";
                 msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID,
-                                            responseIP, messageLen);
+                        responseIP, messageLen);
 
                 useServSock = false;
                 useStabSock = true;
@@ -1053,7 +1048,7 @@ void Chord::setPredecessor(string predIP, string predID)
 }
 
 Node* Chord::getFirstSuccessor(){
-    
+
     return successors.getFirstSuccessor();
 }
 
@@ -1097,28 +1092,19 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
 
     // Check for command name
     if(strcmp(cmnd, PUT) == 0){
-
-        generalInfoLog("Received a put command from client\n");
-
-
+        handleClientPutMessage();
     }
     else if(strcmp(cmnd, GET) == 0){
-
-        generalInfoLog("Received a get command from client\n");
-    
+        handleClientGetMessage();
     }
     else if(strcmp(cmnd, EXISTS) == 0){
-
-        generalInfoLog("Received a exists command from client\n");
-
+        handleClientExistsMessage();
     }
     else if(strcmp(cmnd, LS) == 0){
-
-        generalInfoLog("Received a ls command from client\n");
-
+        handleClientLsMessage();
     }
     else if(strcmp(cmnd, DELETE) == 0){
-
-        generalInfoLog("Received a delete command from client\n");
+        handleClientDeleteMessage();
     }
 }
+
