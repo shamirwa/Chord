@@ -69,3 +69,14 @@ void Node::storeEntry(string fileKey, string fileValue){
     }
 
 }
+
+map<string,Entry> Node::getAllEntries()
+{
+	return this->entryList;
+}
+
+
+
+
+
+

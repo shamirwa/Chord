@@ -41,6 +41,8 @@ using namespace std;
 #define FIND_SUCCESSOR 0
 #define GET_PREDECESSOR 1
 #define NOTIFY_SUCCESSOR 2
+#define LEAVE_MSG_FOR_SUCCESSOR 3
+#define LEAVE_MSG_FOR_PREDECESSOR 4
 
 #define MAX_MSG_SIZE 5000
 

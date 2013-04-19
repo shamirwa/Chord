@@ -254,7 +254,102 @@ void Chord::join(string IP)
     this->joinHelp(IP);
 }
 
+map<string,Entry> Chord::getAllEntries()
+{
+	return localNode->getAllEntries();
+}
+
+char* Chord::makeBufferToSend(long& msgLength)
+{
+	
+				map<string,Entry> entriesToBeSent = this->getAllEntries();
+
+				int sumKeyLengths = 0;
+				int sumValueLengths = 0;
+
+				LeaveMsg* leaveMsg = new LeaveMsg; 
+
+				leaveMsg->type = LEAVE_ENTRIES_MSG;
+
+				leaveMsg->nEntries = entriesToBeSent.size();
+
+				leaveMsg->lengthKeys =(int*) malloc(sizeof(int)*(leaveMsg->nEntries));	
+				leaveMsg->lengthValues=(int*) malloc(sizeof(int)*(leaveMsg->nEntries));
+
+				leaveMsg->keys = (char**)malloc(sizeof(char)*(leaveMsg->nEntries));	
+
+				leaveMsg->values = (char**)malloc(sizeof(char)*(leaveMsg->nEntries));	
+
+				int iter = 0;
+				for(map<string,Entry>::iterator myIter = entriesToBeSent.begin(); myIter!= entriesToBeSent.end();myIter++)
+				{
+								Entry curEntry = myIter->second;
+
+								int lengthKey = curEntry.getFileKey().length();
+
+								sumKeyLengths += lengthKey;
+
+								int lengthValue = curEntry.getFileValue().length();
+
+								sumValueLengths += lengthValue;
+
+								leaveMsg->lengthKeys[iter] = lengthKey;
+
+								leaveMsg->lengthValues[iter] = lengthValue;
+
+								leaveMsg->keys[iter] = (char*)malloc(sizeof(char)*lengthKey);
+
+								memcpy(leaveMsg->keys[iter],curEntry.getFileKey().c_str(),lengthKey);
+
+								leaveMsg->values[iter] = (char*)malloc(sizeof(char)*lengthValue);
+
+								memcpy(leaveMsg->values[iter],curEntry.getFileValue().c_str(),lengthValue);
+
+								iter++;
+				}
+
+				//Make a big buffer and copy everything
+				long sizeMaxBuff = sizeof(LeaveMsg) + 2*sizeof(int)*leaveMsg->nEntries + sizeof(char)*sumValueLengths + sizeof(char)*sumKeyLengths;
+
+				msgLength = sizeMaxBuff;	
+
+				char* maxBuff = (char*)(malloc(sizeof(char)*sizeMaxBuff));
+
+				memcpy(maxBuff,leaveMsg,sizeof(leaveMsg));
+
+				memcpy(maxBuff,leaveMsg->lengthKeys,sizeof(int)*leaveMsg->nEntries);
+
+				memcpy(maxBuff,leaveMsg->lengthValues,sizeof(int)*leaveMsg->nEntries);
+
+				memcpy(maxBuff,leaveMsg->keys,sizeof(char)*sumKeyLengths);
+
+				memcpy(maxBuff,leaveMsg->values,sizeof(char)*sumValueLengths);
+		
+			delete leaveMsg->lengthValues;
+			delete leaveMsg->lengthKeys;
+			delete leaveMsg->keys;
+			delete leaveMsg->values;
+
+			return maxBuff;
+}
+
 void Chord::leave(){
+
+				functionEntryLog("CHORD: leave");
+
+				//This node is about to leave
+				Node* predecessor = this->getPredecessor();
+				Node* successor   = this->getFirstSuccessor();
+
+				//transfer all its keys to the successor
+				long msgLength;
+				char* buffToSend = makeBufferToSend(msgLength);
+				
+				sendRequestToServer(LEAVE_MSG_FOR_SUCCESSOR,successor->getNodeIP(), successor->getNodeID(),buffToSend,msgLength);
+
+				
+
+
 
 
 }
