@@ -15,7 +15,8 @@ Chord::Chord(){
     this->localNode = NULL;	
 }
 
-Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,int serverSocket) {
+Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,
+             int serverSocket, int stabilizeSocket){
 
     this->localNode = NULL;
     this->localNode = new Node;
@@ -25,6 +26,7 @@ Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,int
     this->successors.setMaxNumSuccssor(numSuccessor);
     this->clientSocket = clientSocket;
     this->serverSocket = serverSocket;
+    this->stabilizeSocket = stabilizeSocket;
     this->predecessor = NULL;
 
 }
@@ -445,6 +447,8 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
     string commandName;
     char* msgBuffer = NULL;
     long messageLen = 0;
+    bool useServerSock = false, useStabSock = false;
+    int sendSock = -1;
 
     switch(method){
 
@@ -470,6 +474,9 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                     messageLen = msgLen;
                 }
 
+                useServerSock = true;
+                useStabSock = false;
+
                 break;
             }
 
@@ -482,6 +489,8 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
                         localNode->getNodeIP(), messageLen);
 
+                useStabSock = true;
+                useServerSock = false;
                 break;
             }
 
@@ -492,7 +501,14 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 // create the message to send
                 commandName = "notifySucc";
                 msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
+<<<<<<< HEAD
                         localNode->getNodeIP(), messageLen);
+=======
+                                             localNode->getNodeIP(), messageLen);
+                
+                useServerSock = false;
+                useStabSock = true;
+>>>>>>> 5182b6a98be9bdbd91aece2311327d64f2aa11c2
 
                 break;
             }
@@ -502,26 +518,53 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
     }
 
     // check if socket is open for the servers
-    if(getServerSocket() == -1){
-        // Need to open a socket
-        if((serverSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
-            printf("Error while opening socket to send the message\n");
-            exit(1);
+    if(useServerSock){
+        if(getServerSocket() == -1){
+            // Need to open a socket
+            if((serverSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+                printf("Error while opening socket to send the message\n");
+                exit(1);
+            }
         }
+
+        sendSock = getServerSocket();
+    }
+    else if(useStabSock){
+        if(stabilizeSocket == -1){
+            // Need to reopen the socket
+            if((stabilizeSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+                printf("Error while opening socket to send the message\n");
+                exit(1);
+            }
+        }
+
+        sendSock = stabilizeSocket;
     }
 
     struct sockaddr_in receiverAddr;
 
     memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
     receiverAddr.sin_family = AF_INET;
-    receiverAddr.sin_port = htons(SERVER_PORT);
+
+    if(useServerSock){
+        receiverAddr.sin_port = htons(SERVER_PORT);
+    }
+    else if(useStabSock){
+        receiverAddr.sin_port = htons(STABILIZE_PORT);
+    }
+    else{
+        if(debug){
+            printf("Some error happened while sending\n");
+            fflush(NULL);
+        }
+    }
 
     if(inet_aton(rcvrIP.c_str(), &receiverAddr.sin_addr) == 0){
         printf("INET_ATON Failed\n");
         fflush(NULL);
     }
 
-    if(sendto(getServerSocket(), msgBuffer, messageLen, 0,
+    if(sendto(sendSock, msgBuffer, messageLen, 0,
                 (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
 
         printf("%s: Failed to send the message type %d to leader: %s",
@@ -779,6 +822,8 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
     string commandName;
     char* msgBuffer = NULL;
     long messageLen = 0;
+    bool useServSock = false, useStabSock = false;
+    int sendSock = -1;
 
     switch(method){
 
@@ -789,8 +834,14 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
                 // create the message to send
                 commandName = "findSuccessor";
                 msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID, 
+<<<<<<< HEAD
                         responseIP, messageLen);
 
+=======
+                                            responseIP, messageLen);
+                useServSock = true;
+                useStabSock = false;
+>>>>>>> 5182b6a98be9bdbd91aece2311327d64f2aa11c2
                 break;
             }
         case 1:
@@ -800,7 +851,14 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
                 // create the message to send
                 commandName = "getPredecessor";
                 msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID,
+<<<<<<< HEAD
                         responseIP, messageLen);
+=======
+                                            responseIP, messageLen);
+
+                useServSock = false;
+                useStabSock = true;
+>>>>>>> 5182b6a98be9bdbd91aece2311327d64f2aa11c2
                 break;
             }
 
@@ -809,21 +867,44 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
     }
 
     // check if socket is open for the servers
-    if(getServerSocket() == -1){
+    if(useServSock){
+        if(getServerSocket() == -1){
 
-        printf("Opening socket again\n");
-        // Need to open a socket
-        if((serverSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
-            printf("Error while opening socket to send the message\n");
-            exit(1);
+            printf("Opening socket again\n");
+            // Need to open a socket
+            if((serverSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+                printf("Error while opening socket to send the message\n");
+                exit(1);
+            }
         }
+
+        sendSock = getServerSocket();
+    }
+    else if(useStabSock){
+        if(stabilizeSocket == -1){
+
+            printf("Opening socket again\n");
+            // Need to open a socket
+            if((stabilizeSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+                printf("Error while opening socket to send the message\n");
+                exit(1);
+            }
+        }
+
+        sendSock = stabilizeSocket;
     }
 
     struct sockaddr_in receiverAddr;
 
     memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
     receiverAddr.sin_family = AF_INET;
-    receiverAddr.sin_port = htons(SERVER_PORT);
+
+    if(useServSock){
+        receiverAddr.sin_port = htons(SERVER_PORT);
+    }
+    else if(useStabSock){
+        receiverAddr.sin_port = htons(STABILIZE_PORT);
+    }
 
     if(inet_aton(receiverIP.c_str(), &receiverAddr.sin_addr) == 0){
         printf("INET_ATON Failed\n");
@@ -834,7 +915,7 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
         fflush(NULL);
     }
 
-    if(sendto(getServerSocket(), msgBuffer, messageLen, 0,
+    if(sendto(sendSock, msgBuffer, messageLen, 0,
                 (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
 
         printf("%s: Failed to send the message type %d to server: %s",
@@ -891,7 +972,7 @@ void Chord::stabilize(){
         int recvRet = 0;
 
         printf("Waiting for response\n");
-        recvRet = recvfrom(serverSocket, maxMessage, MAX_MSG_SIZE,
+        recvRet = recvfrom(stabilizeSocket, maxMessage, MAX_MSG_SIZE,
                 0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
 
         printf("Response Message Received\n");
@@ -964,9 +1045,6 @@ void Chord::stabilize(){
     succID = successors.getFirstSuccessor()->getNodeID();
 
     sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
-
-
-
 }
 
 Node* Chord::getPredecessor(){
@@ -1000,4 +1078,60 @@ string Chord::getLocalID(){
 string Chord::getLocalIP(){
 
     return localNode->getNodeIP();
+}
+
+void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
+{
+    functionEntryLog("handleRequestFromClient");
+
+    ClientRequest* clientMsg = new ClientRequest;
+    memcpy(clientMsg, msgRcvd, sizeof(ClientRequest));
+
+    char* file = new char[clientMsg->lengthFileName];
+    char* cmnd = new char[clientMsg->lengthCommandName];
+    char* data = new char[clientMsg->lengthFileData];
+    char* ip = new char[clientMsg->lengthClientIP];
+
+    // Copy fileName
+    long len = sizeof(ClientRequest);
+    memcpy(file, msgRcvd + len, clientMsg->lengthFileName);
+
+    // Copy CommandName
+    len += clientMsg->lengthFileName;
+    memcpy(cmnd, msgRcvd + len, clientMsg->lengthCommandName);
+
+    // Copy fileDate
+    len += clientMsg->lengthCommandName;
+    memcpy(data, msgRcvd + len, clientMsg->lengthFileData);
+
+    // copy client ip
+    len += clientMsg->lengthFileData;
+    memcpy(ip, msgRcvd + len, clientMsg->lengthClientIP);
+
+    // Check for command name
+    if(strcmp(cmnd, PUT) == 0){
+
+        generalInfoLog("Received a put command from client\n");
+
+
+    }
+    else if(strcmp(cmnd, GET) == 0){
+
+        generalInfoLog("Received a get command from client\n");
+    
+    }
+    else if(strcmp(cmnd, EXISTS) == 0){
+
+        generalInfoLog("Received a exists command from client\n");
+
+    }
+    else if(strcmp(cmnd, LS) == 0){
+
+        generalInfoLog("Received a ls command from client\n");
+
+    }
+    else if(strcmp(cmnd, DELETE) == 0){
+
+        generalInfoLog("Received a delete command from client\n");
+    }
 }

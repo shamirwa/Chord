@@ -12,7 +12,7 @@
 
 typedef struct{
 
-    uint32_t type; // 0 for client req message and 2/3 for server req/resp message
+    uint32_t type; // 2/3 for server req/resp message
     char senderID[20];
     uint32_t numParameters; // Number of parameters for the command
     int* paramLenArray; // Length of each parameter
@@ -30,6 +30,7 @@ typedef struct{
 }ClientResponse;
 
 typedef struct{
+<<<<<<< HEAD
     uint32_t type;
     int lengthFileName;
     int lengthCommandName;
@@ -39,6 +40,17 @@ typedef struct{
     char* command;
     char* data;
     char* clientIP;
+=======
+	uint32_t type; // Always 0
+	int lengthFileName;
+	int lengthCommandName;
+	int lengthFileData;
+	int lengthClientIP;
+	char* fileName;
+	char* command;
+	char* data;
+	char* clientIP;
+>>>>>>> 5182b6a98be9bdbd91aece2311327d64f2aa11c2
 }ClientRequest;
 
 typedef struct{

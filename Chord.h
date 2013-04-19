@@ -19,11 +19,12 @@ class Chord
         SuccessorList successors; //stores the successors
         int clientSocket;
         int serverSocket;
+        int stabilizeSocket;
 
 
     public:
         Chord();
-        Chord(string localID,string localIP,int numSuccessor,int clientSocket,int serverSocket);
+        Chord(string localID,string localIP,int numSuccessor,int clientSocket,int serverSocket, int stabilizeSocket);
         ~Chord();
 
         void createHelp(); //Performs all necessary tasks for creating a new chord ring	
@@ -80,6 +81,8 @@ class Chord
         void handleResponseFromServer(char* msgRcvd, string& responseID, string& responseIP); 
 
         void handleRequestFromServer(char* msgRcvd, long messageLen);
+
+        void handleRequestFromClient(char* msgRcvd, long messageLen);
 
         int getServerSocket();
 
