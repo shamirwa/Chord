@@ -38,6 +38,8 @@ using namespace std;
 
 #define SERVER_PORT 1234
 
+#define STABILIZE_PORT 3456
+
 #define FIND_SUCCESSOR 0
 #define GET_PREDECESSOR 1
 #define NOTIFY_SUCCESSOR 2
@@ -45,5 +47,12 @@ using namespace std;
 #define MAX_MSG_SIZE 5000
 
 #define STABILIZE_TIMEOUT 12000000      // 2 seconds
+
+#define DATA "Sample Data"
+#define PUT "put"
+#define GET "get"
+#define EXISTS "exists"
+#define LS "ls"
+#define DELETE "delete"
 
 #endif
