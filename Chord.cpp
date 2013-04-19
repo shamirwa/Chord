@@ -16,7 +16,7 @@ Chord::Chord(){
 }
 
 Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,
-             int serverSocket, int stabilizeSocket){
+        int serverSocket, int stabilizeSocket){
 
     this->localNode = NULL;
     this->localNode = new Node;
@@ -352,11 +352,6 @@ void Chord::leave(){
 
     sendRequestToServer(LEAVE_MSG_FOR_SUCCESSOR,successor->getNodeIP(), successor->getNodeID(),buffToSend,msgLength);
 
-
-
-
-
-
 }
 
 void Chord::ping(){
@@ -504,14 +499,10 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 // create the message to send
                 commandName = "notifySucc";
                 msgBuffer = getMessageToSend(SERVER_REQ, commandName, idToSend, 
-<<<<<<< HEAD
                         localNode->getNodeIP(), messageLen);
-=======
-                                             localNode->getNodeIP(), messageLen);
-                
+
                 useServerSock = false;
                 useStabSock = true;
->>>>>>> 5182b6a98be9bdbd91aece2311327d64f2aa11c2
 
                 break;
             }
@@ -837,14 +828,10 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
                 // create the message to send
                 commandName = "findSuccessor";
                 msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID, 
-<<<<<<< HEAD
                         responseIP, messageLen);
-
-=======
-                                            responseIP, messageLen);
+                
                 useServSock = true;
                 useStabSock = false;
->>>>>>> 5182b6a98be9bdbd91aece2311327d64f2aa11c2
                 break;
             }
         case 1:
@@ -854,14 +841,10 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
                 // create the message to send
                 commandName = "getPredecessor";
                 msgBuffer = getMessageToSend(SERVER_RES, commandName, responseID,
-<<<<<<< HEAD
                         responseIP, messageLen);
-=======
-                                            responseIP, messageLen);
 
                 useServSock = false;
                 useStabSock = true;
->>>>>>> 5182b6a98be9bdbd91aece2311327d64f2aa11c2
                 break;
             }
 
@@ -1113,28 +1096,19 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
 
     // Check for command name
     if(strcmp(cmnd, PUT) == 0){
-
-        generalInfoLog("Received a put command from client\n");
-
-
+        handleClientPutMessage();
     }
     else if(strcmp(cmnd, GET) == 0){
-
-        generalInfoLog("Received a get command from client\n");
-    
+        handleClientGetMessage();
     }
     else if(strcmp(cmnd, EXISTS) == 0){
-
-        generalInfoLog("Received a exists command from client\n");
-
+        handleClientExistsMessage();
     }
     else if(strcmp(cmnd, LS) == 0){
-
-        generalInfoLog("Received a ls command from client\n");
-
+        handleClientLsMessage();
     }
     else if(strcmp(cmnd, DELETE) == 0){
-
-        generalInfoLog("Received a delete command from client\n");
+        handleClientDeleteMessage();
     }
 }
+
