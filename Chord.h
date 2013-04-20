@@ -116,6 +116,7 @@ class Chord
 
         void sendResponseToClient(int method, string receiverIP, long msgSize = 0, char* msg = NULL);
 
+        void handleStabilizeResponse(char* maxMessage);
 };
 
 
