@@ -22,8 +22,8 @@ class Node{
         const string getNodeIP();
         void setNodeID(string id);
         void setNodeIP(string ip);
-        bool checkIfEntryExists(string fileKey);
-        string getEntryValue(string fileKey);
+        bool checkIfEntryExists(string fileKey, string fileName);
+        string getEntryValue(string fileKey, string fileName);
         void storeEntry(string fileKey, string fileName, string fileValue);
         map<string,Entry> getAllEntries();
 
