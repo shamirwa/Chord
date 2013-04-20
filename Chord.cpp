@@ -1111,10 +1111,34 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
     }
     else if(strcmp(commandName, "listAllFile") == 0){
         
+        ClientResponse* msg = new ClientResponse;
+        long finalMsgSize = 0;
+        char* finalMsg;
         // Check if the senderID is same as mine. If yes then I need to send this message
-        // to the server
+        // to the client
         if(isIdEqual(senderID, localNode->getNodeID())){
+            
             // Send reponse to the client
+            msg->type = CLIENT_RESP;
+            msg->numParameters = paramCount - 2;
+            msg->result = 1;
+
+            finalMsgSize = sizeof(ClientResponse) + (sizeof(int) * (msg->numParameters)) 
+                                    + (totalParamsSize - paramLenArr[0] - paramLenArr[1]);
+            finalMsg = new char[finalMsgSize];
+
+            int skipLen = 0;
+            memcpy(finalMsg, msg, sizeof(ClientResponse));
+            skipLen += sizeof(ClientResponse);
+
+            memcpy(finalMsg + skipLen, paramLenArr + 2, (sizeof(int) * (msg->numParameters)));
+            skipLen += (sizeof(int) * (msg->numParameters));
+
+            int addLen = totalParamsSize - paramLenArr[0] - paramLenArr[1];
+            memcpy(finalMsg + skipLen, parameters + paramLenArr[0] + paramLenArr[1],  addLen);
+
+            sendResponseToClient(LS_RESP, senderIP, finalMsgSize, finalMsg);
+
         }
         else
         {
