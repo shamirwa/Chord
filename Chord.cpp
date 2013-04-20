@@ -708,7 +708,8 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 generalInfoLog("In case 3");
                 
                 if(!message){
-                    cout<<"Message was NULL " <<endl;    
+                    cout<<"Message was NULL " <<endl; 
+                    return;
                 }                
                 else{
                     msgBuffer = message;
@@ -724,7 +725,8 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 generalInfoLog("In case 4");
                 
                 if(!message){
-                    cout<<"Message was NULL " <<endl;    
+                    cout<<"Message was NULL " <<endl; 
+                    return;
                 }                
                 else{
                     msgBuffer = message;
@@ -741,6 +743,25 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
 
                 if(!message){
                     cout << "Message was NULL " << endl;
+                    return;
+                }
+                else{
+                    msgBuffer = message;
+                    messageLen = msgLen;
+                }
+
+                useServerSock = true;
+                useStabSock = false;
+
+                break;
+            }
+        case 6:
+            {
+                generalInfoLog("In case 6");
+
+                if(!message){
+                    cout << "Message was null" << endl;
+                    return;
                 }
                 else{
                     msgBuffer = message;
@@ -1079,6 +1100,23 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
 
         // Store and send response to client
         storeFileAndSendResponse(key, fileValue, fileName, senderIP);
+    }
+    else if(strcmp(commandName, "listAllFile") == 0){
+        
+        // Check if the senderID is same as mine. If yes then I need to send this message
+        // to the server
+        if(isIdEqual(senderID, localNode->getNodeID())){
+            // Send reponse to the client
+        }
+        else
+        {
+            // Add my file entries and send it to the client
+            
+
+        }
+
+
+
     }
     else{
         generalInfoLog("Unknown request received\n");
@@ -1600,13 +1638,15 @@ void Chord::storeFileAndSendResponse(string fileID, string fileValue, string fil
 }
 
 
-void Chord::sendResponseToClient(int method, string receiverIP){
+void Chord::sendResponseToClient(int method, string receiverIP, long msgSize, char* msg){
 
     functionEntryLog("CHORD: sendResponseToCLient");
 
-    ClientResponse* message = new ClientResponse;
+    char* message = NULL;
+    ClientResponse* myMessage = new ClientResponse;
+    myMessage->type = CLIENT_RESP;
+    myMessage->result = 1;
 
-    message->type = CLIENT_RESP;
 
     long messageLen = 0;
 
@@ -1615,9 +1655,12 @@ void Chord::sendResponseToClient(int method, string receiverIP){
         case 0:
             {
                 generalInfoLog("In case 0");
-                message->numParameters = 0;
-                message->result = 1;
+                
+                myMessage->numParameters = 0;
+
                 messageLen = sizeof(ClientResponse);
+                message = new char[messageLen];
+                memcpy(message, myMessage, messageLen);
 
                 break;
             }
@@ -1627,10 +1670,70 @@ void Chord::sendResponseToClient(int method, string receiverIP){
 
                 break;
             }
+        case 3:
+            {
+                generalInfoLog("In case 3");
 
+                if(!msg){
+                    messageLen = sizeof(ClientResponse);
+
+                    map<string,Entry> entriesToBeSent = this->getAllEntries();
+                    int i = 0, totalSize = 0, lenArraySize = 0, paramSize = 0, totalEntries = 0;
+
+                    totalEntries = entriesToBeSent.size();
+                    myMessage->numParameters = totalEntries;
+
+                    lenArraySize = sizeof(int) * (myMessage->numParameters);
+
+                    int* lenArray = new int[lenArraySize];
+                    map<string,Entry>::iterator myIter = entriesToBeSent.begin();
+
+                    for(; myIter!= entriesToBeSent.end();myIter++)
+                    {
+                        // Store the length of each value
+                        lenArray[i++] = myIter->second.getFileName().length();
+                        totalSize += myIter->second.getFileName().length();
+                    }
+                    messageLen += lenArraySize;
+
+                    paramSize = totalSize;
+                    messageLen += paramSize;
+
+                    char* params = new char[paramSize];
+                    totalSize = 0;
+
+                    for(myIter = entriesToBeSent.begin();
+                            myIter!= entriesToBeSent.end();myIter++)
+                    {
+                        // Store all the names
+                        memcpy(params + totalSize, myIter->second.getFileName().c_str(), lenArray[i]);
+                        totalSize += lenArray[i++];
+
+                    }
+
+                    // Allocate the large buffer to serialize
+                    message = new char[messageLen];
+
+                    int addLen = sizeof(ClientResponse);
+                    memcpy(message, myMessage, sizeof(ClientResponse));
+                    memcpy(message + addLen, lenArray, lenArraySize);
+                    addLen += lenArraySize;
+                    memcpy(message + addLen, params, paramSize);
+
+                    delete[] lenArray;
+                    delete[] params;
+                }
+                else{
+                    message = msg;
+                    messageLen = msgSize;
+                }
+
+            }
         default:
             generalInfoLog("Error while sending. Unkonwn command request found\n");
     }
+
+    delete myMessage;
 
     // check if socket is open for the servers
     if(getClientSocket() == -1){
@@ -1694,12 +1797,11 @@ void Chord::handleClientLsMessage(string clientIP)
     if(succ->getNodeIP().compare(localNode->getNodeIP()) == 0){
 
         // Send response to the client with my file entries
-        
-
+        sendResponseToClient(LS_RESP, clientIP);
     }
     else{
         // Send this request to all the servers in liner way. I will forward it to my
         // successor and so on
-        //sendRequestToServer();
+        sendRequestToServer(LIST_ALL, succ->getNodeIP(), "NULL", message, messageLen);
     }
 }
