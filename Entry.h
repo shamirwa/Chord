@@ -9,16 +9,16 @@ using namespace std;
 
 class Entry{
     private:
-        string fileKey; // hashcode for the filename
+        string fileName; // hashcode for the filename
         string value;   // Content of the file
 
     public:
         Entry();
-        Entry(string key, string value);
+        Entry(string name, string value);
         ~Entry();
-        void setFileKey(string key);
+        void setFileName(string name);
         void setFileValue(string value);
-        const string getFileKey();
+        const string getFileName();
         const string getFileValue();
 };
 

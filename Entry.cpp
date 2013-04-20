@@ -2,16 +2,16 @@
 
 Entry::Entry(){}
 
-Entry::Entry(string key, string value){
-    this->fileKey = key;
+Entry::Entry(string name, string value){
+    this->fileName = name;
     this->value = value;
 }
 
 Entry::~Entry(){}
 
-const string Entry::getFileKey(){
+const string Entry::getFileName(){
 
-    return this->fileKey;
+    return this->fileName;
 }
 
 const string Entry::getFileValue(){
@@ -22,6 +22,6 @@ void Entry::setFileValue(string value){
     this->value = value;
 }
 
-void Entry::setFileKey(string key){
-    this->fileKey = key;
+void Entry::setFileName(string name){
+    this->fileName = name;
 }

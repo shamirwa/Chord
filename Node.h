@@ -24,7 +24,7 @@ class Node{
         void setNodeIP(string ip);
         bool checkIfEntryExists(string fileKey);
         string getEntryValue(string fileKey);
-        void storeEntry(string fileKey, string fileValue);
+        void storeEntry(string fileKey, string fileName, string fileValue);
         map<string,Entry> getAllEntries();
 
 };
