@@ -5,14 +5,34 @@
 #include "message.h"
 #include <sys/time.h>
 
-string leaveIP = "128.10.3.69";
+string selfIP;
+Chord* myChordInstance;
+
+
+// Define the function to be called when ctrl-c (SIGINT) signal is sent to process
+void  signal_callback_handler(int signum)
+{
+    printf("Caught signal %d\n",signum);
+    // Cleanup and close up stuff here
+    cout<<"Testing Leaving Chord: "<<endl;
+    myChordInstance->leave();
+    // Terminate program
+    exit(signum);
+}
+
+
 
 int main(int argc, char* argv[]){
 
+
+    // Register signal and signal handler
+    signal(SIGINT, signal_callback_handler);
+
+        
     bool isFirstNode = true;
     string bootstrapNode;
     string selfName;
-    string selfIP;
+    //string selfIP;
     string selfID;
     struct in_addr **ipAddr;
     struct hostent* he;
@@ -140,18 +160,18 @@ int main(int argc, char* argv[]){
        */
 
     // Create an object of the chord class
-    Chord myChordInstance(selfID, selfIP, NUM_SUCCESSOR, clientSocket, serverSocket, stabilizeSocket);
+    myChordInstance = new Chord(selfID, selfIP, NUM_SUCCESSOR, clientSocket, serverSocket, stabilizeSocket);
 
 
     // Check if this is the first node or not
     if(!isFirstNode){
         // This node is not the first node to join. SO call the join method with the
         // bootstrap node
-        myChordInstance.join(bootstrapNode);
+        myChordInstance->join(bootstrapNode);
     }
     else{
         // This is the first node to join/ Call the create method
-        myChordInstance.create();
+        myChordInstance->create();
     }
     
     
@@ -213,33 +233,33 @@ int main(int argc, char* argv[]){
         else if(selectReturnValue == 0){
             // Stabilize timer has expired
 
-            myChordInstance.stabilize();
+            myChordInstance->stabilize();
 
             if(debug){
                 printf("After stabilize:\n");
 
-                printf("Self ID: %s  Self IP: %s\n",myChordInstance.getLocalID().c_str(), myChordInstance.getLocalIP().c_str());
-                if(!myChordInstance.getPredecessor()){
+                printf("Self ID: %s  Self IP: %s\n",myChordInstance->getLocalID().c_str(), myChordInstance->getLocalIP().c_str());
+                if(!myChordInstance->getPredecessor()){
                     printf("No predecessor yet\n");
                 }
                 else{
-                    printf("Predecessor ID: %s and Predecessor IP: %s\n", myChordInstance.getPredecessor()->getNodeID().c_str(),
-                                                                          myChordInstance.getPredecessor()->getNodeIP().c_str());
+                    printf("Predecessor ID: %s and Predecessor IP: %s\n", myChordInstance->getPredecessor()->getNodeID().c_str(),
+                                                                          myChordInstance->getPredecessor()->getNodeIP().c_str());
                 }
 
-                if(!myChordInstance.getFirstSuccessor()){
+                if(!myChordInstance->getFirstSuccessor()){
                     printf("No successor yet\n");
                 }
                 else{
-                    printf("Successor ID: %s and Successor IP: %s\n", myChordInstance.getFirstSuccessor()->getNodeID().c_str(),
-                                                                    myChordInstance.getFirstSuccessor()->getNodeIP().c_str());
+                    printf("Successor ID: %s and Successor IP: %s\n", myChordInstance->getFirstSuccessor()->getNodeID().c_str(),
+                                                                    myChordInstance->getFirstSuccessor()->getNodeIP().c_str());
                 }
 
-                if(myChordInstance.getFirstSuccessor() && myChordInstance.getPredecessor()){
+                if(myChordInstance->getFirstSuccessor() && myChordInstance->getPredecessor()){
 
-                    if(myChordInstance.getLocalID().compare(myChordInstance.getPredecessor()->getNodeID()) != 0 &&
-                       myChordInstance.getPredecessor()->getNodeID().compare(myChordInstance.getFirstSuccessor()->getNodeID()) != 0 &&
-                       myChordInstance.getLocalID().compare(myChordInstance.getFirstSuccessor()->getNodeID()) != 0){
+                    if(myChordInstance->getLocalID().compare(myChordInstance->getPredecessor()->getNodeID()) != 0 &&
+                       myChordInstance->getPredecessor()->getNodeID().compare(myChordInstance->getFirstSuccessor()->getNodeID()) != 0 &&
+                       myChordInstance->getLocalID().compare(myChordInstance->getFirstSuccessor()->getNodeID()) != 0){
 
                         printf("System is stabilized\n");
                         printf("---------------------------\n");
@@ -280,7 +300,7 @@ int main(int argc, char* argv[]){
                             uint32_t type = *msgType;
 
                             if(type == SERVER_REQ){		
-                                myChordInstance.handleRequestFromServer(maxMessage, recvRet);
+                                myChordInstance->handleRequestFromServer(maxMessage, recvRet);
                             }
                             else{
                                 cout << "SERVICE: Invalid message received: " << type << endl;
@@ -312,10 +332,13 @@ int main(int argc, char* argv[]){
                             uint32_t type = *msgType;
 
                             if(type == SERVER_REQ){		
-                                myChordInstance.handleRequestFromServer(maxMessage, recvRet);
+                                myChordInstance->handleRequestFromServer(maxMessage, recvRet);
                             }
                             else if(type == CLIENT_REQ){
-                                myChordInstance.handleRequestFromClient(maxMessage, recvRet);
+                                myChordInstance->handleRequestFromClient(maxMessage, recvRet);
+                            }
+                            else if(type == SERVER_RES){
+                                myChordInstance->handleStabilizeResponse(maxMessage);              
                             }
                             else{
                                 cout << "SERVICE: Invalid message received: " << type << endl;
@@ -348,7 +371,7 @@ int main(int argc, char* argv[]){
                             uint32_t type = *msgType;
 
                             if(type == CLIENT_REQ){		
-                                myChordInstance.handleRequestFromClient(maxMessage, recvRet);
+                                myChordInstance->handleRequestFromClient(maxMessage, recvRet);
                             }
                             else{
                                 cout << "SERVICE: Invalid message received: " << type << endl;
@@ -360,11 +383,7 @@ int main(int argc, char* argv[]){
                 }
             }// ENd of fd set for loop
         }
-        if(selfIP == leaveIP)
-        {
-            cout<<"Testing Leaving Chord: "<<endl;
-            myChordInstance.leave();
-        }
+        
 
     }// ENd of infinite loop
 

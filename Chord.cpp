@@ -995,7 +995,9 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
 
     }
     else if(strcmp(commandName, "leaving") == 0){
-    
+   
+        generalInfoLog("Received request for leave");
+
         totalParamsSize = 0;
         delete[] parameters;
         delete[] paramLenArr;
@@ -1043,18 +1045,24 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
             // Store this entry
             localNode->storeEntry(key, name, value);
         }
-        
+       
+        cout<<"My new predecessor is: "<<senderIP<<endl;
+
         // Store the new predecessor
         setPredecessor(senderIP, senderID);
         
     }
     else if(strcmp(commandName, "changeSuccessor") == 0){
-        
+       
+        generalInfoLog("Received request for changeSuccessor");
+
         Node* succ = new Node;
         succ->setNodeID(senderID);
         succ->setNodeIP(senderIP);
 
-        successors.storeSuccessor(succ);
+        cout<<"My new successor is: "<<senderIP<<endl;
+
+        successors.storeFirstSuccessor(succ);
 
     }
     else if(strcmp(commandName, "storeFile") == 0){
@@ -1259,6 +1267,50 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
 
 }
 
+void Chord::handleStabilizeResponse(char* maxMessage)
+{
+    string predIP;// = inet_ntoa(senderProcAddrUDP.sin_addr);
+    string predID;
+    
+    // Send message to my successor to get his predecessor node
+    Node* succNode = successors.getFirstSuccessor();
+    
+    string succIP = succNode->getNodeIP();
+    string succID = succNode->getNodeID();
+
+    handleResponseFromServer(maxMessage, predID, predIP);
+    if(!predIP.compare("NULL") == 0 && !predID.compare("NULL") == 0){
+
+        if(isInInterval(predID, localNode->getNodeID(), succID)){
+
+            printf("stabilize: storing the first successor\n");
+            printf("Self Id: %s\n", localNode->getNodeID().c_str());
+            printf("Received Id: %s\n", predID.c_str());
+            printf("Successor Id: %s\n", succID.c_str());
+            fflush(NULL);
+
+            // Store this successor as the first successor
+            Node* firstSucc = new Node;
+            firstSucc->setNodeID(predID);
+            firstSucc->setNodeIP(predIP);
+
+            successors.storeFirstSuccessor(firstSucc);
+        }
+    }
+    else{
+        printf("No information regarding predecessor received\n");
+    }
+    
+    // Notify the successor and don't wait for any response
+    succIP = successors.getFirstSuccessor()->getNodeIP();
+    succID = successors.getFirstSuccessor()->getNodeID();
+
+    sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
+
+}
+
+
+
 void Chord::stabilize(){
     functionEntryLog("CHORD: stabilize");
 
@@ -1289,7 +1341,7 @@ void Chord::stabilize(){
     else{
 
         sendRequestToServer(GET_PREDECESSOR, succIP, localNode->getNodeID());
-
+/*
         // wait for response message to come
         char* maxMessage = new char[MAX_MSG_SIZE];
         struct sockaddr_in senderProcAddrUDP;
@@ -1302,7 +1354,7 @@ void Chord::stabilize(){
 
         printf("Waiting for response\n");
         recvRet = recvfrom(stabilizeSocket, maxMessage, MAX_MSG_SIZE,
-                0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
+                MSG_DONTWAIT, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
 
         printf("Response Message Received\n");
         fflush(NULL);
@@ -1310,7 +1362,7 @@ void Chord::stabilize(){
         if(recvRet > 0){
             handleResponseFromServer(maxMessage, predID, predIP);
 
-            /*
+            
                if(!predIP.compare("NULL") == 0 && !predID.compare("NULL") == 0){
 
                if(isInInterval(predID, localNode->getNodeID(), succID)){
@@ -1338,13 +1390,14 @@ void Chord::stabilize(){
             succID = successors.getFirstSuccessor()->getNodeID();
 
             sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
-            */
+            
         }
         else{
             printf("Error while receiving in Stabilize\n");
             fflush(NULL);
             return;
-        }
+        }*/
+        return;
     }
 
     if(!predIP.compare("NULL") == 0 && !predID.compare("NULL") == 0){
