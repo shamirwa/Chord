@@ -112,7 +112,7 @@ void SuccessorList::storeSuccessor(Node* newSuccessor){
 
         while(myIter != successors.end())
         {
-            if(isInInterval(newSuccessor->getNodeID(),localNode->getNodeID(),(*myIter)->getNodeID()))
+            if(isInInterval(newSuccessor->getNodeID(),getLocalID(),(*myIter)->getNodeID()))
             {
                    cout<< "Found position for the new successor\n"; 
                    successors.insert(myIter,newSuccessor);

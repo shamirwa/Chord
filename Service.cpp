@@ -5,6 +5,7 @@
 #include "message.h"
 #include <sys/time.h>
 
+string leaveIP = "128.10.3.69";
 
 int main(int argc, char* argv[]){
 
@@ -359,6 +360,12 @@ int main(int argc, char* argv[]){
                 }
             }// ENd of fd set for loop
         }
+        if(selfIP == leaveIP)
+        {
+            cout<<"Testing Leaving Chord: "<<endl;
+            myChordInstance.leave();
+        }
+
     }// ENd of infinite loop
 
     return 0;

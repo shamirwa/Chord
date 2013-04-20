@@ -839,6 +839,10 @@ void Chord::handleResponseFromServer(char* msgRcvd, string& responseID, string& 
 
         responseID = rcvdMsg->senderID;
         responseID[20] = '\0';
+
+        if(responseID.length() > 20){
+            responseID.erase(20);
+        }
         responseIP = respIP;
     }
     else if(strcmp(commandName,"getPredecessor") == 0){
@@ -846,6 +850,9 @@ void Chord::handleResponseFromServer(char* msgRcvd, string& responseID, string& 
 
         responseID = rcvdMsg->senderID;
         responseID[20] = '\0';
+        if(responseID.length() > 20){
+            responseID.erase(20);
+        }
         responseIP = respIP;
     }
     else{
@@ -1031,7 +1038,7 @@ char* Chord::getMessageToSend(int msgType, string cmnd, string idToSend, string 
     // create the message to send
     command* Msg = new command;
     Msg->type = msgType;
-    memcpy(Msg->senderID, idToSend.c_str(), idToSend.length());
+    memcpy(Msg->senderID, idToSend.data(), idToSend.length());
     Msg->numParameters = 2;
 
     printf("SenderID in msg: %s\n", Msg->senderID);
@@ -1370,16 +1377,16 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
         handleClientPutMessage(file, data, ip, msgRcvd, messageLen);
     }
     else if(strcmp(cmnd, GET) == 0){
-        handleClientGetMessage();
+        //handleClientGetMessage();
     }
     else if(strcmp(cmnd, EXISTS) == 0){
-        handleClientExistsMessage();
+        //handleClientExistsMessage();
     }
     else if(strcmp(cmnd, LS) == 0){
-        handleClientLsMessage();
+        //handleClientLsMessage();
     }
     else if(strcmp(cmnd, DELETE) == 0){
-        handleClientDeleteMessage();
+        //handleClientDeleteMessage();
     }
 }
 

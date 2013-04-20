@@ -3,6 +3,7 @@
 
 #include "Node.h"
 #include <list>
+#include "myUtils.h"
 
 class SuccessorList{
 
