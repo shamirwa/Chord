@@ -103,14 +103,15 @@ class Chord
 
         map<string, Entry> getAllEntries();
 
-        char* makeBufferToSend(long& msgLength,string predID);
+        char* makeBufferToSend(string commandName, long& msgLength,string predID, string predIP, bool isLeave = false);
 
-        void storeFileAndSendResponse(string fileID, string fileValue, string clientIP);
+        void storeFileAndSendResponse(string fileID,  string fileValue, string fileName, string clientIP);
 
         void handleClientPutMessage(string fileName, string fileValue, string clientIP,
                                             char* msg, long msgLen);
+        void handleClientLsMessage(string clientIP);
 
-        char* getStoreFileMsg(string clientIP, string fileKey,
+        char* getStoreFileMsg(string clientIP, string fileKey, string fileName, 
                 string fileValue, long& msgSize);
 
         void sendResponseToClient(int method, string receiverIP);

@@ -46,7 +46,7 @@ using namespace std;
 #define LEAVE_MSG_FOR_SUCCESSOR 3
 #define LEAVE_MSG_FOR_PREDECESSOR 4
 #define STORE_FILE 5
-#define SEND_CLIENT_REQ 6
+#define LIST_ALL 6
 
 #define MAX_MSG_SIZE 5000
 

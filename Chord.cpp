@@ -263,7 +263,8 @@ map<string,Entry> Chord::getAllEntries()
     return localNode->getAllEntries();
 }
 
-char* Chord::makeBufferToSend(long& msgLength,string predID)
+char* Chord::makeBufferToSend(string commandName, long& msgLength, string predID,
+                             string predIP, bool isLeave)
 {
     generalInfoLog("CHORD: makeBufferToSend");    
 
@@ -271,7 +272,7 @@ char* Chord::makeBufferToSend(long& msgLength,string predID)
 
     int sumKeyLengths = 0;
     int sumValueLengths = 0;
-    int i = 0, totalSize = 0, lenArraySize = 0, paramSize = 0;
+    int i = 0, totalSize = 0, lenArraySize = 0, paramSize = 0, totalEntries = 0;
 
    // LeaveMsg* leaveMsg = new LeaveMsg; 
     command* leaveMsg = new command;
@@ -279,25 +280,45 @@ char* Chord::makeBufferToSend(long& msgLength,string predID)
 
     leaveMsg->type = SERVER_REQ;
     memcpy(leaveMsg->senderID,predID.c_str(),predID.length());
+    
+    totalEntries = entriesToBeSent.size();
+    leaveMsg->numParameters = totalEntries + 2;
 
-    leaveMsg->numParameters = entriesToBeSent.size() + 2;
+    if(isLeave){
+        lenArraySize = sizeof(int) * (leaveMsg->numParameters + totalEntries);
+    }
+    else{
+        lenArraySize = sizeof(int) * (leaveMsg->numParameters);
+    }
 
-    lenArraySize = sizeof(int) * (leaveMsg->numParameters);
     int* lenArray = new int[lenArraySize];
-    string commandName = "leaving";
 
     lenArray[i++] = commandName.length();
     totalSize = commandName.length();
-    lenArray[i++] = localNode->getNodeIP().length();
+    lenArray[i++] = predIP.length();
     totalSize += localNode->getNodeIP().length();
    
     map<string,Entry>::iterator myIter = entriesToBeSent.begin();
-    for(; myIter!= entriesToBeSent.end();myIter++)
-    {
-        // Store the length of each value
-        lenArray[i] = myIter->second.getFileValue().length();
-        totalSize += ID_SIZE;
-        totalSize += lenArray[i++];
+
+    if(isLeave){
+        for(; myIter!= entriesToBeSent.end();myIter++)
+        {
+            // Store the length of each value
+            lenArray[i++] = myIter->second.getFileValue().length();
+            lenArray[i++] = myIter->second.getFileName().length();
+            totalSize += ID_SIZE;
+            totalSize += myIter->second.getFileName().length();
+            totalSize += myIter->second.getFileValue().length();
+        }
+    }
+    else{
+        // For ls message
+        for(; myIter!= entriesToBeSent.end();myIter++)
+        {
+            // Store the length of each value
+            lenArray[i++] = myIter->second.getFileName().length();
+            totalSize += myIter->second.getFileName().length();
+        }
     }
 
 
@@ -310,24 +331,43 @@ char* Chord::makeBufferToSend(long& msgLength,string predID)
     char* params = new char[paramSize];
 
     memcpy(params, commandName.c_str(), commandName.length());
-    memcpy(params + commandName.length(), localNode->getNodeIP().c_str(),
-            localNode->getNodeIP().length());
+    memcpy(params + commandName.length(), predIP.c_str(),
+            predIP.length());
     
     i = 2;
     totalSize = lenArray[0] + lenArray[1];
+    
+    if(isLeave){
+        for(myIter = entriesToBeSent.begin();
+                myIter!= entriesToBeSent.end();myIter++){
 
-    for(myIter = entriesToBeSent.begin();
-        myIter!= entriesToBeSent.end();myIter++){
+            // Store all the keys
+            memcpy(params + totalSize, myIter->first.c_str(),
+                    ID_SIZE);
+            totalSize += ID_SIZE;
 
-        // Store all the keys
-        memcpy(params + totalSize, myIter->second.getFileKey().c_str(),
-                ID_SIZE);
-        totalSize += ID_SIZE;
-        
-        // Store all the values
-        memcpy(params + totalSize, myIter->second.getFileValue().c_str(),
-                lenArray[i]);
-        totalSize += lenArray[i++];
+            // Store all the values
+            memcpy(params + totalSize, myIter->second.getFileValue().c_str(),
+                    lenArray[i]);
+            totalSize += lenArray[i++];
+
+            // Store all the names
+            memcpy(params + totalSize, myIter->second.getFileName().c_str(),
+                    lenArray[i]);
+            totalSize += lenArray[i++];
+
+        }
+    }
+    else{
+        for(myIter = entriesToBeSent.begin();
+                myIter!= entriesToBeSent.end();myIter++){
+
+            // Store all the names
+            memcpy(params + totalSize, myIter->second.getFileName().c_str(),
+                    lenArray[i]);
+            totalSize += lenArray[i++];
+
+        }
     }
    
     // Allocate the large buffer to serialize
@@ -435,7 +475,8 @@ void Chord::leave(){
 
     //transfer all its keys to the successor
     long msgLength;
-    char* buffToSend = makeBufferToSend(msgLength,predecessor->getNodeID());
+    string cmnd = "leaving";
+    char* buffToSend = makeBufferToSend(cmnd, msgLength,predecessor->getNodeID(), predecessor->getNodeIP(), true);
 
     sendRequestToServer(LEAVE_MSG_FOR_SUCCESSOR,successor->getNodeIP(), successor->getNodeID(),buffToSend,msgLength);
 
@@ -950,31 +991,50 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
     
         totalParamsSize = 0;
         delete[] parameters;
+        delete[] paramLenArr;
+        int numEntries = paramCount - 2;
+
+        paramCount += numEntries;
+
+        int* paramLenArr = new int[paramCount];
+        memcpy(paramLenArr, msgRcvd + sizeof(command), sizeof(int) * paramCount);
 
         // Find the actual size
         for(int i = 0; i < paramCount; i++){
             totalParamsSize += paramLenArr[i];
         }
         // Add for the space of keys
-        totalParamsSize += (ID_SIZE * (paramCount - 2));
+        totalParamsSize += (ID_SIZE * numEntries);
 
         parameters = new char[totalParamsSize];
         memcpy(parameters, msgRcvd + sizeof(command) + sizeof(int)*paramCount, totalParamsSize);
 
         // Store the entries
         int skipLen = paramLenArr[0] + paramLenArr[1];
+        int valueLen = 0;
         char* key = new char[ID_SIZE];
         char* value;
+        char* name;
         for(int j = 0; j < (paramCount - 2); j++){
-
-            value = new char[paramLenArr[j+2]];
+            valueLen = paramLenArr[j+2];
+            value = new char[valueLen];
+            ++j;
+            
+            // Copy the key
             memcpy(key, parameters + skipLen, ID_SIZE);
             skipLen += ID_SIZE;
 
-            memcpy(value, parameters + skipLen, paramLenArr[j+2]);
+            // Copy the value
+            memcpy(value, parameters + skipLen, valueLen);
+            skipLen += valueLen;
+
+            // Copy the name
+            name = new char[paramLenArr[j+2]];
+            memcpy(name, parameters + skipLen, paramLenArr[j+2]);
             skipLen += paramLenArr[j+2];
 
-            localNode->storeEntry(key, value);
+            // Store this entry
+            localNode->storeEntry(key, name, value);
         }
         
         // Store the new predecessor
@@ -1005,8 +1065,13 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         memcpy(fileValue, parameters + paramLenArr[0] + paramLenArr[1] + paramLenArr[2], paramLenArr[3]);
         fileValue[paramLenArr[3]] = '\0';
 
+        char* fileName = new char[paramLenArr[4] + 1];
+        memcpy(fileName, parameters + paramLenArr[0] + paramLenArr[1] + paramLenArr[2] + paramLenArr[3], paramLenArr[4]);
+        fileName[paramLenArr[4]] = '\0';
+
+
         // Store and send response to client
-        storeFileAndSendResponse(key, fileValue, senderIP);
+        storeFileAndSendResponse(key, fileValue, fileName, senderIP);
     }
     else{
         generalInfoLog("Unknown request received\n");
@@ -1370,20 +1435,20 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
         handleClientPutMessage(file, data, ip, msgRcvd, messageLen);
     }
     else if(strcmp(cmnd, GET) == 0){
-        handleClientGetMessage();
+       // handleClientGetMessage();
     }
     else if(strcmp(cmnd, EXISTS) == 0){
-        handleClientExistsMessage();
+        //handleClientExistsMessage();
     }
     else if(strcmp(cmnd, LS) == 0){
-        handleClientLsMessage();
+        //handleClientLsMessage(ip);
     }
     else if(strcmp(cmnd, DELETE) == 0){
-        handleClientDeleteMessage();
+        //handleClientDeleteMessage();
     }
 }
 
-char* Chord::getStoreFileMsg(string clientIP, string fileKey, 
+char* Chord::getStoreFileMsg(string clientIP, string fileKey, string fileName,
         string fileValue, long& msgSize)
 {
     functionEntryLog("getStoreFileMsg");
@@ -1403,7 +1468,7 @@ char* Chord::getStoreFileMsg(string clientIP, string fileKey,
     command* Msg = new command;
     Msg->type = SERVER_REQ;
     memcpy(Msg->senderID, localNode->getNodeID().c_str(), localNode->getNodeID().length());
-    Msg->numParameters = 4;
+    Msg->numParameters = 5;
 
     printf("SenderID in msg: %s\n", Msg->senderID);
 
@@ -1412,6 +1477,7 @@ char* Chord::getStoreFileMsg(string clientIP, string fileKey,
     paramLen[1] = clientIP.length();
     paramLen[2] = fileKey.length();
     paramLen[3] = fileValue.length();
+    paramLen[4] = fileName.length();
 
     int totalParamLen = 0;
     for(int i = 0; i<Msg->numParameters; i++){
@@ -1426,6 +1492,8 @@ char* Chord::getStoreFileMsg(string clientIP, string fileKey,
     memcpy(params + skipLen, fileKey.c_str(), fileKey.length());
     skipLen += fileKey.length();
     memcpy(params + skipLen, fileValue.c_str(), fileValue.length());
+    skipLen += fileName.length();
+    memcpy(params + skipLen, fileName.c_str(), fileName.length());
 
     /*
        if(debug){
@@ -1480,7 +1548,7 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
             fflush(NULL);
         }
 
-        char* messageToSend = getStoreFileMsg(clientIP, fileID, fileValue, msgLen);
+        char* messageToSend = getStoreFileMsg(clientIP, fileID, fileName, fileValue, msgLen);
 
         // Send the request to successor to store this file
         sendRequestToServer(STORE_FILE, clientIP, "NULL", messageToSend, msgLen);
@@ -1500,7 +1568,7 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
             }
             
             // Store and send the response to client
-            storeFileAndSendResponse(fileID, fileValue, clientIP);
+            storeFileAndSendResponse(fileID, fileValue, fileName, clientIP);
         }
         else{
             if(debug){
@@ -1514,11 +1582,11 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
 
 }
 
-void Chord::storeFileAndSendResponse(string fileID, string fileValue, string clientIP){
+void Chord::storeFileAndSendResponse(string fileID, string fileValue, string fileName, string clientIP){
     functionEntryLog("storeFileAndSendResponse");
 
     // Store the entry in the list
-    localNode->storeEntry(fileID, fileValue);
+    localNode->storeEntry(fileID, fileName, fileValue);
 
     // Send Response to the client
     sendResponseToClient(PUT_RESP, clientIP);
@@ -1597,4 +1665,34 @@ void Chord::sendResponseToClient(int method, string receiverIP){
         fflush(NULL);
     }
 
+}
+
+void Chord::handleClientLsMessage(string clientIP)
+{
+    functionEntryLog("handleClientLsMessage");
+    
+    // create a command message with all of my entries and send it to other server
+    // insert my ID in senderID field. I will reply to client with all the file names
+    // once I have received all the filenames.
+    string cmnd = "listAllFile";
+    long messageLen = 0;
+    char* message = makeBufferToSend(cmnd, messageLen, localNode->getNodeID(), clientIP);
+
+    // Get my successor  node
+    Node* succ = successors.getFirstSuccessor();
+
+    // Check if my successor ip is same as my ip.
+    // if yes then I am the only node in the network and will send response to the
+    // client
+    if(succ->getNodeIP().compare(localNode->getNodeIP()) == 0){
+
+        // Send response to the client with my file entries
+        
+
+    }
+    else{
+        // Send this request to all the servers in liner way. I will forward it to my
+        // successor and so on
+        //sendRequestToServer();
+    }
 }

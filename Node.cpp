@@ -27,20 +27,20 @@ void Node::setNodeIP(string ip){
     this->localIP = ip;
 }
 
-bool Node::checkIfEntryExists(string fileKey){
+bool Node::checkIfEntryExist(string fileKey, string fileName){
 
     bool entryFound = false;
 
     if(this->entryList.find(fileKey) != this->entryList.end()){
         // Found the entry with the given key
-        cout << "Entry with the key " << fileKey << " exists" << endl;
+        cout << "Entry with the key " << fileKey << " and name " << fileName << " exists" << endl;
         entryFound = true;
     }
 
     return entryFound;
 }
 
-string Node::getEntryValue(string fileKey){
+string Node::getEntryValue(string fileKey, string fileName){
 
     string value;
 
@@ -49,16 +49,16 @@ string Node::getEntryValue(string fileKey){
     }
     else{
         // Entry doesn't exists on this node
-        cout << "Entry with the key " << fileKey << " not found" << endl;
+        cout << "Entry with the key " << fileKey << "and name " << fileName << " not found" << endl;
         value = FILE_NOT_FOUND;
     }
 
     return value;
 }
 
-void Node::storeEntry(string fileKey, string fileValue){
+void Node::storeEntry(string fileKey, string fileName, string fileValue){
 
-    Entry newEntry(fileKey, fileValue); 
+    Entry newEntry(fileName, fileValue); 
     // Check if an entry exists with this key
     if(checkIfEntryExists(fileKey)){
         cout << FILE_ALREADY_STORED << endl;
