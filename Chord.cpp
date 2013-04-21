@@ -388,76 +388,6 @@ char* Chord::makeBufferToSend(string commandName, long& msgLength, string predID
     generalInfoLog("Buffer to be sent is made");
     return maxBuff;
 
-/*
-    leaveMsg->type = LEAVE_ENTRIES_MSG;
-
-    leaveMsg->nEntries = entriesToBeSent.size();
-    leaveMsg->lengthPredIP = predIP.length();
-
-    leaveMsg->lengthKeys =(int*) malloc(sizeof(int)*(leaveMsg->nEntries));	
-    leaveMsg->lengthValues=(int*) malloc(sizeof(int)*(leaveMsg->nEntries));
-
-    leaveMsg->keys = (char**)malloc(sizeof(char)*(leaveMsg->nEntries));	
-
-    leaveMsg->values = (char**)malloc(sizeof(char)*(leaveMsg->nEntries));	
-
-    int iter = 0;
-    for(map<string,Entry>::iterator myIter = entriesToBeSent.begin(); myIter!= entriesToBeSent.end();myIter++)
-    {
-        Entry curEntry = myIter->second;
-
-        int lengthKey = curEntry.getFileKey().length();
-
-        sumKeyLengths += lengthKey;
-
-        int lengthValue = curEntry.getFileValue().length();
-
-        sumValueLengths += lengthValue;
-
-        leaveMsg->lengthKeys[iter] = lengthKey;
-
-        leaveMsg->lengthValues[iter] = lengthValue;
-
-        leaveMsg->keys[iter] = (char*)malloc(sizeof(char)*lengthKey);
-
-        memcpy(leaveMsg->keys[iter],curEntry.getFileKey().c_str(),lengthKey);
-
-        leaveMsg->values[iter] = (char*)malloc(sizeof(char)*lengthValue);
-
-        memcpy(leaveMsg->values[iter],curEntry.getFileValue().c_str(),lengthValue);
-
-        iter++;
-    }
-
-    //Make a big buffer and copy everything
-    long sizeMaxBuff = sizeof(LeaveMsg) + 2*sizeof(int)*leaveMsg->nEntries + sizeof(char)*sumValueLengths + sizeof(char)*sumKeyLengths;
-
-    msgLength = sizeMaxBuff;	
-
-    char* maxBuff = (char*)(malloc(sizeof(char)*sizeMaxBuff));
-
-    memcpy(maxBuff,leaveMsg,sizeof(leaveMsg));
-
-    memcpy(maxBuff+sizeof(leaveMsg),leaveMsg->lengthKeys,sizeof(int)*(leaveMsg->nEntries));
-
-    memcpy(maxBuff+sizeof(leaveMsg)+sizeof(int)*(leaveMsg->nEntries),leaveMsg->lengthValues,sizeof(int)*(leaveMsg->nEntries));
-
-    memcpy(maxBuff+sizeof(leaveMsg)+2*sizeof(int)*(leaveMsg->nEntries),leaveMsg->keys,sizeof(char)*sumKeyLengths);
-
-    memcpy(maxBuff+sizeof(leaveMsg)+2*sizeof(int)*leaveMsg->nEntries+sizeof(char)*sumKeyLengths,leaveMsg->values,sizeof(char)*sumValueLengths);
-
-    memcpy(maxBuff+sizeof(leaveMsg)+2*sizeof(int)*leaveMsg->nEntries+sizeof(char)*sumKeyLengths+sizeof(char)*sumValueLengths,predIP.c_str(),predIP.length());
-
-
-    delete leaveMsg->lengthValues;
-    delete leaveMsg->lengthKeys;
-    delete leaveMsg->keys;
-    delete leaveMsg->values;
-
-    generalInfoLog("Buffer to be sent is made");
-
-    return maxBuff;
-   */
 }
 
 void Chord::leave(){
@@ -521,33 +451,6 @@ void Chord::leave(){
 
     sendRequestToServer(LEAVE_MSG_FOR_PREDECESSOR,predecessor->getNodeIP(),
          predecessor->getNodeID(),buffForPred, msgLength);
-
-
-
-
-    /*
-    LeaveMsgForPredecessor* leaveMessageForPred = new LeaveMsgForPredecessor;
-
-    leaveMessageForPred->type = LEAVE_MSG_FOR_PREDECESSOR;
-    int lengthPred = successor->getNodeIP().length();
-    leaveMessageForPred->lengthSuccIP = lengthPred;
-    leaveMessageForPred->succIP = (char *)malloc(sizeof(char)*lengthPred);
-    memcpy(leaveMessageForPred->succIP,successor->getNodeIP().c_str(),lengthPred);
-    long size = sizeof(LeaveMsgForPredecessor)+ sizeof(char)*lengthPred;
-
-    char* buffForPred = (char *)malloc(sizeof(char)*size);
-    memcpy(buffForPred,leaveMessageForPred,sizeof(LeaveMsgForPredecessor));
-    memcpy(buffForPred+sizeof(LeaveMsgForPredecessor),leaveMessageForPred->succIP,lengthPred);
-
-    generalInfoLog("Buffer to be sent is made");
-
-    delete leaveMessageForPred->succIP;   
-    
-
-    //send Message to Predecessor
-
-    sendRequestToServer(LEAVE_MSG_FOR_PREDECESSOR,predecessor->getNodeIP(),predecessor->getNodeID(),buffForPred,size);
-    */
 
 }
 
@@ -1039,9 +942,20 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         successors.storeFirstSuccessor(succ);
 
     }
-    else if(strcmp(commandName, "storeFile") == 0){
+    else if(strcmp(commandName, "storeFile") == 0 ||
+           (strcmp(commandName, "getFile") == 0)){
 
-        generalInfoLog("Received request for storefile");
+        bool forStore = false;
+        if(strcmp(commandName, "storeFile") == 0){
+            forStore = true;
+        }
+       
+        if(forStore){
+            generalInfoLog("Received request for storefile");
+        }
+        else{
+            generalInfoLog("Received request for getFile");
+        }
 
         char* fileID = new char[paramLenArr[2] + 1];
         memcpy(fileID, parameters + paramLenArr[0] + paramLenArr[1], paramLenArr[2]);
@@ -1052,17 +966,32 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
             key.erase(20, 1);
         }
 
-        char* fileValue = new char[paramLenArr[3] + 1];
-        memcpy(fileValue, parameters + paramLenArr[0] + paramLenArr[1] + paramLenArr[2], paramLenArr[3]);
-        fileValue[paramLenArr[3]] = '\0';
+        char* fileValue = NULL;
+        char* fileName = NULL;
 
-        char* fileName = new char[paramLenArr[4] + 1];
-        memcpy(fileName, parameters + paramLenArr[0] + paramLenArr[1] + paramLenArr[2] + paramLenArr[3], paramLenArr[4]);
-        fileName[paramLenArr[4]] = '\0';
+        if(forStore){
+            fileValue = new char[paramLenArr[3] + 1];
+            memcpy(fileValue, parameters + paramLenArr[0] + paramLenArr[1] + paramLenArr[2], paramLenArr[3]);
+            fileValue[paramLenArr[3]] = '\0';
 
+            fileName = new char[paramLenArr[4] + 1];
+            memcpy(fileName, parameters + paramLenArr[0] + paramLenArr[1] + paramLenArr[2] + paramLenArr[3], paramLenArr[4]);
+            fileName[paramLenArr[4]] = '\0';
+        }
+        else{
+            fileName = new char[paramLenArr[3] + 1];
+            memcpy(fileName, parameters + paramLenArr[0] + paramLenArr[1] + paramLenArr[2], paramLenArr[3]);
+            fileName[paramLenArr[3]] = '\0';
+        }
 
-        // Store and send response to client
-        storeFileAndSendResponse(key, fileValue, fileName, senderIP);
+        if(forStore){
+            // Store and send response to client
+            storeFileAndSendResponse(key, fileValue, fileName, senderIP);
+        }
+        else{
+            // Get the file and send response to client
+            getFileAndSendResponse(key, fileName, senderIP);
+        }
     }
     else if(strcmp(commandName, "listAllFile") == 0){
 
@@ -1504,62 +1433,7 @@ void Chord::stabilize(){
     else{
 
         sendRequestToServer(GET_PREDECESSOR, succIP, localNode->getNodeID());
-/*
-        // wait for response message to come
-        char* maxMessage = new char[MAX_MSG_SIZE];
-        struct sockaddr_in senderProcAddrUDP;
-
-        // To store the address of the process from whom a message is received
-        memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
-        socklen_t senderLenUDP = sizeof(senderProcAddrUDP);
-
-        int recvRet = 0;
-
-        printf("Waiting for response\n");
-        recvRet = recvfrom(stabilizeSocket, maxMessage, MAX_MSG_SIZE,
-                MSG_DONTWAIT, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
-
-        printf("Response Message Received\n");
-        fflush(NULL);
-
-        if(recvRet > 0){
-            handleResponseFromServer(maxMessage, predID, predIP);
-
-            
-               if(!predIP.compare("NULL") == 0 && !predID.compare("NULL") == 0){
-
-               if(isInInterval(predID, localNode->getNodeID(), succID)){
-
-               printf("stabilize: storing the first successor\n");
-               printf("Self Id: %s\n", localNode->getNodeID().c_str());
-               printf("Received Id: %s\n", predID.c_str());
-               printf("Successor Id: %s\n", succID.c_str());
-               fflush(NULL);
-
-            // Store this successor as the first successor
-            Node* firstSucc = new Node;
-            firstSucc->setNodeID(predID);
-            firstSucc->setNodeIP(predIP);
-
-            successors.storeFirstSuccessor(firstSucc);
-            }
-            }
-            else{
-            printf("No information regarding predecessor received\n");
-            }
-
-            // Notify the successor and don't wait for any response
-            succIP = successors.getFirstSuccessor()->getNodeIP();
-            succID = successors.getFirstSuccessor()->getNodeID();
-
-            sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
-            
-        }
-        else{
-            printf("Error while receiving in Stabilize\n");
-            fflush(NULL);
-            return;
-        }*/
+        
         return;
     }
 
@@ -1695,7 +1569,7 @@ void Chord::handleClientGetMessage(string fileName, string clientIP,
             fflush(NULL);
         }
 
-        char* messageToSend = getGetFileMsg(clientIP, fileID, fileName, msgLen);
+        char* messageToSend = getStoreFileMsg(clientIP, fileID, fileName, "NULL", msgLen, false);
 
         // Send the request to successor to store this file
         sendRequestToServer(GET_FILE, successNode->getNodeIP(), NULL , messageToSend, msgLen);
@@ -1759,81 +1633,8 @@ void Chord::getFileAndSendResponse(string fileID, string fileName, string client
     sendResponseToClient(GET_RESP, clientIP, 1, largeBuffSize, largeBuff);
 }
 
-char* Chord::getGetFileMsg(string clientIP, string fileKey, string fileName,long& msgSize)
-{
-    functionEntryLog("getGetFileMsg");
-
-    if(debug){
-        printf("Sending Message details\n");
-        printf("Type: SERV_REQ \n");
-        printf("SenderID: %s\n", localNode->getNodeID().c_str());
-        printf("Length of ID: %ld\n", localNode->getNodeID().length());
-        printf("IP to send: %s\n", clientIP.c_str());
-        fflush(NULL);
-    }
-
-    string cmnd = "getFile";
-
-    // create the message to send
-    command* Msg = new command;
-    Msg->type = SERVER_REQ;
-    memcpy(Msg->senderID, localNode->getNodeID().c_str(), localNode->getNodeID().length());
-    Msg->numParameters = 4;
-
-    printf("SenderID in msg: %s\n", Msg->senderID);
-
-    int* paramLen = new int[Msg->numParameters];
-    paramLen[0] = cmnd.length();
-    paramLen[1] = clientIP.length();
-    paramLen[2] = fileKey.length();
-    paramLen[3] = fileName.length();
-
-    int totalParamLen = 0;
-    for(int i = 0; i<Msg->numParameters; i++){
-        totalParamLen += paramLen[i];
-    }
-
-    char* params = new char[totalParamLen];
-    int skipLen = paramLen[0];
-    memcpy(params, cmnd.c_str(), paramLen[0]);
-    memcpy(params + skipLen, clientIP.c_str(), paramLen[1]);
-    skipLen += paramLen[1];
-    memcpy(params + skipLen, fileKey.c_str(), fileKey.length());
-    skipLen += fileKey.length();
-    memcpy(params + skipLen, fileName.c_str(), fileName.length());
-
-    /*
-       if(debug){
-       int len = paramLen[0] + paramLen[1];
-
-       printf("Parameters: %s\n", params);
-       for(int i = 0; i<len; ++i){
-       printf("%c\n", params[i]);
-       }
-       }*/
-
-    // Allocate a large buffer to serialize the parameters
-    char* msgBuffer = NULL;
-    long messageLen = 0;
-    messageLen = sizeof(command) + totalParamLen  + sizeof(int) * Msg->numParameters;
-    msgBuffer = new char[messageLen];
-    memcpy(msgBuffer, Msg, sizeof(command));
-    memcpy(msgBuffer + sizeof(command), paramLen, sizeof(int) * Msg->numParameters);
-    memcpy(msgBuffer + sizeof(command) + sizeof(int) * Msg->numParameters, params, totalParamLen);
-
-
-    // Delete the memory allocated for paramLen and params
-    delete[] paramLen;
-    delete[] params;
-    delete Msg;
-
-    // Return the message buffer
-    msgSize = messageLen;
-    return msgBuffer;
-}
-
 char* Chord::getStoreFileMsg(string clientIP, string fileKey, string fileName,
-        string fileValue, long& msgSize)
+        string fileValue, long& msgSize, bool isPutMsg)
 {
     functionEntryLog("getStoreFileMsg");
 
@@ -1846,13 +1647,26 @@ char* Chord::getStoreFileMsg(string clientIP, string fileKey, string fileName,
         fflush(NULL);
     }
 
-    string cmnd = "storeFile";
+    string cmnd;
+    
+    if(isPutMsg){
+        cmnd = "storeFile";
+    }
+    else{
+        cmnd = "getFile";
+    }
 
     // create the message to send
     command* Msg = new command;
     Msg->type = SERVER_REQ;
     memcpy(Msg->senderID, localNode->getNodeID().c_str(), localNode->getNodeID().length());
-    Msg->numParameters = 5;
+
+    if(isPutMsg){
+        Msg->numParameters = 5;
+    }
+    else{
+        Msg->numParameters = 4;
+    }
 
     printf("SenderID in msg: %s\n", Msg->senderID);
 
@@ -1860,8 +1674,14 @@ char* Chord::getStoreFileMsg(string clientIP, string fileKey, string fileName,
     paramLen[0] = cmnd.length();
     paramLen[1] = clientIP.length();
     paramLen[2] = fileKey.length();
-    paramLen[3] = fileValue.length();
-    paramLen[4] = fileName.length();
+
+    if(isPutMsg){
+        paramLen[3] = fileValue.length();
+        paramLen[4] = fileName.length();
+    }
+    else{
+        paramLen[3] = fileName.length();
+    }
 
     int totalParamLen = 0;
     for(int i = 0; i<Msg->numParameters; i++){
@@ -1875,8 +1695,11 @@ char* Chord::getStoreFileMsg(string clientIP, string fileKey, string fileName,
     skipLen += paramLen[1];
     memcpy(params + skipLen, fileKey.c_str(), fileKey.length());
     skipLen += fileKey.length();
-    memcpy(params + skipLen, fileValue.c_str(), fileValue.length());
-    skipLen += fileName.length();
+
+    if(isPutMsg){
+        memcpy(params + skipLen, fileValue.c_str(), fileValue.length());
+        skipLen += fileValue.length();
+    }
     memcpy(params + skipLen, fileName.c_str(), fileName.length());
 
     /*
@@ -1933,7 +1756,7 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
             fflush(NULL);
         }
 
-        char* messageToSend = getStoreFileMsg(clientIP, fileID, fileName, fileValue, msgLen);
+        char* messageToSend = getStoreFileMsg(clientIP, fileID, fileName, fileValue, msgLen, true);
 
         // Send the request to successor to store this file
         sendRequestToServer(STORE_FILE, succNode->getNodeIP(), "NULL", messageToSend, msgLen);

@@ -112,7 +112,7 @@ class Chord
         void handleClientLsMessage(string clientIP);
 
         char* getStoreFileMsg(string clientIP, string fileKey, string fileName, 
-                string fileValue, long& msgSize);
+                string fileValue, long& msgSize, bool isPutMsg);
 
         void sendResponseToClient(int method, string receiverIP, int resultCode, long msgSize = 0, char* msg = NULL);
 
@@ -121,9 +121,6 @@ class Chord
         void handleClientGetMessage(string fileName, string clientIP, 
                                         char* msg, long msgLen);
         void getFileAndSendResponse(string fileID, string fileName, string clientIP);
-        char* getGetFileMsg(string clientIP, string fileKey, string fileName,long& msgSize);
-
-
 
         void handleClientExistsMessage(string clientIP, string fileName);
 
