@@ -116,6 +116,12 @@ class Chord
 
         void sendResponseToClient(int method, string receiverIP);
         void handleStabilizeResponse(char* maxMessage);
+        void handleClientGetMessage(string fileName, string clientIP, 
+                                        char* msg, long msgLen);
+        void getFileAndSendResponse(string fileID, string fileName, string clientIP);
+        char* getGetFileMsg(string clientIP, string fileKey, string fileName,long& msgSize);
+
+
 };
 
 
