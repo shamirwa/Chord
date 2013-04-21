@@ -1495,7 +1495,7 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
         handleClientPutMessage(file, data, ip, msgRcvd, messageLen);
     }
     else if(strcmp(cmnd, GET) == 0){
-       // handleClientGetMessage();
+       // handleClientGetMessage(file,ip);
     }
     else if(strcmp(cmnd, EXISTS) == 0){
         //handleClientExistsMessage();
@@ -1506,6 +1506,145 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
     else if(strcmp(cmnd, DELETE) == 0){
         //handleClientDeleteMessage();
     }
+}
+
+void Chord::handleClientGetMessage(string fileName, string clientIP, 
+                                    char* msg, long msgLen)
+{
+    functionEntryLog("handleClientGetMessage");
+
+    // get the local hash id for this file
+    string fileID = getLocalHashID(fileName);
+
+    string successorID = successors.getFirstSuccessor()->getNodeID();
+
+    string localNodeID = localNode->getNodeID();
+
+    // find the successor of this fileID
+    //Lies between the current node and successor node 
+    //
+    if(isInInterval(fileID, localNodeID, successorID))
+    {
+        // Send the request to my successor as he will have the file
+        if(debug){
+            printf("Sending file to successor\n");
+            fflush(NULL);
+        }
+
+        char* messageToSend = getGetFileMsg(clientIP, fileID, fileName, msgLen);
+
+        // Send the request to successor to store this file
+        sendRequestToServer(GET_FILE, clientIP, NULL , messageToSend, msgLen);
+
+    }
+    else
+    {
+        string closestPrecedingNodeIP = this->closestPrecedingNode(fileID);
+
+        if(closestPrecedingNodeIP.compare(localNode->getNodeIP()) == 0){
+
+            // I am the only node in the network
+            // Send my ID  SEND RESPONSE TO SERVER
+            if(debug){
+                printf("Sending response with self id. No preceeding node\n");
+                fflush(NULL);
+            }
+            
+            // Get the file and send the response to client
+            getFileAndSendResponse(fileID, fileName, clientIP);
+        }
+        else{
+            if(debug){
+                printf("Forwarding the message to the preceeding node\n");
+                fflush(NULL);
+            }
+            // Forward this message to the preceding Node
+            sendRequestToServer(CLIENT_REQ, closestPrecedingNodeIP, "NULL", msg, msgLen);
+        }
+    }
+}
+
+void Chord::getFileAndSendResponse(string fileID, string fileName, string clientIP){
+    functionEntryLog("storeFileAndSendResponse");
+
+    // Get the entry from the list
+    string fileData = localNode->getEntryValue(fileID, fileName);
+
+    // Send Response to the client
+    sendResponseToClient(GET_RESP, clientIP, fileData);
+}
+
+char* Chord::getGetFileMsg(string clientIP, string fileKey, string fileName,long& msgSize)
+{
+    functionEntryLog("getGetFileMsg");
+
+    if(debug){
+        printf("Sending Message details\n");
+        printf("Type: SERV_REQ \n");
+        printf("SenderID: %s\n", localNode->getNodeID().c_str());
+        printf("Length of ID: %ld\n", localNode->getNodeID().length());
+        printf("IP to send: %s\n", clientIP.c_str());
+        fflush(NULL);
+    }
+
+    string cmnd = "getFile";
+
+    // create the message to send
+    command* Msg = new command;
+    Msg->type = SERVER_REQ;
+    memcpy(Msg->senderID, localNode->getNodeID().c_str(), localNode->getNodeID().length());
+    Msg->numParameters = 4;
+
+    printf("SenderID in msg: %s\n", Msg->senderID);
+
+    int* paramLen = new int[Msg->numParameters];
+    paramLen[0] = cmnd.length();
+    paramLen[1] = clientIP.length();
+    paramLen[2] = fileKey.length();
+    paramLen[3] = fileName.length();
+
+    int totalParamLen = 0;
+    for(int i = 0; i<Msg->numParameters; i++){
+        totalParamLen += paramLen[i];
+    }
+
+    char* params = new char[totalParamLen];
+    int skipLen = paramLen[0];
+    memcpy(params, cmnd.c_str(), paramLen[0]);
+    memcpy(params + skipLen, clientIP.c_str(), paramLen[1]);
+    skipLen += paramLen[1];
+    memcpy(params + skipLen, fileKey.c_str(), fileKey.length());
+    skipLen += fileKey.length();
+    memcpy(params + skipLen, fileName.c_str(), fileName.length());
+
+    /*
+       if(debug){
+       int len = paramLen[0] + paramLen[1];
+
+       printf("Parameters: %s\n", params);
+       for(int i = 0; i<len; ++i){
+       printf("%c\n", params[i]);
+       }
+       }*/
+
+    // Allocate a large buffer to serialize the parameters
+    char* msgBuffer = NULL;
+    long messageLen = 0;
+    messageLen = sizeof(command) + totalParamLen  + sizeof(int) * Msg->numParameters;
+    msgBuffer = new char[messageLen];
+    memcpy(msgBuffer, Msg, sizeof(command));
+    memcpy(msgBuffer + sizeof(command), paramLen, sizeof(int) * Msg->numParameters);
+    memcpy(msgBuffer + sizeof(command) + sizeof(int) * Msg->numParameters, params, totalParamLen);
+
+
+    // Delete the memory allocated for paramLen and params
+    delete[] paramLen;
+    delete[] params;
+    delete Msg;
+
+    // Return the message buffer
+    msgSize = messageLen;
+    return msgBuffer;
 }
 
 char* Chord::getStoreFileMsg(string clientIP, string fileKey, string fileName,
