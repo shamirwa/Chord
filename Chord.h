@@ -114,9 +114,16 @@ class Chord
         char* getStoreFileMsg(string clientIP, string fileKey, string fileName, 
                 string fileValue, long& msgSize);
 
-        void sendResponseToClient(int method, string receiverIP, long msgSize = 0, char* msg = NULL);
+        void sendResponseToClient(int method, string receiverIP, int resultCode, long msgSize = 0, char* msg = NULL);
 
         void handleStabilizeResponse(char* maxMessage);
+
+        void handleClientExistsMessage(string clientIP, string fileName);
+
+        void handleClientDeleteMessage(string clientIP, string fileName);
+
+        char* getDeleteExistsMessage(string ipToSend, string fileName, long& msgSize, bool isDelete);
+
 };
 
 
