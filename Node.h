@@ -26,6 +26,7 @@ class Node{
         string getEntryValue(string fileKey, string fileName);
         void storeEntry(string fileKey, string fileName, string fileValue);
         map<string,Entry> getAllEntries();
+        void removeEntry(string fileKey, string fileName);
 
 };
 

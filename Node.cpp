@@ -76,7 +76,12 @@ map<string,Entry> Node::getAllEntries()
 }
 
 
+void Node::removeEntry(string fileKey, string fileName)
+{
+    if(checkIfEntryExists(fileKey, fileName)){
 
-
-
+        cout << "Removing the entry for file name " << fileName << endl;
+        entryList.erase(fileKey);
+    }
+}
 

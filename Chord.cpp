@@ -704,25 +704,14 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
                 break;
             }
          case 3:
-            {
-                generalInfoLog("In case 3");
-                
-                if(!message){
-                    cout<<"Message was NULL " <<endl; 
-                    return;
-                }                
-                else{
-                    msgBuffer = message;
-                    messageLen = msgLen;
-                }
-
-                useServerSock = true;
-                useStabSock = false;
-                break;
-            }
          case 4:
+         case 5:
+         case 6:
+         case 7:
+         case 8:
+         case 9:
             {
-                generalInfoLog("In case 4");
+                cout << "In case " << method << endl;
                 
                 if(!message){
                     cout<<"Message was NULL " <<endl; 
@@ -735,42 +724,6 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
 
                 useServerSock = true;
                 useStabSock = false;
-                break;
-            }
-        case 5:
-            {
-                generalInfoLog("In case 5");
-
-                if(!message){
-                    cout << "Message was NULL " << endl;
-                    return;
-                }
-                else{
-                    msgBuffer = message;
-                    messageLen = msgLen;
-                }
-
-                useServerSock = true;
-                useStabSock = false;
-
-                break;
-            }
-        case 6:
-            {
-                generalInfoLog("In case 6");
-
-                if(!message){
-                    cout << "Message was null" << endl;
-                    return;
-                }
-                else{
-                    msgBuffer = message;
-                    messageLen = msgLen;
-                }
-
-                useServerSock = true;
-                useStabSock = false;
-
                 break;
             }
         default:
@@ -1088,6 +1041,8 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
     }
     else if(strcmp(commandName, "storeFile") == 0){
 
+        generalInfoLog("Received request for storefile");
+
         char* fileID = new char[paramLenArr[2] + 1];
         memcpy(fileID, parameters + paramLenArr[0] + paramLenArr[1], paramLenArr[2]);
         fileID[paramLenArr[2]] = '\0';
@@ -1110,6 +1065,8 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         storeFileAndSendResponse(key, fileValue, fileName, senderIP);
     }
     else if(strcmp(commandName, "listAllFile") == 0){
+
+        generalInfoLog("Received request for listAllFile");
         
         ClientResponse* msg = new ClientResponse;
         long finalMsgSize = 0;
@@ -1137,18 +1094,162 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
             int addLen = totalParamsSize - paramLenArr[0] - paramLenArr[1];
             memcpy(finalMsg + skipLen, parameters + paramLenArr[0] + paramLenArr[1],  addLen);
 
-            sendResponseToClient(LS_RESP, senderIP, finalMsgSize, finalMsg);
+            sendResponseToClient(LS_RESP, senderIP, 1, finalMsgSize, finalMsg);
 
         }
         else
         {
             // Add my file entries and send it to the client
-            
+            map<string,Entry> entrylist = localNode->getAllEntries();
+            map<string,Entry>::iterator myIter = entrylist.begin();
 
+            int myEntryCount = entrylist.size();
+
+            int totalEntries = myEntryCount + paramCount;
+            int* lengthArray = new int[totalEntries];
+
+            // Copy all the older paramters
+            memcpy(lengthArray, paramLenArr, paramCount);
+            int i = 0;
+
+            for(; myIter != entrylist.end(); ++myIter){
+                
+                lengthArray[paramCount + i] = myIter->second.getFileName().length();
+                ++i;
+            }
+
+            int totalLength = totalParamsSize;
+
+            for(int i = 0; i<myEntryCount; i++){
+                totalLength += lengthArray[paramCount + i];
+            }
+
+            char* newParameters = new char[totalLength];
+            memcpy(newParameters, parameters, totalParamsSize);
+
+            myIter = entrylist.begin();
+            i = 0;
+            for(; myIter != entrylist.end(); ++myIter){
+                
+                memcpy(newParameters + totalParamsSize + i, 
+                        myIter->second.getFileName().c_str(),
+                        myIter->second.getFileName().length());
+                i += myIter->second.getFileName().length();
+            }
+
+            long largeBufferLen = sizeof(command) + (sizeof(int) * totalEntries) + totalLength;
+            char* largeBuffer = new char[largeBufferLen];
+            int skipLen = sizeof(command);
+
+            memcpy(largeBuffer, rcvdMsg, skipLen);
+            memcpy(largeBuffer + skipLen, lengthArray, totalEntries);
+            skipLen += sizeof(int) * totalEntries;
+            memcpy(largeBuffer + skipLen, newParameters, totalLength);
+
+            delete[] lengthArray;
+            delete[] newParameters;
+
+            // I am assuming that chord network is stabilized one. That is it has formed circle.
+            // So assuming that my successor id is not equal to my Id if I am here.
+            // Send the request to the successor
+            //
+            Node* succ = successors.getFirstSuccessor();
+
+            sendRequestToServer(LIST_ALL, succ->getNodeIP(), "NULL", 
+                                largeBuffer, largeBufferLen);
         }
 
+    }
+    else if(strcmp(commandName, "deleteFile") == 0){
+            
+        generalInfoLog("Received request for deleteFile");
 
+        // Check if the message has travelled whole circle
+        if(senderID.compare(localNode->getNodeID()) == 0){
 
+            sendResponseToClient(DELETE_RESP, senderIP, 1);
+        }
+        else{
+            // Get the file name and delete it from my node
+            char* fileName = new char[paramLenArr[2] + 1];
+            int skipLen = paramLenArr[0] + paramLenArr[1];
+
+            memcpy(fileName, parameters + skipLen, paramLenArr[2]);
+            fileName[paramLenArr[2]] = '\0';
+
+            string fileToDel = fileName;
+            string fileKey = getLocalHashID(fileName);
+
+            // Check if file is there and delete it
+            if(localNode->checkIfEntryExists(fileKey, fileToDel)){
+                localNode->removeEntry(fileKey, fileToDel);
+            }
+
+            // Forward the message to my successor
+            Node* succ = successors.getFirstSuccessor();
+
+            // TODO: Here we can check that if my ID is same as my successor id then that mean
+            // the network is not stable and there is some error in ring formation.
+            // We can send error code to the client. We are not handling it now.
+            if(localNode->getNodeIP().compare(succ->getNodeIP()) == 0){
+
+                // Send response to client with result code 0. This might be bcoz network is 
+                // not stable
+                sendResponseToClient(DELETE_RESP, senderIP, 0);
+
+                return;
+            }
+            
+            sendRequestToServer(DELETE_FILE, succ->getNodeIP(), "NULL", msgRcvd, messageLen);
+        }
+    }
+    else if(strcmp(commandName, "fileExists") == 0){
+            
+        generalInfoLog("Received request for fileExists");
+
+        // Check if the message has travelled whole circle
+        if(senderID.compare(localNode->getNodeID()) == 0){
+
+            // If yes that means that the file is not there in the network
+            sendResponseToClient(EXISTS_RESP, senderIP, 0);
+        }
+        else{
+            // Get the file name and check if it exists
+            char* fileName = new char[paramLenArr[2] + 1];
+            int skipLen = paramLenArr[0] + paramLenArr[1];
+
+            memcpy(fileName, parameters + skipLen, paramLenArr[2]);
+            fileName[paramLenArr[2]] = '\0';
+
+            string fileToDel = fileName;
+            string fileKey = getLocalHashID(fileName);
+
+            // Check if file is there 
+            if(localNode->checkIfEntryExists(fileKey, fileToDel)){
+            
+                // Send the response to client
+                sendResponseToClient(EXISTS_RESP, senderIP, 1);
+
+                return;
+            }
+
+            // Forward the message to my successor
+            Node* succ = successors.getFirstSuccessor();
+
+            // TODO: Here we can check that if my ID is same as my successor id then that mean
+            // the network is not stable and there is some error in ring formation.
+            // We can send error code to the client. We are not handling it now.
+            if(localNode->getNodeIP().compare(succ->getNodeIP()) == 0){
+
+                // Send response to client with result code 0. This might be bcoz network is 
+                // not stable
+                sendResponseToClient(EXISTS_RESP, senderIP, 0);
+
+                return;
+            }
+
+            sendRequestToServer(EXISTS_FILE, succ->getNodeIP(), "NULL", msgRcvd, messageLen);
+        }
     }
     else{
         generalInfoLog("Unknown request received\n");
@@ -1557,16 +1658,16 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
         handleClientPutMessage(file, data, ip, msgRcvd, messageLen);
     }
     else if(strcmp(cmnd, GET) == 0){
-       // handleClientGetMessage(file,ip);
+        handleClientGetMessage(file,ip,msgRcvd, messageLen);
     }
     else if(strcmp(cmnd, EXISTS) == 0){
-        //handleClientExistsMessage();
+        handleClientExistsMessage(ip, file);
     }
     else if(strcmp(cmnd, LS) == 0){
-        //handleClientLsMessage(ip);
+        handleClientLsMessage(ip);
     }
     else if(strcmp(cmnd, DELETE) == 0){
-        //handleClientDeleteMessage();
+        handleClientDeleteMessage(ip, file);
     }
 }
 
@@ -1578,14 +1679,15 @@ void Chord::handleClientGetMessage(string fileName, string clientIP,
     // get the local hash id for this file
     string fileID = getLocalHashID(fileName);
 
-    string successorID = successors.getFirstSuccessor()->getNodeID();
+    //string successorID = successors.getFirstSuccessor()->getNodeID();
+    Node* successNode = successors.getFirstSuccessor();
 
     string localNodeID = localNode->getNodeID();
 
     // find the successor of this fileID
     //Lies between the current node and successor node 
     //
-    if(isInInterval(fileID, localNodeID, successorID))
+    if(isInInterval(fileID, localNodeID, successNode->getNodeID()))
     {
         // Send the request to my successor as he will have the file
         if(debug){
@@ -1596,7 +1698,7 @@ void Chord::handleClientGetMessage(string fileName, string clientIP,
         char* messageToSend = getGetFileMsg(clientIP, fileID, fileName, msgLen);
 
         // Send the request to successor to store this file
-        sendRequestToServer(GET_FILE, clientIP, NULL , messageToSend, msgLen);
+        sendRequestToServer(GET_FILE, successNode->getNodeIP(), NULL , messageToSend, msgLen);
 
     }
     else
@@ -1627,13 +1729,34 @@ void Chord::handleClientGetMessage(string fileName, string clientIP,
 }
 
 void Chord::getFileAndSendResponse(string fileID, string fileName, string clientIP){
-    functionEntryLog("storeFileAndSendResponse");
+    functionEntryLog("getFileAndSendResponse");
 
     // Get the entry from the list
     string fileData = localNode->getEntryValue(fileID, fileName);
 
+    // Make the client response message
+    ClientResponse* getResp = new ClientResponse;
+    getResp->type = CLIENT_RESP;
+    getResp->numParameters = 1;
+    getResp->result = 1;
+
+    int* lenArray = new int[1];
+    lenArray[0] = fileData.length();
+
+    char* param = new char[lenArray[0]];
+    memcpy(param, fileData.c_str(), fileData.length());
+
+    long largeBuffSize = sizeof(ClientResponse) + sizeof(int) + lenArray[0];
+    char* largeBuff = new char[largeBuffSize];
+
+    int skipLen = sizeof(ClientResponse);
+    memcpy(largeBuff, getResp, skipLen);
+    memcpy(largeBuff + skipLen, lenArray, sizeof(int));
+    skipLen += sizeof(int);
+    memcpy(largeBuff + skipLen, param, lenArray[0]);
+
     // Send Response to the client
-    sendResponseToClient(GET_RESP, clientIP, fileData);
+    sendResponseToClient(GET_RESP, clientIP, 1, largeBuffSize, largeBuff);
 }
 
 char* Chord::getGetFileMsg(string clientIP, string fileKey, string fileName,long& msgSize)
@@ -1794,14 +1917,15 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
     // get the local hash id for this file
     string fileID = getLocalHashID(fileName);
 
-    string successorID = successors.getFirstSuccessor()->getNodeID();
+    //string successorID = successors.getFirstSuccessor()->getNodeID();
+    Node* succNode = successors.getFirstSuccessor();
 
     string localNodeID = localNode->getNodeID();
 
     // find the successor of this fileID
     //Lies between the current node and successor node 
     //
-    if(isInInterval(fileID, localNodeID, successorID))
+    if(isInInterval(fileID, localNodeID, succNode->getNodeID()))
     {
         // Send the file to my successor to store it
         if(debug){
@@ -1812,7 +1936,7 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
         char* messageToSend = getStoreFileMsg(clientIP, fileID, fileName, fileValue, msgLen);
 
         // Send the request to successor to store this file
-        sendRequestToServer(STORE_FILE, clientIP, "NULL", messageToSend, msgLen);
+        sendRequestToServer(STORE_FILE, succNode->getNodeIP(), "NULL", messageToSend, msgLen);
 
     }
     else
@@ -1850,18 +1974,18 @@ void Chord::storeFileAndSendResponse(string fileID, string fileValue, string fil
     localNode->storeEntry(fileID, fileName, fileValue);
 
     // Send Response to the client
-    sendResponseToClient(PUT_RESP, clientIP);
+    sendResponseToClient(PUT_RESP, clientIP, 1);
 }
 
 
-void Chord::sendResponseToClient(int method, string receiverIP, long msgSize, char* msg){
+void Chord::sendResponseToClient(int method, string receiverIP, int resultCode, long msgSize, char* msg){
 
-    functionEntryLog("CHORD: sendResponseToCLient");
+    functionEntryLog("CHORD: sendResponseToClient");
 
     char* message = NULL;
     ClientResponse* myMessage = new ClientResponse;
     myMessage->type = CLIENT_RESP;
-    myMessage->result = 1;
+    myMessage->result = resultCode;
 
 
     long messageLen = 0;
@@ -1883,6 +2007,25 @@ void Chord::sendResponseToClient(int method, string receiverIP, long msgSize, ch
         case 1:
             {
                 generalInfoLog("In case 1");
+                if(!msg){
+                    cout << "ERROR: Get Message is NULL\n";
+                    return;
+                }
+                else{
+                    message = msg;
+                    messageLen = msgSize;
+                }
+
+                break;
+            }
+        case 2:
+            {
+                generalInfoLog("In case 2");
+
+                myMessage->numParameters = 0;
+                messageLen = sizeof(ClientResponse);
+                message = new char[messageLen];
+                memcpy(message, myMessage, messageLen);
 
                 break;
             }
@@ -1945,6 +2088,19 @@ void Chord::sendResponseToClient(int method, string receiverIP, long msgSize, ch
                 }
 
             }
+        case 4:
+            {
+                generalInfoLog("In case 4");
+        
+                myMessage->numParameters = 0;
+                messageLen = sizeof(ClientResponse);
+                message = new char[messageLen];
+                memcpy(message, myMessage, messageLen);
+
+                break;
+
+            }
+
         default:
             generalInfoLog("Error while sending. Unkonwn command request found\n");
     }
@@ -2013,11 +2169,145 @@ void Chord::handleClientLsMessage(string clientIP)
     if(succ->getNodeIP().compare(localNode->getNodeIP()) == 0){
 
         // Send response to the client with my file entries
-        sendResponseToClient(LS_RESP, clientIP);
+        sendResponseToClient(LS_RESP, clientIP, 1);
     }
     else{
         // Send this request to all the servers in liner way. I will forward it to my
         // successor and so on
         sendRequestToServer(LIST_ALL, succ->getNodeIP(), "NULL", message, messageLen);
+    }
+}
+
+void Chord::handleClientDeleteMessage(string clientIP, string fileName)
+{
+    functionEntryLog("handleClientDeleteMessage");
+
+    // Get the hash key for the file name
+    string fileKey = getLocalHashID(fileName);
+
+    // Delete all the instance of the file in my entry list
+    localNode->removeEntry(fileKey, fileName);
+
+    // Pass this fileName to the other node via successor node
+    Node* succ = successors.getFirstSuccessor();
+
+    // Check if my successor ip is same as my ip.
+    // if yes then I am the only node in the network and will send response to the
+    // client
+    if(succ->getNodeIP().compare(localNode->getNodeIP()) == 0){
+
+        // Send response to the client
+        sendResponseToClient(DELETE_RESP, clientIP, 1);
+    }
+    else
+    {
+        // Create the message and send it
+        long messageLen = 0;
+        char* message  = getDeleteExistsMessage(clientIP, fileName, messageLen, true);
+        // Send this request to all the servers in liner way. I will forward it to my
+        // successor and so on
+        sendRequestToServer(DELETE_FILE, succ->getNodeIP(), "NULL", message, messageLen);
+
+    }
+}
+
+char* Chord::getDeleteExistsMessage(string ipToSend, string fileName, long& msgSize, bool isDelete)
+{
+    functionEntryLog("getDeleteExistsMessage");
+
+    command* delMsg = new command;
+   
+    string commandName;
+
+    if(isDelete){
+        commandName = "deleteFile";
+    }
+    else
+    {
+        commandName = "fileExists";
+    }
+
+    delMsg->type = SERVER_REQ;
+    memcpy(delMsg->senderID, localNode->getNodeID().c_str(), localNode->getNodeID().length());
+    delMsg->numParameters = 3;
+
+    int* lenArray = new int[delMsg->numParameters];
+    lenArray[0] = commandName.length();
+    lenArray[1] = ipToSend.length();
+    lenArray[2] = fileName.length();
+
+    long paramSize = commandName.length() + ipToSend.length() + fileName.length();
+
+    char* parameters = new char[paramSize];
+
+    long skipLen = commandName.length();
+    memcpy(parameters, commandName.c_str(), skipLen);
+    memcpy(parameters + skipLen, ipToSend.c_str(), ipToSend.length());
+    skipLen += ipToSend.length();
+    memcpy(parameters + skipLen, fileName.c_str(), fileName.length());
+
+    msgSize = sizeof(command) + (sizeof(int) * delMsg->numParameters) + paramSize;
+    char* msgBuffer = new char[msgSize];
+
+    skipLen = sizeof(command);
+    memcpy(msgBuffer, delMsg, skipLen);
+    memcpy(msgBuffer + skipLen, lenArray, (sizeof(int) * delMsg->numParameters));
+    skipLen += (sizeof(int) * delMsg->numParameters);
+    memcpy(msgBuffer + skipLen, parameters, paramSize);
+    
+    delete[] lenArray;
+    delete[] parameters;
+    delete delMsg;
+
+    return msgBuffer;
+}
+
+void Chord::handleClientExistsMessage(string clientIP, string fileName)
+{
+    functionEntryLog("handleClientExistsMessage");
+
+    // Get the file hash key
+    string fileKey = getLocalHashID(fileName);
+
+    // Check if file exists in my entry list
+    if(localNode->checkIfEntryExists(fileKey, fileName)){
+
+        // Send the client response with result code 1
+        sendResponseToClient(EXISTS_RESP, clientIP, 1);
+
+        return;
+    }
+    else
+    {
+        // Send the message to the successor server
+        Node* succ = successors.getFirstSuccessor();
+
+        // Check if I am the successor of myself that means
+        // I am the only node in the network
+        if(localNode->getNodeIP().compare(succ->getNodeIP()) == 0){
+
+            // Check if entryexists on my system
+            if(localNode->checkIfEntryExists(fileKey, fileName)){
+
+                //send response to the client
+                sendResponseToClient(EXISTS_RESP, clientIP, 1);
+
+                return;
+            }
+            else{
+                // Send failure response to the client
+                sendResponseToClient(EXISTS_RESP, clientIP, 0);
+
+                return;
+            }
+        }
+        else
+        {
+            // Forward the request to the successor
+            long msgLen = 0;
+            char* message = getDeleteExistsMessage(clientIP, fileName, msgLen, false);
+
+            sendRequestToServer(EXISTS_FILE, succ->getNodeIP(), "NULL", message, msgLen);
+        }
     }
 }
