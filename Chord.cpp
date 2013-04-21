@@ -1239,7 +1239,10 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
             // I am assuming that chord network is stabilized one. That is it has formed circle.
             // So assuming that my successor id is not equal to my Id if I am here.
             // Send the request to the successor
-            sendRequestToServer(LIST_ALL, successors.getFirstSuccessor()->getNodeIP(), "NULL", 
+            //
+            Node* succ = successors.getFirstSuccessor();
+
+            sendRequestToServer(LIST_ALL, succ->getNodeIP(), "NULL", 
                                 largeBuffer, largeBufferLen);
         }
 
@@ -1275,6 +1278,14 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
             // TODO: Here we can check that if my ID is same as my successor id then that mean
             // the network is not stable and there is some error in ring formation.
             // We can send error code to the client. We are not handling it now.
+            if(localNode->getNodeIP().compare(succ->getNodeIP()) == 0){
+
+                // Send response to client with result code 0. This might be bcoz network is 
+                // not stable
+                sendResponseToClient(DELETE_RESP, senderIP, 0);
+
+                return;
+            }
             
             sendRequestToServer(DELETE_FILE, succ->getNodeIP(), "NULL", msgRcvd, messageLen);
         }
@@ -1315,7 +1326,15 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
             // TODO: Here we can check that if my ID is same as my successor id then that mean
             // the network is not stable and there is some error in ring formation.
             // We can send error code to the client. We are not handling it now.
-            
+            if(localNode->getNodeIP().compare(succ->getNodeIP()) == 0){
+
+                // Send response to client with result code 0. This might be bcoz network is 
+                // not stable
+                sendResponseToClient(EXISTS_RESP, senderIP, 0);
+
+                return;
+            }
+
             sendRequestToServer(EXISTS_FILE, succ->getNodeIP(), "NULL", msgRcvd, messageLen);
         }
     }
@@ -1916,6 +1935,17 @@ void Chord::sendResponseToClient(int method, string receiverIP, int resultCode, 
 
                 break;
             }
+        case 2:
+            {
+                generalInfoLog("In case 2");
+
+                myMessage->numParameters = 0;
+                messageLen = sizeof(ClientResponse);
+                message = new char[messageLen];
+                memcpy(message, myMessage, messageLen);
+
+                break;
+            }
         case 3:
             {
                 generalInfoLog("In case 3");
@@ -1973,6 +2003,18 @@ void Chord::sendResponseToClient(int method, string receiverIP, int resultCode, 
                     message = msg;
                     messageLen = msgSize;
                 }
+
+            }
+        case 4:
+            {
+                generalInfoLog("In case 4");
+        
+                myMessage->numParameters = 0;
+                messageLen = sizeof(ClientResponse);
+                message = new char[messageLen];
+                memcpy(message, myMessage, messageLen);
+
+                break;
 
             }
         default:
