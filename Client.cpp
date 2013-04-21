@@ -3,6 +3,9 @@
  * Usage: ./Client
  */
 
+/* TODO: When client receives the output of the ls command then it will
+ * look into all the file names and remove the duplicate one.
+ */
 
 #include <iostream>
 #include <stdio.h>
