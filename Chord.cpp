@@ -830,7 +830,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         senderID.erase(20, 1);
     }
 
-    // Check if response is for FIND_SUCCESSOR
+    // Check if request is for FIND_SUCCESSOR
     if(strcmp(commandName, "findSuccessor") == 0){
 
         generalInfoLog("Received request for findSuccessor");
@@ -996,121 +996,138 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
     else if(strcmp(commandName, "listAllFile") == 0){
 
         generalInfoLog("Received request for listAllFile");
+        char* cliMessageToSend = NULL;
+        long cliMessageLen = 0;
         
-        ClientResponse* msg = new ClientResponse;
-        long finalMsgSize = 0;
-        char* finalMsg;
         // Check if the senderID is same as mine. If yes then I need to send this message
         // to the client
         if(isIdEqual(senderID, localNode->getNodeID())){
             
             // Send reponse to the client
-            msg->type = CLIENT_RESP;
-            msg->numParameters = paramCount - 2;
-            msg->result = 1;
+            cliMessageToSend = getLSClientMessage(paramCount, totalParamsSize, paramLenArr,
+                                                    parameters, cliMessageLen);
 
-            finalMsgSize = sizeof(ClientResponse) + (sizeof(int) * (msg->numParameters)) 
-                                    + (totalParamsSize - paramLenArr[0] - paramLenArr[1]);
-            finalMsg = new char[finalMsgSize];
-
-            int skipLen = 0;
-            memcpy(finalMsg, msg, sizeof(ClientResponse));
-            skipLen += sizeof(ClientResponse);
-
-            memcpy(finalMsg + skipLen, paramLenArr + 2, (sizeof(int) * (msg->numParameters)));
-            skipLen += (sizeof(int) * (msg->numParameters));
-
-            int addLen = totalParamsSize - paramLenArr[0] - paramLenArr[1];
-            memcpy(finalMsg + skipLen, parameters + paramLenArr[0] + paramLenArr[1],  addLen);
-
-            sendResponseToClient(LS_RESP, senderIP, 1, finalMsgSize, finalMsg);
+            sendResponseToClient(LS_RESP, senderIP, 1, cliMessageToSend, cliMessageLen);
 
         }
         else
         {
-            // Add my file entries and send it to the client
-            map<string,Entry> entrylist = localNode->getAllEntries();
-            map<string,Entry>::iterator myIter = entrylist.begin();
-
-            int myEntryCount = entrylist.size();
-
-            int totalEntries = myEntryCount + paramCount;
-            int* lengthArray = new int[totalEntries];
-
-            // Copy all the older paramters
-            memcpy(lengthArray, paramLenArr, paramCount);
-            int i = 0;
-
-            for(; myIter != entrylist.end(); ++myIter){
-                
-                lengthArray[paramCount + i] = myIter->second.getFileName().length();
-                ++i;
-            }
-
-            int totalLength = totalParamsSize;
-
-            for(int i = 0; i<myEntryCount; i++){
-                totalLength += lengthArray[paramCount + i];
-            }
-
-            char* newParameters = new char[totalLength];
-            memcpy(newParameters, parameters, totalParamsSize);
-
-            myIter = entrylist.begin();
-            i = 0;
-            for(; myIter != entrylist.end(); ++myIter){
-                
-                memcpy(newParameters + totalParamsSize + i, 
-                        myIter->second.getFileName().c_str(),
-                        myIter->second.getFileName().length());
-                i += myIter->second.getFileName().length();
-            }
-
-            long largeBufferLen = sizeof(command) + (sizeof(int) * totalEntries) + totalLength;
-            char* largeBuffer = new char[largeBufferLen];
-            int skipLen = sizeof(command);
-
-            memcpy(largeBuffer, rcvdMsg, skipLen);
-            memcpy(largeBuffer + skipLen, lengthArray, totalEntries);
-            skipLen += sizeof(int) * totalEntries;
-            memcpy(largeBuffer + skipLen, newParameters, totalLength);
-
-            delete[] lengthArray;
-            delete[] newParameters;
-
-            // I am assuming that chord network is stabilized one. That is it has formed circle.
-            // So assuming that my successor id is not equal to my Id if I am here.
+            // check if my successor id is not equal to my Id.
             // Send the request to the successor
-            //
             Node* succ = successors.getFirstSuccessor();
 
-            sendRequestToServer(LIST_ALL, succ->getNodeIP(), "NULL", 
-                                largeBuffer, largeBufferLen);
-        }
+            if(succ->getNodeIP().compare(localNode->getNodeIP()) == 0){
 
+                // That means network is unstable. But send the list of message so far collected
+                // with result code 0
+                cliMessageToSend = getLSClientMessage(paramCount, totalParamsSize, paramLenArr,
+                        parameters, cliMessageLen);
+
+                sendResponseToClient(LS_RESP, senderIP, 0, cliMessageToSend, cliMessageLen);
+            }
+            else{
+                // Make a valid message and send to the server
+                // Add my file entries and send it to the client
+                map<string,Entry> entrylist = localNode->getAllEntries();
+                map<string,Entry>::iterator myIter = entrylist.begin();
+
+                int myEntryCount = entrylist.size();
+
+                int totalEntries = myEntryCount + paramCount;
+                int* lengthArray = new int[totalEntries];
+
+                // Copy all the older paramters
+                memcpy(lengthArray, paramLenArr, paramCount);
+                int i = 0;
+
+                for(; myIter != entrylist.end(); ++myIter){
+
+                    lengthArray[paramCount + i] = myIter->second.getFileName().length();
+                    ++i;
+                }
+
+                int totalLength = totalParamsSize;
+
+                for(int i = 0; i<myEntryCount; i++){
+                    totalLength += lengthArray[paramCount + i];
+                }
+
+                char* newParameters = new char[totalLength];
+                memcpy(newParameters, parameters, totalParamsSize);
+
+                myIter = entrylist.begin();
+                i = 0;
+                for(; myIter != entrylist.end(); ++myIter){
+
+                    memcpy(newParameters + totalParamsSize + i, 
+                            myIter->second.getFileName().c_str(),
+                            myIter->second.getFileName().length());
+                    i += myIter->second.getFileName().length();
+                }
+
+                long largeBufferLen = sizeof(command) + (sizeof(int) * totalEntries) + totalLength;
+                char* largeBuffer = new char[largeBufferLen];
+                int skipLen = sizeof(command);
+
+                memcpy(largeBuffer, rcvdMsg, skipLen);
+                memcpy(largeBuffer + skipLen, lengthArray, totalEntries);
+                skipLen += sizeof(int) * totalEntries;
+                memcpy(largeBuffer + skipLen, newParameters, totalLength);
+
+                delete[] lengthArray;
+                delete[] newParameters;
+
+                sendRequestToServer(LIST_ALL, succ->getNodeIP(), "NULL", 
+                        largeBuffer, largeBufferLen);
+            }
+        }
     }
     else if(strcmp(commandName, "deleteFile") == 0){
+
+        char* delMessage = msgRcvd;
+        long messageSize = messageLen;
             
         generalInfoLog("Received request for deleteFile");
+        
+        // Get the file name and delete it from my node
+        char* fileName = new char[paramLenArr[2] + 1];
+        int skipLen = paramLenArr[0] + paramLenArr[1];
+
+        memcpy(fileName, parameters + skipLen, paramLenArr[2]);
+        fileName[paramLenArr[2]] = '\0';
+        skipLen += paramLenArr[2];
+
+        char* deleteStatus = new char[paramLenArr[3] + 1];
+        memcpy(deleteStatus, parameters + skipLen, paramLenArr[3]);
+        deleteStatus[paramLenArr[3]] = '\0';
 
         // Check if the message has travelled whole circle
         if(senderID.compare(localNode->getNodeID()) == 0){
-
-            sendResponseToClient(DELETE_RESP, senderIP, 1);
+            if(strcmp(deleteStatus, "found") == 0){
+                sendResponseToClient(DELETE_RESP, senderIP, 1);
+            }
+            else{
+                sendResponseToClient(DELETE_RESP, senderIP, 0);
+            }
         }
         else{
-            // Get the file name and delete it from my node
-            char* fileName = new char[paramLenArr[2] + 1];
-            int skipLen = paramLenArr[0] + paramLenArr[1];
-
-            memcpy(fileName, parameters + skipLen, paramLenArr[2]);
-            fileName[paramLenArr[2]] = '\0';
 
             string fileToDel = fileName;
             string fileKey = getLocalHashID(fileName);
 
             // Check if file is there and delete it
             if(localNode->checkIfEntryExists(fileKey, fileToDel)){
+                
+                if(strcmp(deleteStatus, "notFound") == 0){
+                    
+                    // Delete the older message buffer
+                    delete[] delMessage;
+
+                    delMessage = NULL;
+                    delMessage = getDeleteExistsMessage(senderIP, fileName, messageSize, true,
+                                    "found");
+                }
+
                 localNode->removeEntry(fileKey, fileToDel);
             }
 
@@ -1124,12 +1141,15 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
 
                 // Send response to client with result code 0. This might be bcoz network is 
                 // not stable
+                if(strcmp(deleteStatus, "found") == 0){
+                    cout << "Have deleted few instance of the file but not all. The network structure is not stable\n";
+                }
                 sendResponseToClient(DELETE_RESP, senderIP, 0);
 
                 return;
             }
             
-            sendRequestToServer(DELETE_FILE, succ->getNodeIP(), "NULL", msgRcvd, messageLen);
+            sendRequestToServer(DELETE_FILE, succ->getNodeIP(), "NULL", delMessage, messageSize);
         }
     }
     else if(strcmp(commandName, "fileExists") == 0){
@@ -1184,6 +1204,40 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         generalInfoLog("Unknown request received\n");
     }
 }
+
+
+char* Chord::getLSClientMessage(int paramCount, int totalParamSize,
+                         int* lenArray, char* params, long& msgLen){
+
+
+    ClientResponse* msg = new ClientResponse;
+    long finalMsgSize = 0;
+    char* finalMsg;
+
+        // Send reponse to the client
+        msg->type = CLIENT_RESP;
+        msg->numParameters = paramCount - 2;
+        msg->result = 1;
+
+        finalMsgSize = sizeof(ClientResponse) + (sizeof(int) * (msg->numParameters))
+            + (totalParamsSize - lenArray[0] - lenArray[1]);
+        finalMsg = new char[finalMsgSize];
+
+        int skipLen = 0;
+        memcpy(finalMsg, msg, sizeof(ClientResponse));
+        skipLen += sizeof(ClientResponse);
+
+        memcpy(finalMsg + skipLen, lenArray + 2, (sizeof(int) * (msg->numParameters)));
+        skipLen += (sizeof(int) * (msg->numParameters));
+
+        int addLen = totalParamsSize - lenArray[0] - lenArray[1];
+        memcpy(finalMsg + skipLen, params + lenArray[0] + lenArray[1],  addLen);
+
+    msgLen = finalMsgSize;
+    return finalMsg;
+
+}
+
 
 char* Chord::getMessageToSend(int msgType, string cmnd, string idToSend, string ipToSend,
         long& msgLength)
@@ -2004,9 +2058,18 @@ void Chord::handleClientLsMessage(string clientIP)
 void Chord::handleClientDeleteMessage(string clientIP, string fileName)
 {
     functionEntryLog("handleClientDeleteMessage");
+    bool isFilePresent = false;
 
     // Get the hash key for the file name
     string fileKey = getLocalHashID(fileName);
+
+    // Check if file exists
+    if(localNode->checkIfEntryExists(fileKey, fileName)){
+        isFilePresent = true;
+    }
+    else{
+        isFilePresent = false;
+    }
 
     // Delete all the instance of the file in my entry list
     localNode->removeEntry(fileKey, fileName);
@@ -2020,13 +2083,18 @@ void Chord::handleClientDeleteMessage(string clientIP, string fileName)
     if(succ->getNodeIP().compare(localNode->getNodeIP()) == 0){
 
         // Send response to the client
-        sendResponseToClient(DELETE_RESP, clientIP, 1);
+        if(isFilePresent){
+            sendResponseToClient(DELETE_RESP, clientIP, 1);
+        }
+        else{
+            sendResponseToClient(DELETE_RESP, clientIP, 0);
+        }
     }
     else
     {
         // Create the message and send it
         long messageLen = 0;
-        char* message  = getDeleteExistsMessage(clientIP, fileName, messageLen, true);
+        char* message  = getDeleteExistsMessage(clientIP, fileName, messageLen, true, "notFound");
         // Send this request to all the servers in liner way. I will forward it to my
         // successor and so on
         sendRequestToServer(DELETE_FILE, succ->getNodeIP(), "NULL", message, messageLen);
@@ -2034,7 +2102,8 @@ void Chord::handleClientDeleteMessage(string clientIP, string fileName)
     }
 }
 
-char* Chord::getDeleteExistsMessage(string ipToSend, string fileName, long& msgSize, bool isDelete)
+char* Chord::getDeleteExistsMessage(string ipToSend, string fileName, long& msgSize, bool isDelete,
+                                    string deleteStat)
 {
     functionEntryLog("getDeleteExistsMessage");
 
@@ -2052,14 +2121,28 @@ char* Chord::getDeleteExistsMessage(string ipToSend, string fileName, long& msgS
 
     delMsg->type = SERVER_REQ;
     memcpy(delMsg->senderID, localNode->getNodeID().c_str(), localNode->getNodeID().length());
-    delMsg->numParameters = 3;
+
+    if(isDelete){
+        delMsg->numParameters = 4;
+    }
+    else{
+        delMsg->numParameters = 3;
+    }
 
     int* lenArray = new int[delMsg->numParameters];
     lenArray[0] = commandName.length();
     lenArray[1] = ipToSend.length();
     lenArray[2] = fileName.length();
 
+    if(isDelete){
+        lenArray[3] = deleteStat.length();
+    }
+    
     long paramSize = commandName.length() + ipToSend.length() + fileName.length();
+    
+    if(isDelete){
+        paramSize += deleteStat.length();
+    }
 
     char* parameters = new char[paramSize];
 
@@ -2068,6 +2151,11 @@ char* Chord::getDeleteExistsMessage(string ipToSend, string fileName, long& msgS
     memcpy(parameters + skipLen, ipToSend.c_str(), ipToSend.length());
     skipLen += ipToSend.length();
     memcpy(parameters + skipLen, fileName.c_str(), fileName.length());
+    skipLen += fileName.length();
+
+    if(isDelete){
+        memcpy(parameters + skipLen, deleteStat.c_str(), deleteStat.length()); 
+    }
 
     msgSize = sizeof(command) + (sizeof(int) * delMsg->numParameters) + paramSize;
     char* msgBuffer = new char[msgSize];
@@ -2128,7 +2216,7 @@ void Chord::handleClientExistsMessage(string clientIP, string fileName)
         {
             // Forward the request to the successor
             long msgLen = 0;
-            char* message = getDeleteExistsMessage(clientIP, fileName, msgLen, false);
+            char* message = getDeleteExistsMessage(clientIP, fileName, msgLen, false, "NULL");
 
             sendRequestToServer(EXISTS_FILE, succ->getNodeIP(), "NULL", message, msgLen);
         }

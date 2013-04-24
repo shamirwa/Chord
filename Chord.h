@@ -126,7 +126,7 @@ class Chord
 
         void handleClientDeleteMessage(string clientIP, string fileName);
 
-        char* getDeleteExistsMessage(string ipToSend, string fileName, long& msgSize, bool isDelete);
+        char* getDeleteExistsMessage(string ipToSend, string fileName, long& msgSize, bool isDelete, string deleteStat);
 
 
 };
