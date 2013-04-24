@@ -128,6 +128,8 @@ class Chord
 
         char* getDeleteExistsMessage(string ipToSend, string fileName, long& msgSize, bool isDelete, string deleteStat);
 
+        char* getLSClientMessage(int paramCount, int totalParamSize, int* lenArray, char* params, long& msgLen);
+
 
 };
 

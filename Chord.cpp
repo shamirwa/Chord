@@ -1007,7 +1007,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
             cliMessageToSend = getLSClientMessage(paramCount, totalParamsSize, paramLenArr,
                                                     parameters, cliMessageLen);
 
-            sendResponseToClient(LS_RESP, senderIP, 1, cliMessageToSend, cliMessageLen);
+            sendResponseToClient(LS_RESP, senderIP, 1, cliMessageLen, cliMessageToSend);
 
         }
         else
@@ -1023,7 +1023,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 cliMessageToSend = getLSClientMessage(paramCount, totalParamsSize, paramLenArr,
                         parameters, cliMessageLen);
 
-                sendResponseToClient(LS_RESP, senderIP, 0, cliMessageToSend, cliMessageLen);
+                sendResponseToClient(LS_RESP, senderIP, 0, cliMessageLen, cliMessageToSend);
             }
             else{
                 // Make a valid message and send to the server
@@ -1206,7 +1206,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
 }
 
 
-char* Chord::getLSClientMessage(int paramCount, int totalParamSize,
+char* Chord::getLSClientMessage(int paramCount, int totalParamsSize,
                          int* lenArray, char* params, long& msgLen){
 
 
