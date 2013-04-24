@@ -1,5 +1,6 @@
 all:	service chord slist node entry utils
 	g++ service chord slist node entry utils -o all -lcrypto
+	g++ -o Client Client.cpp
 
 service:	Service.cpp Service.h Chord.h Defs.h Node.h Successorlist.h Entry.h myUtils.h
 	g++ -c -g -o service Service.cpp 
@@ -18,5 +19,6 @@ entry:	Entry.cpp Entry.h
 
 utils:	myUtils.cpp myUtils.h Exception.h
 	g++ -c -g -o utils myUtils.cpp -lcrypto
+
 clean:
-	rm -rf entry node slist chord service utils all
+	rm -rf entry node slist chord service utils all Client

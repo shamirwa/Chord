@@ -302,6 +302,9 @@ int main(int argc, char* argv[]){
                             if(type == SERVER_REQ){		
                                 myChordInstance->handleRequestFromServer(maxMessage, recvRet);
                             }
+                            else if(type == CLIENT_REQ){
+                                myChordInstance->handleRequestFromClient(maxMessage, recvRet);
+                            }
                             else{
                                 cout << "SERVICE: Invalid message received: " << type << endl;
                             }
@@ -334,9 +337,9 @@ int main(int argc, char* argv[]){
                             if(type == SERVER_REQ){		
                                 myChordInstance->handleRequestFromServer(maxMessage, recvRet);
                             }
-                            else if(type == CLIENT_REQ){
+                            /*else if(type == CLIENT_REQ){
                                 myChordInstance->handleRequestFromClient(maxMessage, recvRet);
-                            }
+                            }*/
                             else if(type == SERVER_RES){
                                 myChordInstance->handleStabilizeResponse(maxMessage);              
                             }

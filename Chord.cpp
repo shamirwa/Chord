@@ -282,6 +282,9 @@ char* Chord::makeBufferToSend(string commandName, long& msgLength, string predID
     memcpy(leaveMsg->senderID,predID.c_str(),predID.length());
     
     totalEntries = entriesToBeSent.size();
+
+    cout << "Entry COunt: " << totalEntries << endl;
+
     leaveMsg->numParameters = totalEntries + 2;
 
     if(isLeave){
@@ -1033,20 +1036,29 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
 
                 int myEntryCount = entrylist.size();
 
+                cout << "ENtry Count: " << myEntryCount << endl;
+                cout << "Client IP: " << senderIP << endl;
+
                 int totalEntries = myEntryCount + paramCount;
+
+                cout << "Param Count: " << paramCount;
+
                 int* lengthArray = new int[totalEntries];
 
                 // Copy all the older paramters
-                memcpy(lengthArray, paramLenArr, paramCount);
+                memcpy(lengthArray, paramLenArr, sizeof(int) * paramCount);
                 int i = 0;
 
                 for(; myIter != entrylist.end(); ++myIter){
+
+                    cout << "Copying the entry lengths" << endl;
 
                     lengthArray[paramCount + i] = myIter->second.getFileName().length();
                     ++i;
                 }
 
                 int totalLength = totalParamsSize;
+                cout << "Total ParamSize: " << totalParamsSize << endl;
 
                 for(int i = 0; i<myEntryCount; i++){
                     totalLength += lengthArray[paramCount + i];
@@ -1059,6 +1071,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 i = 0;
                 for(; myIter != entrylist.end(); ++myIter){
 
+                    cout << "Copying the fileName from entryList" << endl;
                     memcpy(newParameters + totalParamsSize + i, 
                             myIter->second.getFileName().c_str(),
                             myIter->second.getFileName().length());
@@ -1070,7 +1083,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 int skipLen = sizeof(command);
 
                 memcpy(largeBuffer, rcvdMsg, skipLen);
-                memcpy(largeBuffer + skipLen, lengthArray, totalEntries);
+                memcpy(largeBuffer + skipLen, lengthArray, sizeof(int) * totalEntries);
                 skipLen += sizeof(int) * totalEntries;
                 memcpy(largeBuffer + skipLen, newParameters, totalLength);
 
@@ -1560,26 +1573,32 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
     ClientRequest* clientMsg = new ClientRequest;
     memcpy(clientMsg, msgRcvd, sizeof(ClientRequest));
 
-    char* file = new char[clientMsg->lengthFileName];
-    char* cmnd = new char[clientMsg->lengthCommandName];
-    char* data = new char[clientMsg->lengthFileData];
-    char* ip = new char[clientMsg->lengthClientIP];
+    char* file = new char[clientMsg->lengthFileName + 1];
+    char* cmnd = new char[clientMsg->lengthCommandName + 1];
+    char* data = new char[clientMsg->lengthFileData + 1];
+    char* ip = new char[clientMsg->lengthClientIP + 1];
 
     // Copy fileName
     long len = sizeof(ClientRequest);
     memcpy(file, msgRcvd + len, clientMsg->lengthFileName);
+    file[clientMsg->lengthFileName] = '\0';
 
     // Copy CommandName
     len += clientMsg->lengthFileName;
     memcpy(cmnd, msgRcvd + len, clientMsg->lengthCommandName);
+    cmnd[clientMsg->lengthCommandName] = '\0';
 
     // Copy fileDate
     len += clientMsg->lengthCommandName;
     memcpy(data, msgRcvd + len, clientMsg->lengthFileData);
+    data[clientMsg->lengthFileData] = '\0';
 
     // copy client ip
     len += clientMsg->lengthFileData;
     memcpy(ip, msgRcvd + len, clientMsg->lengthClientIP);
+    ip[clientMsg->lengthClientIP] = '\0';
+
+    cout << "File: " << file << "  cmnd: " << cmnd << "  data: " << data << "  ip: " << ip << endl;
 
     // Check for command name
     if(strcmp(cmnd, PUT) == 0){
@@ -1596,6 +1615,9 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
     }
     else if(strcmp(cmnd, DELETE) == 0){
         handleClientDeleteMessage(ip, file);
+    }
+    else{
+        cout << "Invalid request from client\n";
     }
 }
 
@@ -1969,6 +1991,7 @@ void Chord::sendResponseToClient(int method, string receiverIP, int resultCode, 
                     messageLen = msgSize;
                 }
 
+                break;
             }
         case 4:
             {
@@ -2099,7 +2122,13 @@ void Chord::handleClientDeleteMessage(string clientIP, string fileName)
     {
         // Create the message and send it
         long messageLen = 0;
-        char* message  = getDeleteExistsMessage(clientIP, fileName, messageLen, true, "notFound");
+        char* message  = NULL;
+        if(isFilePresent){
+            message = getDeleteExistsMessage(clientIP, fileName, messageLen, true, "found");
+        }
+        else{
+            message = getDeleteExistsMessage(clientIP, fileName, messageLen, true, "notFound");
+        }
         // Send this request to all the servers in liner way. I will forward it to my
         // successor and so on
         sendRequestToServer(DELETE_FILE, succ->getNodeIP(), "NULL", message, messageLen);

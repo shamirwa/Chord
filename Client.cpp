@@ -52,7 +52,7 @@ void helperLS(char* maxMessage, int numParam)
 {
 
     set<string> fileSet;          
-    int numParameters = numParameters;
+    int numParameters = numParam;
     int skipLenInt = sizeof(ClientResponse);
     int skipLenEntry = sizeof(ClientResponse) + sizeof(int)*numParameters;
 
@@ -126,8 +126,9 @@ void recieveOutputFromServer(string commandName)
             else if(clientResponse->result == 1)
             {
                 long buffSize = recvRet - (sizeof(ClientResponse)+sizeof(int));
-                char* responseString = new char[buffSize];
+                char* responseString = new char[buffSize + 1];
                 memcpy(responseString,maxMessage + sizeof(ClientResponse)+sizeof(int), buffSize);
+                responseString[buffSize] = '\0';
 
                 cout<< DATA_START <<endl;
                 cout<< responseString <<endl;
@@ -140,20 +141,20 @@ void recieveOutputFromServer(string commandName)
         }
         else if(commandName == LS)
         {
-            if(clientResponse->result == 0 && clientResponse->numParameters ==0)
+            if(clientResponse->result == 1 && clientResponse->numParameters ==0)
             {
                 cout << NO_FILES << endl;
             }
-            else if(clientResponse->result == 0 && clientResponse->numParameters > 0)
+            else if(clientResponse->result == 1 && clientResponse->numParameters > 0)
             {
                 helperLS(maxMessage,clientResponse->numParameters);        
             }
-            else if(clientResponse->result == 1 && clientResponse->numParameters > 0)
+            else if(clientResponse->result == 0 && clientResponse->numParameters > 0)
             {
                 cout<< ERROR_SOME_FILES << endl;
                 helperLS(maxMessage,clientResponse->numParameters);
             }
-            else if(clientResponse->result == 1 && clientResponse->numParameters == 0)
+            else if(clientResponse->result == 0 && clientResponse->numParameters == 0)
             {
                 cout << ERROR_NO_FILES <<endl;
             }
@@ -183,16 +184,14 @@ void recieveOutputFromServer(string commandName)
     }
 }
 
-
-void sendRequestToServer(string commandName,string receiverIP,string filename,string data,string myIP)
+void setSystemParam()
 {
-
-    //Socket variables for client
+     //Socket variables for client
     int n;
     struct sockaddr_in servaddr;
     socklen_t lensock;
 
-    client_sockfd = socket(AF_INET,SOCK_DGRAM,0);
+    client_sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
     if(client_sockfd == -1)
     {
@@ -212,7 +211,11 @@ void sendRequestToServer(string commandName,string receiverIP,string filename,st
         printf("Bind failed\n");
         exit(EXIT_FAILURE);
     }
+}
 
+
+void sendRequestToServer(string commandName,string receiverIP,string filename,string data,string myIP)
+{
     //Create a client request
     ClientRequest* req = new ClientRequest;
     req->type = CLIENT_REQ;
@@ -236,10 +239,11 @@ void sendRequestToServer(string commandName,string receiverIP,string filename,st
 
     memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
     receiverAddr.sin_family = AF_INET;
-    receiverAddr.sin_port = htons(SERVER_PORT);
+    receiverAddr.sin_port = htons(CLIENT_PORT);
 
     if(inet_aton(receiverIP.c_str(), &receiverAddr.sin_addr) == 0){
         printf("INET_ATON Failed\n");
+        exit(1);
     }
 
     if(sendto(client_sockfd, msgBuffer, messageLen, 0,
@@ -303,6 +307,8 @@ int main(int argc,char **argv)
     cout<<"3 - ls"<<endl;
     cout<<"4 - delete"<<endl;
 
+    setSystemParam();
+    
     while(1)
     {
         cout<<"Please enter the operation (0-4) you intend to do: "<<endl;
