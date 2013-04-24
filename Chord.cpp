@@ -284,6 +284,7 @@ char* Chord::makeBufferToSend(string commandName, long& msgLength, string predID
     totalEntries = entriesToBeSent.size();
 
     cout << "Entry COunt: " << totalEntries << endl;
+    cout.flush();
 
     leaveMsg->numParameters = totalEntries + 2;
 
@@ -531,6 +532,7 @@ void Chord::buildFingerTable(string succIP, string succID){
 
     cout<<"Added reference to finger table entries "<<
         lowestWrittenIndex<<" "<<highestWrittenIndex<<endl;
+    cout.flush();
 
 
 }
@@ -618,9 +620,11 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
          case 9:
             {
                 cout << "In case " << method << endl;
+                cout.flush();
                 
                 if(!message){
                     cout<<"Message was NULL " <<endl; 
+                    cout.flush();
                     return;
                 }                
                 else{
@@ -870,6 +874,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 isInInterval(senderID, getPredecessor()->getNodeID(), localNode->getNodeID()))
         {
             printf("updating my predecessor as %s *  %s\n", senderID.c_str(), senderIP.c_str());
+            fflush(NULL);
             setPredecessor(senderIP, senderID); 
         }
 
@@ -927,6 +932,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         }
        
         cout<<"My new predecessor is: "<<senderIP<<endl;
+        cout.flush();
 
         // Store the new predecessor
         setPredecessor(senderIP, senderID);
@@ -941,6 +947,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         succ->setNodeIP(senderIP);
 
         cout<<"My new successor is: "<<senderIP<<endl;
+        cout.flush();
 
         successors.storeFirstSuccessor(succ);
 
@@ -1042,6 +1049,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 int totalEntries = myEntryCount + paramCount;
 
                 cout << "Param Count: " << paramCount;
+                cout.flush();
 
                 int* lengthArray = new int[totalEntries];
 
@@ -1052,6 +1060,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 for(; myIter != entrylist.end(); ++myIter){
 
                     cout << "Copying the entry lengths" << endl;
+                    cout.flush();
 
                     lengthArray[paramCount + i] = myIter->second.getFileName().length();
                     ++i;
@@ -1059,6 +1068,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
 
                 int totalLength = totalParamsSize;
                 cout << "Total ParamSize: " << totalParamsSize << endl;
+                cout.flush();
 
                 for(int i = 0; i<myEntryCount; i++){
                     totalLength += lengthArray[paramCount + i];
@@ -1072,6 +1082,8 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 for(; myIter != entrylist.end(); ++myIter){
 
                     cout << "Copying the fileName from entryList" << endl;
+                    cout.flush();
+
                     memcpy(newParameters + totalParamsSize + i, 
                             myIter->second.getFileName().c_str(),
                             myIter->second.getFileName().length());
@@ -1082,13 +1094,20 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 char* largeBuffer = new char[largeBufferLen];
                 int skipLen = sizeof(command);
 
-                memcpy(largeBuffer, rcvdMsg, skipLen);
+                command* newCmnd = new command;
+                newCmnd->type = SERVER_REQ;
+                memcpy(newCmnd->senderID, senderID.c_str(), ID_SIZE);
+                newCmnd->numParameters = totalEntries;
+
+
+                memcpy(largeBuffer, newCmnd, skipLen);
                 memcpy(largeBuffer + skipLen, lengthArray, sizeof(int) * totalEntries);
                 skipLen += sizeof(int) * totalEntries;
                 memcpy(largeBuffer + skipLen, newParameters, totalLength);
 
                 delete[] lengthArray;
                 delete[] newParameters;
+                delete newCmnd;
 
                 sendRequestToServer(LIST_ALL, succ->getNodeIP(), "NULL", 
                         largeBuffer, largeBufferLen);
@@ -1134,7 +1153,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 if(strcmp(deleteStatus, "notFound") == 0){
                     
                     // Delete the older message buffer
-                    delete[] delMessage;
+                    //delete[] delMessage;
 
                     delMessage = NULL;
                     delMessage = getDeleteExistsMessage(senderIP, fileName, messageSize, true,
@@ -1156,6 +1175,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
                 // not stable
                 if(strcmp(deleteStatus, "found") == 0){
                     cout << "Have deleted few instance of the file but not all. The network structure is not stable\n";
+                    cout.flush();
                 }
                 sendResponseToClient(DELETE_RESP, senderIP, 0);
 
@@ -1274,6 +1294,7 @@ char* Chord::getMessageToSend(int msgType, string cmnd, string idToSend, string 
     Msg->numParameters = 2;
 
     printf("SenderID in msg: %s\n", Msg->senderID);
+    fflush(NULL);
 
     int* paramLen = new int[2];
     paramLen[0] = cmnd.length();
@@ -1367,6 +1388,7 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
         if(getServerSocket() == -1){
 
             printf("Opening socket again\n");
+            fflush(NULL);
             // Need to open a socket
             if((serverSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
                 printf("Error while opening socket to send the message\n");
@@ -1380,6 +1402,7 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
         if(stabilizeSocket == -1){
 
             printf("Opening socket again\n");
+            fflush(NULL);
             // Need to open a socket
             if((stabilizeSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
                 printf("Error while opening socket to send the message\n");
@@ -1404,6 +1427,7 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
 
     if(inet_aton(receiverIP.c_str(), &receiverAddr.sin_addr) == 0){
         printf("INET_ATON Failed\n");
+        fflush(NULL);
     }
 
     if(debug){
@@ -1458,6 +1482,7 @@ void Chord::handleStabilizeResponse(char* maxMessage)
     }
     else{
         printf("No information regarding predecessor received\n");
+        fflush(NULL);
     }
     
     // Notify the successor and don't wait for any response
@@ -1480,6 +1505,7 @@ void Chord::stabilize(){
 
     if(!succNode){
         cout << "Successor Node is NULL\n";
+        cout.flush();
         return;
     }
 
@@ -1488,6 +1514,7 @@ void Chord::stabilize(){
 
     if(succIP.compare(localNode->getNodeIP()) == 0){
         printf("I am the successor of myself\n");
+        fflush(NULL);
         if(getPredecessor()){
             predID = getPredecessor()->getNodeID();
             predIP = getPredecessor()->getNodeIP();
@@ -1524,6 +1551,7 @@ void Chord::stabilize(){
     }
     else{
         printf("No information regarding predecessor received\n");
+        fflush(NULL);
     }
 
     // Notify the successor and don't wait for any response
@@ -1599,6 +1627,7 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
     ip[clientMsg->lengthClientIP] = '\0';
 
     cout << "File: " << file << "  cmnd: " << cmnd << "  data: " << data << "  ip: " << ip << endl;
+    cout.flush();
 
     // Check for command name
     if(strcmp(cmnd, PUT) == 0){
@@ -1618,6 +1647,7 @@ void Chord::handleRequestFromClient(char* msgRcvd, long messageLen)
     }
     else{
         cout << "Invalid request from client\n";
+        cout.flush();
     }
 }
 
@@ -1648,7 +1678,7 @@ void Chord::handleClientGetMessage(string fileName, string clientIP,
         char* messageToSend = getStoreFileMsg(clientIP, fileID, fileName, "NULL", msgLen, false);
 
         // Send the request to successor to store this file
-        sendRequestToServer(GET_FILE, successNode->getNodeIP(), NULL , messageToSend, msgLen);
+        sendRequestToServer(GET_FILE, successNode->getNodeIP(), "NULL" , messageToSend, msgLen);
 
     }
     else
@@ -1874,6 +1904,9 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
 void Chord::storeFileAndSendResponse(string fileID, string fileValue, string fileName, string clientIP){
     functionEntryLog("storeFileAndSendResponse");
 
+    cout << "Storing file: " << fileName << endl;
+    cout.flush();
+
     // Store the entry in the list
     localNode->storeEntry(fileID, fileName, fileValue);
 
@@ -1913,6 +1946,7 @@ void Chord::sendResponseToClient(int method, string receiverIP, int resultCode, 
                 generalInfoLog("In case 1");
                 if(!msg){
                     cout << "ERROR: Get Message is NULL\n";
+                    cout.flush();
                     return;
                 }
                 else{
@@ -2016,6 +2050,7 @@ void Chord::sendResponseToClient(int method, string receiverIP, int resultCode, 
     if(getClientSocket() == -1){
 
         printf("Opening socket again\n");
+        fflush(NULL);
         // Need to open a socket
         if((clientSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
             printf("Error while opening socket to send the message\n");
@@ -2032,6 +2067,7 @@ void Chord::sendResponseToClient(int method, string receiverIP, int resultCode, 
 
     if(inet_aton(receiverIP.c_str(), &receiverAddr.sin_addr) == 0){
         printf("INET_ATON Failed\n");
+        fflush(NULL);
     }
 
     if(debug){

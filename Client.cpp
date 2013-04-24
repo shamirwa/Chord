@@ -300,17 +300,17 @@ int main(int argc,char **argv)
 
     int command;
 
-    cout<<"List of operations available are: "<<endl;
-    cout<<"0 - put"<<endl;
-    cout<<"1 - get"<<endl;
-    cout<<"2 - exists"<<endl;
-    cout<<"3 - ls"<<endl;
-    cout<<"4 - delete"<<endl;
-
-    setSystemParam();
+        setSystemParam();
     
     while(1)
     {
+        cout<<"List of operations available are: "<<endl;
+        cout<<"0 - put"<<endl;
+        cout<<"1 - get"<<endl;
+        cout<<"2 - exists"<<endl;
+        cout<<"3 - ls"<<endl;
+        cout<<"4 - delete"<<endl;
+
         cout<<"Please enter the operation (0-4) you intend to do: "<<endl;
         cin >> command;
 

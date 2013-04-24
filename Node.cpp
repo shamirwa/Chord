@@ -42,18 +42,18 @@ bool Node::checkIfEntryExists(string fileKey, string fileName){
 
 string Node::getEntryValue(string fileKey, string fileName){
 
-    string value;
+    string retValue;
 
     if(checkIfEntryExists(fileKey, fileName)){
-        value = this->entryList[fileKey].getFileValue();
+        retValue = this->entryList[fileKey].getFileValue();
     }
     else{
         // Entry doesn't exists on this node
         cout << "Entry with the key " << fileKey << "and name " << fileName << " not found" << endl;
-        value = FILE_NOT_FOUND;
+        retValue = FILE_NOT_FOUND;
     }
 
-    return value;
+    return retValue;
 }
 
 void Node::storeEntry(string fileKey, string fileName, string fileValue){
