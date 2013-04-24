@@ -13,18 +13,67 @@
 #include "Defs.h"
 #include "myUtils.h"
 #include "message.h"
+#include <set>
 
 #define XINU 0
 #define VM 1
 #define debug 1
+#define FILE_DNOT_EXIST " File does not exist on the cloud "
+#define FILE_EXISTS  " File Exists on the cloud "
+#define FILE_STORED  " File was stored on the cloud "
+#define FILE_NOT_STORED " File could not be stored on the ring. Try again as the ring is not formed yet. " 
 
+#define ERROR " Unknown error "
+
+#define FILE_DELETED " File deleted from cloud"
+#define FILE_NOT_DELETED " File could not be deleted"
+#define DATA_START " DATA : "
+#define NO_FILES " No Files: "
+#define LIST " LIST: "
+#define ERROR_NO_FILES " No File: Ring is not Stabilized. Try again "
+#define ERROR_SOME_FILES " Could retrieve some files. Cannot traverse entire ring. In stabilize phase "
 
 using namespace std;
 
 int client_sockfd;
 
-void recieveOutputFromServer()
+void printSet(set<string> fileSet)
 {
+    
+    cout<<LIST<<endl;    
+    for (set<string>::iterator it=fileSet.begin(); it!=fileSet.end(); ++it)
+        cout << *it << endl;
+
+    cout<<endl;
+}
+
+
+void helperLS(char* maxMessage, int numParam)
+{
+
+    set<string> fileSet;          
+    int numParameters = numParameters;
+    int skipLenInt = sizeof(ClientResponse);
+    int skipLenEntry = sizeof(ClientResponse) + sizeof(int)*numParameters;
+
+    for(int i=0; i < numParameters; i++)
+    {
+        int* length = new int[1];
+        memcpy(length,maxMessage + skipLenInt, sizeof(int));
+        skipLenInt += sizeof(int);
+        char* entry = new char[*length];
+        memcpy(entry,maxMessage+skipLenEntry,(*length)*sizeof(char));
+        skipLenEntry += (*length)*sizeof(char);
+        fileSet.insert(entry);
+
+    }        
+    printSet(fileSet);
+}
+
+
+void recieveOutputFromServer(string commandName)
+{
+
     // wait for response message to come
     char* maxMessage = new char[MAX_MSG_SIZE];
     struct sockaddr_in senderProcAddrUDP;
@@ -39,15 +88,105 @@ void recieveOutputFromServer()
     recvRet = recvfrom(client_sockfd, maxMessage, MAX_MSG_SIZE,
             0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
 
-
     if(recvRet > 0)
     {
-        printf("Response from server %s \n",string(maxMessage).c_str());				}
+        ClientResponse* clientResponse = new ClientResponse;
+        clientResponse = (ClientResponse *)maxMessage;
+
+        if(commandName == EXISTS)
+        {
+            if(clientResponse->result == 1)
+            {
+                cout<< FILE_EXISTS <<endl;
+            }
+            else if(clientResponse->result == 0)
+            {
+                cout<< FILE_DNOT_EXIST <<endl;
+            }
+            else
+            {
+                cout<< ERROR <<endl;    
+            }
+
+        }
+        else if(commandName == PUT)
+        {
+            if(clientResponse->result == 1)
+                cout<< FILE_STORED <<endl;
+            else if(clientResponse->result == 0)
+                cout<< FILE_NOT_STORED <<endl;
+            else
+                cout<< ERROR <<endl;
+
+        }
+        else if(commandName == GET)
+        {
+            if(clientResponse->result == 0)
+                cout<< FILE_DNOT_EXIST <<endl;
+            else if(clientResponse->result == 1)
+            {
+                long buffSize = recvRet - (sizeof(ClientResponse)+sizeof(int));
+                char* responseString = new char[buffSize];
+                memcpy(responseString,maxMessage + sizeof(ClientResponse)+sizeof(int), buffSize);
+
+                cout<< DATA_START <<endl;
+                cout<< responseString <<endl;
+
+            }
+            else
+            {
+                cout<< ERROR <<endl;
+            }
+        }
+        else if(commandName == LS)
+        {
+            if(clientResponse->result == 0 && clientResponse->numParameters ==0)
+            {
+                cout << NO_FILES << endl;
+            }
+            else if(clientResponse->result == 0 && clientResponse->numParameters > 0)
+            {
+                helperLS(maxMessage,clientResponse->numParameters);        
+            }
+            else if(clientResponse->result == 1 && clientResponse->numParameters > 0)
+            {
+                cout<< ERROR_SOME_FILES << endl;
+                helperLS(maxMessage,clientResponse->numParameters);
+            }
+            else if(clientResponse->result == 1 && clientResponse->numParameters == 0)
+            {
+                cout << ERROR_NO_FILES <<endl;
+            }
+            else
+            {
+                cout<< ERROR <<endl;   
+            }       
+        }
+        else if(commandName == DELETE)
+        {
+            if(clientResponse->result == 1)
+                cout<< FILE_DELETED <<endl;
+            else if(clientResponse->result == 0)
+                cout<< FILE_NOT_DELETED <<endl;
+            else
+                cout<< ERROR <<endl;
+        }
+        else
+        {
+            cout<< ERROR <<endl;
+        }
+
+    }
+    else
+    {
+        cout<< " Connection Closed or other error " <<endl;
+    }
 }
 
 
 void sendRequestToServer(string commandName,string receiverIP,string filename,string data,string myIP)
 {
+
     //Socket variables for client
     int n;
     struct sockaddr_in servaddr;
@@ -123,6 +262,7 @@ void sendRequestToServer(string commandName,string receiverIP,string filename,st
 
 int main(int argc,char **argv)
 {
+
     // Get self hostname
     char myName[100];
     gethostname(myName, 100);
@@ -187,7 +327,7 @@ int main(int argc,char **argv)
                     string commandName = PUT;		
 
                     sendRequestToServer(commandName,serverIP,filename,data,selfIP);
-                    recieveOutputFromServer();
+                    recieveOutputFromServer(commandName);
                     break;
                 }
             case 1:
@@ -207,7 +347,7 @@ int main(int argc,char **argv)
                     string commandName = GET;		
 
                     sendRequestToServer(commandName,serverIP,filename,data,selfIP);
-                    recieveOutputFromServer();
+                    recieveOutputFromServer(commandName);
                     break;
                 }
             case 2:
@@ -227,7 +367,7 @@ int main(int argc,char **argv)
                     string commandName = EXISTS;		
 
                     sendRequestToServer(commandName,serverIP,filename,data,selfIP);
-                    recieveOutputFromServer();
+                    recieveOutputFromServer(commandName);
 
                     break;
                 }
@@ -245,7 +385,7 @@ int main(int argc,char **argv)
                     string commandName = LS;		
 
                     sendRequestToServer(commandName,serverIP,filename,data,selfIP);
-                    recieveOutputFromServer();
+                    recieveOutputFromServer(commandName);
 
                     break;
                 }
@@ -266,7 +406,7 @@ int main(int argc,char **argv)
                     string commandName = DELETE;		
 
                     sendRequestToServer(commandName,serverIP,filename,data,selfIP);
-                    recieveOutputFromServer();
+                    recieveOutputFromServer(commandName);
                     break;
                 }
             default:

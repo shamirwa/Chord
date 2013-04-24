@@ -1612,7 +1612,12 @@ void Chord::getFileAndSendResponse(string fileID, string fileName, string client
     ClientResponse* getResp = new ClientResponse;
     getResp->type = CLIENT_RESP;
     getResp->numParameters = 1;
-    getResp->result = 1;
+
+    //FILE WAS NOT FOUND RESULT CODE IS ZERO
+    if(fileData == FILE_NOT_FOUND)
+        getResp->result = 0;
+    else
+        getResp->result = 1;
 
     int* lenArray = new int[1];
     lenArray[0] = fileData.length();
