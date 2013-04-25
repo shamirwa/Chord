@@ -36,7 +36,7 @@ int main(int argc, char* argv[]){
     string selfID;
     struct in_addr **ipAddr;
     struct hostent* he;
-    int clientSocket, serverSocket, stabilizeSocket;
+    int clientSocket, serverSocket, stabilizeSocket, fingerTableSocket, pingSocket;
     
     // Stabilize Variable
     struct timeval stabilizeTimer, endTime, selectTimer;
@@ -106,14 +106,26 @@ int main(int argc, char* argv[]){
         generalInfoLog("Error when trying to open the socket for stabilize\n");
         exit(1);
     }
+
+    if((fingerTableSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+        generalInfoLog("Error when trying to open the socket for fingerTableSocket\n");
+        exit(1);
+    }
+
+    if((pingSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+        generalInfoLog("Error when trying to open the socket for pingSocket\n");
+        exit(1);
+    }
     printf("Server Socket: %d\n", serverSocket);
     printf("Client Socket: %d\n", clientSocket);
     printf("Stabilize Socket: %d\n", stabilizeSocket);
+    printf("FingerTabelSocket: %d\n", fingerTableSocket);
+    printf("Ping Socket: %d\n", pingSocket);
     
     // SELECT with both client and server socket
     /****** COMMUNICATION VARIABLES ********/
     struct sockaddr_in senderProcAddrUDP;
-    struct sockaddr_in myInfoUDP,myInfoUDP2, myInfoUDP3;
+    struct sockaddr_in myInfoUDP,myInfoUDP2, myInfoUDP3, myInfoUDP4, myInfoUDP5;
 
 
     // To store the address of the process from whom a message is received
@@ -138,9 +150,26 @@ int main(int argc, char* argv[]){
     myInfoUDP3.sin_port = htons(STABILIZE_PORT);
     myInfoUDP3.sin_addr.s_addr = htonl(INADDR_ANY);
 
+    // Store the info to bind receiving port with the socket.
+    memset((char*)&myInfoUDP4, 0, sizeof(myInfoUDP4));
+    myInfoUDP4.sin_family = AF_INET;
+    myInfoUDP4.sin_port = htons(FINGERTABLE_PORT);
+    myInfoUDP4.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    // Store the info to bind receiving port with the socket.
+    memset((char*)&myInfoUDP5, 0, sizeof(myInfoUDP5));
+    myInfoUDP5.sin_family = AF_INET;
+    myInfoUDP5.sin_port = htons(PING_PORT);
+    myInfoUDP5.sin_addr.s_addr = htonl(INADDR_ANY);
+
     // bind the UDP receiver socket
     if(bind(serverSocket, (struct sockaddr*) &myInfoUDP, sizeof(myInfoUDP)) == -1){
         generalInfoLog("Bind failed for server socket \n");
+        exit(1);
+    }
+    
+    if(bind(clientSocket, (struct sockaddr*) &myInfoUDP2, sizeof(myInfoUDP2)) == -1){
+        generalInfoLog("Bind failed for client socket\n");
         exit(1);
     }
     
@@ -148,10 +177,18 @@ int main(int argc, char* argv[]){
         generalInfoLog("Bind failed for stabilize socket \n");
         exit(1);
     }
-    if(bind(clientSocket, (struct sockaddr*) &myInfoUDP2, sizeof(myInfoUDP2)) == -1){
-        generalInfoLog("Bind failed for client socket\n");
+
+    if(bind(fingerTableSocket, (struct sockaddr*) &myInfoUDP4, sizeof(myInfoUDP4)) == -1){
+        generalInfoLog("Bind failed for fingerTableSocket socket \n");
         exit(1);
     }
+
+    if(bind(pingSocket, (struct sockaddr*) &myInfoUDP5, sizeof(myInfoUDP5)) == -1){
+        generalInfoLog("Bind failed for pingSocket socket \n");
+        exit(1);
+    }
+
+    
     /*
        for(int i = 0; i<20; ++i){
        printf("%d * ",selfID[i]);
@@ -160,7 +197,8 @@ int main(int argc, char* argv[]){
        */
 
     // Create an object of the chord class
-    myChordInstance = new Chord(selfID, selfIP, NUM_SUCCESSOR, clientSocket, serverSocket, stabilizeSocket);
+    myChordInstance = new Chord(selfID, selfIP, NUM_SUCCESSOR, clientSocket, serverSocket, 
+                                stabilizeSocket, fingerTableSocket, pingSocket);
 
 
     // Check if this is the first node or not
@@ -184,10 +222,14 @@ int main(int argc, char* argv[]){
     FD_SET(serverSocket, &read_fds);
     FD_SET(clientSocket, &read_fds);
     FD_SET(stabilizeSocket, &read_fds);
+    FD_SET(fingerTableSocket, &read_fds);
+    FD_SET(pingSocket, &read_fds);
 
     int fdmax = (serverSocket > clientSocket ? serverSocket : clientSocket);
 
     fdmax = (stabilizeSocket > fdmax ? stabilizeSocket : fdmax);
+    fdmax = (fingerTableSocket > fdmax ? fingerTableSocket : fdmax);
+    fdmax = (pingSocket > fdmax ? pingSocket : fdmax);
 
     master = read_fds;
     
@@ -309,6 +351,11 @@ int main(int argc, char* argv[]){
                                 cout << "SERVICE: Invalid message received: " << type << endl;
                             }
                         }
+                        else{
+
+                            cout << "Error: " << errno << " while receiving message at serv socket\n";
+                        }
+
 
                         delete[] maxMessage;
                     }
@@ -347,6 +394,9 @@ int main(int argc, char* argv[]){
                                 cout << "SERVICE: Invalid message received: " << type << endl;
                             }
                         }
+                        else{
+                            cout << "Error " << errno << " while receiveing message in stabilize\n";
+                        }
 
                         delete[] maxMessage;
 
@@ -380,9 +430,121 @@ int main(int argc, char* argv[]){
                                 cout << "SERVICE: Invalid message received: " << type << endl;
                             }
                         }
+                        else{
+
+                            cout << "Error " << errno << " while receiving message at clientsocket\n" << endl;
+                        }
 
                         delete[] maxMessage;
                     }
+                    else if(i == fingerTableSocket){
+
+                        cout << " Received a finger table socket message\n";
+
+                        // Received the stabilize related message from server
+                        char* maxMessage = new char[MAX_MSG_SIZE];
+                        struct sockaddr_in senderProcAddrUDP;
+
+                        // To store the address of the process from whom a message is received
+                        memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
+                        socklen_t senderLenUDP = sizeof(senderProcAddrUDP);
+
+                        int recvRet = 0;
+
+                        recvRet = recvfrom(fingerTableSocket, maxMessage, MAX_MSG_SIZE,
+                                0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
+
+                        if(recvRet > 0){
+                            // Get the type of the message
+                            uint32_t* msgType = (uint32_t*)(maxMessage);
+                            uint32_t type = *msgType;
+
+                            if(type == SERVER_REQ){		
+                                myChordInstance->handleRequestFromServer(maxMessage, recvRet, true);
+                            }
+                            else{
+                                cout << "SERVICE: Invalid message received: " << type << endl;
+                            }
+                        }
+                        else{
+                            cout << "Error " << errno << " while receiveing message in fingerTabelSocket\n";
+                        }
+
+                        delete[] maxMessage;
+
+                    }
+                    else if(i==pingSocket){
+
+                        cout << "Ping response received" << endl;
+                        
+                        // Received the pign message
+                        pingMsg* msg = new pingMsg;
+                        struct sockaddr_in senderProcAddrUDP;
+
+                        // To store the address of the process from whom a message is received
+                        memset((char*)&senderProcAddrUDP, 0, sizeof(senderProcAddrUDP));
+                        socklen_t senderLenUDP = sizeof(senderProcAddrUDP);
+
+                        int recvRet = 0;
+
+                        recvRet = recvfrom(pingSocket, msg, sizeof(pingMsg),
+                                0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
+
+                        string rcvrIP = inet_ntoa(senderProcAddrUDP.sin_addr);
+
+                        if(recvRet > 0){
+
+                            // Get the type of the message
+                            int type = msg->type;
+
+                            if(type == PING_RES_TYPE){     
+
+                                cout << "Ping response received from " << rcvrIP << endl;
+                                cout.flush();
+
+                                myChordInstance->setPingFlag(false);
+                            }
+                            else if(type == PING_REQ_TYPE){
+                                // Send the response to the servr
+                                msg->type = PING_RES_TYPE;
+
+                                struct sockaddr_in receiverAddr;
+
+                                memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
+                                receiverAddr.sin_family = AF_INET;
+                                receiverAddr.sin_port = htons(PING_PORT);
+
+                                if(inet_aton(rcvrIP.c_str(), &receiverAddr.sin_addr) == 0){
+                                    printf("INET_ATON Failed\n");
+                                    fflush(NULL);
+                                }
+
+                                if(sendto(pingSocket, msg, sizeof(pingMsg), 0,
+                                            (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
+
+                                    printf("%s: Failed to send the message type %d to process: %s with error %d\n",
+                                            myChordInstance->getLocalIP().c_str(), PING_RES_TYPE, rcvrIP.c_str(), errno);
+                                    fflush(NULL);
+                                }
+                                else{
+                                    printf("%s: successfully sent the message type %d to %s\n",
+                                            myChordInstance->getLocalIP().c_str(), PING_RES_TYPE, rcvrIP.c_str());
+                                    fflush(NULL);
+                                }
+
+                            }
+                            else{
+                                cout << "SERVICE: Invalid message received: " << type << endl;
+                            }
+                        }
+                        else{
+                            cout << "Error " << errno << " while receiveing message in pingSocket\n";  
+                        }
+
+                        delete msg;
+
+                    }
+
                 }
             }// ENd of fd set for loop
         }

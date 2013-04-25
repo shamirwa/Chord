@@ -165,6 +165,7 @@ string addPowerOfTwo(int powerOfTwo,string ID)
 		if(powerOfTwo < 0 || powerOfTwo >= (FINGER_TABLE_SIZE)) {
 		
 			generalInfoLog("The power of two is out of range! It must be in the interval");
+            return "NULL";
 				
 		}
 

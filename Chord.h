@@ -20,11 +20,15 @@ class Chord
         int clientSocket;
         int serverSocket;
         int stabilizeSocket;
+        int fingerTableSocket;
+        int pingSocket;
+        bool pingSent;
 
 
     public:
         Chord();
-        Chord(string localID,string localIP,int numSuccessor,int clientSocket,int serverSocket, int stabilizeSocket);
+        Chord(string localID,string localIP,int numSuccessor,int clientSocket,int serverSocket, 
+                    int stabilizeSocket, int fingerSocket, int pingSock);
         ~Chord();
 
         void createHelp(); //Performs all necessary tasks for creating a new chord ring	
@@ -44,13 +48,15 @@ class Chord
 
         string closestPrecedingNode(string id); //search the local table for the highest predecessor of id
 
-        void findSuccessor(string IP, char* message, long messageLen); //finds the successor of a given node with IP "IP"
+        void findSuccessor(string IP, char* message, long messageLen, bool isFingerMsg = false); //finds the successor of a given node with IP "IP"
 
         void leave(); //runs the leave operations for this node, updates information of adjacent nodes
 
         void notify(string predecessor); //This method is invoked by another node which thinks it is this node's predecessor
 
         void ping(); // Requests a sign of live. This method is invoked by another node which thinks it is this node's successor.
+
+        void setPingFlag(bool status);
 
         /*
          * Stores a finger table in the form:
@@ -61,7 +67,7 @@ class Chord
          */
         map<int,pair<string,string> > fingerTable; 
 
-        void buildFingerTable(string IP, string ID); //Builds the finger table
+        void buildFingerTable(string IP, string ID, bool isForStab = false); //Builds the finger table
 
         void insert(string id, string fileContent); //Inserts a new data object into the network with the Key 'id' and Value 'fileContent'
 
@@ -74,13 +80,13 @@ class Chord
         void insertReplicas(string id); //Insert replica of a file with Key 'id'
 
         void sendRequestToServer(int method, string rcvrIP, string idToSend, char* message = NULL, 
-                long msgLen = 0);
+                long msgLen = 0, bool isFingerMsg = false);
 
-        void sendResponseToServer(int method, string responseID, string responseIP, string receiverIP);
+        void sendResponseToServer(int method, string responseID, string responseIP, string receiverIP, bool isFingerMsg = false);
 
         void handleResponseFromServer(char* msgRcvd, string& responseID, string& responseIP); 
 
-        void handleRequestFromServer(char* msgRcvd, long messageLen);
+        void handleRequestFromServer(char* msgRcvd, long messageLen, bool isForFinger = false);
 
         void handleRequestFromClient(char* msgRcvd, long messageLen);
 

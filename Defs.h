@@ -38,6 +38,10 @@ using namespace std;
 
 #define STABILIZE_PORT 3456
 
+#define FINGERTABLE_PORT 4567
+
+#define PING_PORT 5678
+
 #define FIND_SUCCESSOR 0
 #define GET_PREDECESSOR 1
 #define NOTIFY_SUCCESSOR 2
@@ -52,7 +56,9 @@ using namespace std;
 
 #define MAX_MSG_SIZE 5000
 
-#define STABILIZE_TIMEOUT 12000000      // 2 seconds
+#define STABILIZE_TIMEOUT 10000000      // 2 seconds
+
+#define SLEEP_AFTER_NOTIFY 1
 
 #define DATA "Sample Data"
 #define PUT "put"

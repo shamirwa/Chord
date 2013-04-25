@@ -16,7 +16,7 @@ Chord::Chord(){
 }
 
 Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,
-        int serverSocket, int stabilizeSocket){
+        int serverSocket, int stabilizeSocket, int fingerSocket, int pingSock){
 
     this->localNode = NULL;
     this->localNode = new Node;
@@ -27,12 +27,20 @@ Chord::Chord(string localID,string localIP,int numSuccessor,int clientSocket,
     this->clientSocket = clientSocket;
     this->serverSocket = serverSocket;
     this->stabilizeSocket = stabilizeSocket;
+    this->fingerTableSocket = fingerSocket;
+    this->pingSocket = pingSock;
+    this->pingSent = false;
     this->predecessor = NULL;
 
 }
 
 Chord::~Chord() {
     delete this->localNode;
+}
+
+void Chord::setPingFlag(bool status){
+
+    pingSent = status;
 }
 
 void Chord::createHelp()
@@ -63,20 +71,26 @@ string Chord::closestPrecedingNode(string id)
         string curr_finger_id = curr_id_ip.first;
         string curr_finger_ip = curr_id_ip.second;
 
-        printf("%s\n",curr_id_ip.first.c_str());
+        printf("ID: %s\n",curr_id_ip.first.c_str());
         fflush(NULL);
 
         if(isInInterval(curr_finger_id, localNodeID, id)){
+
+            cout << " Returning the preceding node " << curr_finger_ip << " from finger table\n";
+            cout.flush();
             return curr_finger_ip;
         }
     }
 
+    cout << " Returning my node ip " << localNode->getNodeIP() << " \n";
+    cout.flush();
     return localNode->getNodeIP();
 
 }
 
 
-void Chord::findSuccessor(string senderIPFromMsg, char* message, long messageLen)
+void Chord::findSuccessor(string senderIPFromMsg, char* message, long messageLen,
+                            bool isFingerMsg)
 {
     functionEntryLog("findSuccessor");
 
@@ -107,7 +121,7 @@ void Chord::findSuccessor(string senderIPFromMsg, char* message, long messageLen
             printf("Sending response with self successor id\n");
             fflush(NULL);
         }
-        sendResponseToServer(FIND_SUCCESSOR, successorID, successorIP, senderIPFromMsg);
+        sendResponseToServer(FIND_SUCCESSOR, successorID, successorIP, senderIPFromMsg, isFingerMsg);
 
     }
     else
@@ -123,7 +137,7 @@ void Chord::findSuccessor(string senderIPFromMsg, char* message, long messageLen
                 fflush(NULL);
             }
 
-            sendResponseToServer(FIND_SUCCESSOR, localNodeID, localNodeIP, senderIPFromMsg);
+            sendResponseToServer(FIND_SUCCESSOR, localNodeID, localNodeIP, senderIPFromMsg, isFingerMsg);
         }
         else{
             if(debug){
@@ -131,7 +145,7 @@ void Chord::findSuccessor(string senderIPFromMsg, char* message, long messageLen
                 fflush(NULL);
             }
             // Forward this message to the preceding Node
-            sendRequestToServer(FIND_SUCCESSOR, closestPrecedingNodeIP, "NULL", message, messageLen);
+            sendRequestToServer(FIND_SUCCESSOR, closestPrecedingNodeIP, "NULL", message, messageLen, isFingerMsg);
         }
     }
 }
@@ -231,7 +245,7 @@ void Chord::joinHelp(string IP)
         successors.storeSuccessor(mySucc);
     }
     else{
-        printf("Error while receiving response for findSuccessor request message in Join\n");
+        printf("Error %d while receiving response for findSuccessor request message in Join\n", errno);
         fflush(NULL);
     }
 
@@ -460,11 +474,50 @@ void Chord::leave(){
 
 void Chord::ping(){
 
+    functionEntryLog("Sending Ping");
 
+    // Send the PING request
+    pingMsg* pMsg = new pingMsg;
+    pMsg->type = PING_REQ_TYPE;
+
+
+    if(predecessor){
+
+        struct sockaddr_in receiverAddr;
+        string rcvrIP = predecessor->getNodeIP();
+
+        memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
+        receiverAddr.sin_family = AF_INET;
+        receiverAddr.sin_port = htons(PING_PORT);
+
+        if(inet_aton(rcvrIP.c_str(), &receiverAddr.sin_addr) == 0){
+            printf("INET_ATON Failed\n");
+            fflush(NULL);
+        }
+
+        if(sendto(pingSocket, pMsg, sizeof(pingMsg), 0,
+                    (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
+
+            printf("%s: Failed to send the message type %d to process: %s with error %d\n",
+                    localNode->getNodeIP().c_str(), PING_REQ_TYPE, rcvrIP.c_str(), errno);
+            fflush(NULL);
+        }
+        else{
+            printf("%s: successfully sent the message type %d to %s\n",
+                    localNode->getNodeIP().c_str(), PING_REQ_TYPE, rcvrIP.c_str());
+            fflush(NULL);
+        }
+
+        pingSent = true;
+    }
+    else{
+        cout << "Error: Something went wrong. My Predecessor is not there" << endl;
+        cout.flush();
+    }
 }
 
 
-void Chord::buildFingerTable(string succIP, string succID){
+void Chord::buildFingerTable(string succIP, string succID, bool isForStab){
 
     functionEntryLog("CHORD: buildFingerTable");	
 
@@ -475,9 +528,18 @@ void Chord::buildFingerTable(string succIP, string succID){
     for(int i=0;i<FINGER_TABLE_SIZE;i++)
     {
 
-        string startOfInterval =	addPowerOfTwo(i,localNode->getNodeID());  
+        string startOfInterval =	addPowerOfTwo(i,localNode->getNodeID());
 
-        sendRequestToServer(FIND_SUCCESSOR,succIP, startOfInterval);
+        if(startOfInterval.compare("NULL") == 0){
+            continue;
+        }
+
+        if(isForStab){
+            sendRequestToServer(FIND_SUCCESSOR,succIP, startOfInterval, NULL, 0, true);
+        }
+        else{
+            sendRequestToServer(FIND_SUCCESSOR,succIP, startOfInterval);
+        }
         // Here I need to ask my successor node to find me successor of 
         // startOfInterval ID
 
@@ -491,9 +553,15 @@ void Chord::buildFingerTable(string succIP, string succID){
 
         int recvRet = 0;
 
-        recvRet = recvfrom(serverSocket, maxMessage, MAX_MSG_SIZE,
-                0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
+        if(isForStab){
+            recvRet = recvfrom(fingerTableSocket, maxMessage, MAX_MSG_SIZE,
+                    0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
+        }
+        else{
 
+            recvRet = recvfrom(serverSocket, maxMessage, MAX_MSG_SIZE,
+                    0, (struct sockaddr*) &senderProcAddrUDP, &senderLenUDP);
+        }
         string senderIP;// = inet_ntoa(senderProcAddrUDP.sin_addr);
 
         string senderID;
@@ -502,12 +570,13 @@ void Chord::buildFingerTable(string succIP, string succID){
             handleResponseFromServer(maxMessage, senderID, senderIP);	
         }
         else{
-            printf("Error while receiving response for findSuccessor request message in buildFingerTable \n");
+            printf("Error %d while receiving response for findSuccessor request message in buildFingerTable \n", errno);
             fflush(NULL);
         }
 
         if(!isInInterval(startOfInterval,localNode->getNodeID(),senderID))
         {
+            cout << "Breaking from loop" << endl;
             break;
         }
 
@@ -523,11 +592,12 @@ void Chord::buildFingerTable(string succIP, string succID){
         else if(isInInterval(senderID,localNode->getNodeID(),
                     fingerTable[i].first))	
         {
-            fingerTable[i].first = senderIP;
-            fingerTable[i].second = senderID;
+            fingerTable[i].first = senderID;
+            fingerTable[i].second = senderIP;
         }
 
-
+        cout << "Finger Table Entry: " << i << " EntryIP: " << senderIP << " Entry ID: " << senderID << endl;
+        cout.flush();
     }
 
     cout<<"Added reference to finger table entries "<<
@@ -543,7 +613,7 @@ void Chord::insert(string id,string fileContent){
 }
 
 void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend, 
-        char* message, long msgLen){
+        char* message, long msgLen, bool isFingerMsg){
 
     functionEntryLog("CHORD: sendRequestToServer");
 
@@ -664,6 +734,10 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
         sendSock = stabilizeSocket;
     }
 
+    if(isFingerMsg){
+        sendSock = fingerTableSocket;
+    }
+
     struct sockaddr_in receiverAddr;
 
     memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
@@ -682,6 +756,10 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
         }
     }
 
+    if(isFingerMsg){
+        receiverAddr.sin_port = htons(FINGERTABLE_PORT);
+    }
+
     if(inet_aton(rcvrIP.c_str(), &receiverAddr.sin_addr) == 0){
         printf("INET_ATON Failed\n");
         fflush(NULL);
@@ -690,8 +768,8 @@ void Chord::sendRequestToServer(int method, string rcvrIP, string idToSend,
     if(sendto(sendSock, msgBuffer, messageLen, 0,
                 (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
 
-        printf("%s: Failed to send the message type %d to leader: %s",
-                localNode->getNodeIP().c_str(), SERVER_REQ, rcvrIP.c_str());
+        printf("%s: Failed to send the message type %d to leader: %s with error %d\n",
+                localNode->getNodeIP().c_str(), SERVER_REQ, rcvrIP.c_str(), errno);
         fflush(NULL);
     }
     else{
@@ -789,7 +867,7 @@ void Chord::handleResponseFromServer(char* msgRcvd, string& responseID, string& 
 
 }
 
-void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
+void Chord::handleRequestFromServer(char* msgRcvd, long messageLen, bool isForFinger)
 {
     functionEntryLog("CHORD: handleRequestFromServer");
 
@@ -841,17 +919,24 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
     if(strcmp(commandName, "findSuccessor") == 0){
 
         generalInfoLog("Received request for findSuccessor");
-        findSuccessor(senderIP, msgRcvd, messageLen);	
+        findSuccessor(senderIP, msgRcvd, messageLen, isForFinger);	
     }
     else if(strcmp(commandName, "getPredecessor") == 0){
 
         generalInfoLog("Received request for getPredecessor");
 
-        if(getPredecessor()){
-            sendResponseToServer(GET_PREDECESSOR, getPredecessor()->getNodeID(), 
-                    getPredecessor()->getNodeIP(), senderIP); 
+        if(predecessor){
+            
+            cout << "Seding " << predecessor->getNodeIP() << " as my pred" << endl;
+            cout.flush();
+
+            sendResponseToServer(GET_PREDECESSOR, predecessor->getNodeID(), 
+                    predecessor->getNodeIP(), senderIP); 
         }
         else{
+
+            cout << "No pred. So sending NULL" << endl;
+            cout.flush();
             sendResponseToServer(GET_PREDECESSOR, "NULL", "NULL", senderIP);
         }
     }
@@ -950,6 +1035,9 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen)
         cout.flush();
 
         successors.storeFirstSuccessor(succ);
+
+        // Ask new successor to build the finger table
+        //buildFingerTable(senderIP, senderID, true);
 
     }
     else if(strcmp(commandName, "storeFile") == 0 ||
@@ -1340,7 +1428,8 @@ char* Chord::getMessageToSend(int msgType, string cmnd, string idToSend, string 
     return msgBuffer;
 }
 
-void Chord::sendResponseToServer(int method, string responseID, string responseIP, string receiverIP){
+void Chord::sendResponseToServer(int method, string responseID, string responseIP, string receiverIP,
+                                    bool isFingerMsg){
 
     functionEntryLog("CHORD: sendResponseToServer");
 
@@ -1413,6 +1502,11 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
         sendSock = stabilizeSocket;
     }
 
+    if(isFingerMsg){
+
+        sendSock = fingerTableSocket;
+    }
+
     struct sockaddr_in receiverAddr;
 
     memset((char*)&receiverAddr, 0, sizeof(receiverAddr));
@@ -1423,6 +1517,10 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
     }
     else if(useStabSock){
         receiverAddr.sin_port = htons(STABILIZE_PORT);
+    }
+
+    if(isFingerMsg){
+        receiverAddr.sin_port = htons(FINGERTABLE_PORT);
     }
 
     if(inet_aton(receiverIP.c_str(), &receiverAddr.sin_addr) == 0){
@@ -1438,8 +1536,8 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
     if(sendto(sendSock, msgBuffer, messageLen, 0,
                 (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
 
-        printf("%s: Failed to send the message type %d to server: %s",
-                localNode->getNodeIP().c_str(), SERVER_RES, receiverIP.c_str());
+        printf("%s: Failed to send the message type %d to server: %s with error %d\n",
+                localNode->getNodeIP().c_str(), SERVER_RES, receiverIP.c_str(), errno);
         fflush(NULL);
     }
     else{
@@ -1452,8 +1550,11 @@ void Chord::sendResponseToServer(int method, string responseID, string responseI
 
 void Chord::handleStabilizeResponse(char* maxMessage)
 {
+    functionEntryLog("In handleStabilizeResponse\n");
+
     string predIP;// = inet_ntoa(senderProcAddrUDP.sin_addr);
     string predID;
+    bool isSuccChanged = false;
     
     // Send message to my successor to get his predecessor node
     Node* succNode = successors.getFirstSuccessor();
@@ -1478,6 +1579,8 @@ void Chord::handleStabilizeResponse(char* maxMessage)
             firstSucc->setNodeIP(predIP);
 
             successors.storeFirstSuccessor(firstSucc);
+
+            isSuccChanged = true;
         }
     }
     else{
@@ -1491,6 +1594,31 @@ void Chord::handleStabilizeResponse(char* maxMessage)
 
     sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
 
+    // Sleep here just to make sure notify update has been applied
+    //sleep(SLEEP_AFTER_NOTIFY);
+
+    isSuccChanged = true;
+    // Fix the finger table
+    if(isSuccChanged){
+        buildFingerTable(succIP, succID, true);
+        cout << "After buildFinger table in HandleResponseForstabilize\n";
+        cout.flush();
+    }
+
+    // Check for predecessor
+    if(pingSent){
+        if(predecessor){
+            delete predecessor;
+        }
+        predecessor = NULL;
+        pingSent = false;
+    }
+    else{
+        if(predecessor){
+            ping();
+        }
+    }
+    
 }
 
 
@@ -1502,6 +1630,8 @@ void Chord::stabilize(){
     Node* succNode = successors.getFirstSuccessor();
     string predIP;// = inet_ntoa(senderProcAddrUDP.sin_addr);
     string predID;
+
+    bool isSuccChange = false;
 
     if(!succNode){
         cout << "Successor Node is NULL\n";
@@ -1547,6 +1677,7 @@ void Chord::stabilize(){
             firstSucc->setNodeIP(predIP);
 
             successors.storeFirstSuccessor(firstSucc);
+            isSuccChange = true;
         }
     }
     else{
@@ -1554,11 +1685,33 @@ void Chord::stabilize(){
         fflush(NULL);
     }
 
+
     // Notify the successor and don't wait for any response
     succIP = successors.getFirstSuccessor()->getNodeIP();
     succID = successors.getFirstSuccessor()->getNodeID();
 
     sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
+
+    // Sleep to make sure that notify update has been done at successor.
+    //sleep(SLEEP_AFTER_NOTIFY);
+    
+    // fix finger table
+    //buildFingerTable(succIP, succID, true);
+
+    //cout << "After buildFinger table in stabilize\n";
+    //cout.flush();
+    if(pingSent){
+        if(predecessor){
+            delete predecessor;
+        }
+        predecessor = NULL;
+        pingSent = false;
+    }
+    else{
+        if(predecessor){
+            ping();
+        }
+    }
 }
 
 Node* Chord::getPredecessor(){
@@ -1859,11 +2012,15 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
     // find the successor of this fileID
     //Lies between the current node and successor node 
     //
+    cout << "File ID Length: " << fileID.length() << endl;
+    cout << "My node id length: " << localNodeID.length() << endl;
+    cout << "My Succ node if len: " << succNode->getNodeID().length() << endl;
+
     if(isInInterval(fileID, localNodeID, succNode->getNodeID()))
     {
         // Send the file to my successor to store it
         if(debug){
-            printf("Sending file to successor\n");
+            printf("Sending file to successor %s\n", succNode->getNodeIP().c_str());
             fflush(NULL);
         }
 
@@ -1891,7 +2048,7 @@ void Chord::handleClientPutMessage(string fileName, string fileValue, string cli
         }
         else{
             if(debug){
-                printf("Forwarding the message to the preceeding node\n");
+                printf("Forwarding the message to the preceeding node %s\n", closestPrecedingNodeIP.c_str());
                 fflush(NULL);
             }
             // Forward this message to the preceding Node
@@ -2078,8 +2235,8 @@ void Chord::sendResponseToClient(int method, string receiverIP, int resultCode, 
     if(sendto(clientSocket, message, messageLen, 0,
                 (struct sockaddr*) &receiverAddr, sizeof(receiverAddr)) == -1){
 
-        printf("%s: Failed to send the message type %d to client: %s",
-                localNode->getNodeIP().c_str(), SERVER_RES, receiverIP.c_str());
+        printf("%s: Failed to send the message type %d to client: %s with error: %d\n",
+                localNode->getNodeIP().c_str(), SERVER_RES, receiverIP.c_str(), errno);
         fflush(NULL);
     }
     else{

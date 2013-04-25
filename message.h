@@ -8,7 +8,8 @@
 #define SERVER_REQ  2
 #define SERVER_RES  3
 #define LEAVE_ENTRIES_MSG   4
-
+#define PING_REQ_TYPE 5
+#define PING_RES_TYPE 6
 
 typedef struct{
 
@@ -86,7 +87,9 @@ typedef struct{
     
 }LeaveMsgForPredecessor;
 
-
+typedef struct{
+    uint32_t type; // PING TYPE
+}pingMsg;
 
 
 #endif

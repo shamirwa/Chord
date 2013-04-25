@@ -58,6 +58,7 @@ void helperLS(char* maxMessage, int numParam)
 
     for(int i=0; i < numParameters; i++)
     {
+        cout << "Getting the fileNames " << endl;
         int* length = new int[1];
         memcpy(length,maxMessage + skipLenInt, sizeof(int));
         skipLenInt += sizeof(int);
