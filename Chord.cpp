@@ -968,6 +968,10 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen, bool isForFi
    
         generalInfoLog("Received request for leave");
 
+        generalInfoLog("My predecessor is leaving");
+
+        removeReference(getPredecessor());        
+
         totalParamsSize = 0;
         delete[] parameters;
         delete[] paramLenArr;
@@ -1026,6 +1030,8 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen, bool isForFi
     else if(strcmp(commandName, "changeSuccessor") == 0){
        
         generalInfoLog("Received request for changeSuccessor");
+    
+        removeReference(getFirstSuccessor());
 
         Node* succ = new Node;
         succ->setNodeID(senderID);
@@ -1038,6 +1044,7 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen, bool isForFi
 
         // Ask new successor to build the finger table
         //buildFingerTable(senderIP, senderID, true);
+        addReference(succ);
 
     }
     else if(strcmp(commandName, "storeFile") == 0 ||
@@ -1597,7 +1604,7 @@ void Chord::handleStabilizeResponse(char* maxMessage)
     // Sleep here just to make sure notify update has been applied
     //sleep(SLEEP_AFTER_NOTIFY);
 
-    isSuccChanged = true;
+    //isSuccChanged = true;
     // Fix the finger table
     if(isSuccChanged){
         buildFingerTable(succIP, succID, true);
@@ -1607,10 +1614,15 @@ void Chord::handleStabilizeResponse(char* maxMessage)
 
     // Check for predecessor
     if(pingSent){
+        
+        //Remove it from finger table
+        removeReference(predecessor);
+
+
         if(predecessor){
             delete predecessor;
         }
-        predecessor = NULL;
+                predecessor = NULL;
         pingSent = false;
     }
     else{
@@ -1619,6 +1631,222 @@ void Chord::handleStabilizeResponse(char* maxMessage)
         }
     }
     
+}
+
+void Chord::unsetEntry(int index)
+{
+
+    functionEntryLog("unsetEntry");
+
+    if (index < 0 || index >= FINGER_TABLE_SIZE) {
+        cout<<" unsetEntry was invoked with an index out of array "
+            << "bounds; index=" << index << ", length of array="
+            << FINGER_TABLE_SIZE << endl;
+    }
+    
+    string overWrittenID = "NULL";
+    string overWrittenIP = "NULL";
+
+    if(fingerTable.find(index) != fingerTable.end())
+    {
+        overWrittenID = fingerTable[index].first;
+        overWrittenIP = fingerTable[index].second;
+
+        fingerTable.erase(index);    
+    }
+
+    if(overWrittenID == "NULL" && overWrittenIP == "NULL")
+    {
+        cout<< "unsetEntry did not change anything because entry was null before " <<endl;
+
+    }
+    else if(overWrittenID == "NULL" || overWrittenIP == "NULL")
+    {
+        cout<<"Error : " << overWrittenID << " " << overWrittenIP << endl;
+        //what is java Chord doing here?
+    }
+    else
+    {
+        cout<<"unsetEntry did not do anything"<<endl;
+    }
+
+}
+
+void Chord::setEntry(int index,string referenceForReplacementID,string referenceForReplacementIP)
+{
+    functionEntryLog("setEntry");
+
+    if (index < 0 || index >= FINGER_TABLE_SIZE) {
+        cout<<" setEntry was invoked with an index out of array "
+            << "bounds; index=" << index << ", length of array="
+            << FINGER_TABLE_SIZE << endl;
+    }
+
+    if(referenceForReplacementIP == "NULL" || referenceForReplacementID == "NULL")
+    {
+        cout<< "setEntry NULL passed to set" << endl;
+    }
+    else
+    {
+        fingerTable[index] = make_pair(referenceForReplacementID,referenceForReplacementIP);
+        cout<< "index is set to: " << referenceForReplacementID << " " <<referenceForReplacementIP << endl;
+    }
+
+}
+
+void Chord::addReference(Node* nodeToAdd)
+{
+    functionEntryLog("addReference");
+    
+    if(nodeToAdd == NULL)
+    {
+        cout<<"addReference cannot be invoked with value null! Returning"<<endl;
+        return;
+    }
+    else
+    {
+        cout<<"Node ID to add is: "<< nodeToAdd->getNodeID();
+        cout<<"Node IP to add is: "<< nodeToAdd->getNodeIP();
+    }
+
+    string nodeToAddID = nodeToAdd->getNodeID();
+    string nodeToAddIP = nodeToAdd->getNodeIP();
+
+    int lowestWrittenIndex = -1;
+    int highestWrittenIndex = -1;
+
+    for(int i=0; i < FINGER_TABLE_SIZE; i++)
+    {
+        string startOfInterval = addPowerOfTwo(i,localNode->getNodeID());
+
+        if(!isInInterval(startOfInterval,localNode->getNodeID(),nodeToAddID))
+        {
+            cout << "Breaking from loop" << endl;
+            break;
+        }
+
+        if(lowestWrittenIndex == -1){
+            lowestWrittenIndex = i;
+        }
+        highestWrittenIndex = i;
+
+        if(fingerTable.find(i) == fingerTable.end())
+        {
+            fingerTable[i] = make_pair(nodeToAddID,nodeToAddIP);
+        }
+        else if(isInInterval(nodeToAddID,localNode->getNodeID(),
+                    fingerTable[i].first))	
+        {
+            fingerTable[i].first = nodeToAddID;
+            fingerTable[i].second = nodeToAddIP;
+        }
+
+    }
+
+    if(highestWrittenIndex == -1)
+    {
+        cout << " addReference did not add the given reference, "
+                                        <<  "because it did not fit anywhere!" <<endl;
+        
+        
+    }
+
+    if(highestWrittenIndex == lowestWrittenIndex)
+    {
+        cout << " Added reference to finger table entry " << highestWrittenIndex << endl;
+    }
+    else
+    {
+        cout << "Added reference to finger table entries "
+                                << lowestWrittenIndex << " to " << highestWrittenIndex << endl;
+    }
+
+}
+
+void Chord::removeReference(Node* nodeToRem)
+{
+    functionEntryLog("removeReference");
+
+    if(nodeToRem == NULL)
+    {
+        cout<<"Remove Reference cannot be invoked with value null! Returning"<<endl;
+        return;
+    }
+    else
+    {
+        cout<<"Node ID to remove is: "<< nodeToRem->getNodeID();
+        cout<<"Node IP to remove is: "<< nodeToRem->getNodeIP();    
+    }
+
+    string nodeToRemID = nodeToRem->getNodeID();
+    string nodeToRemIP = nodeToRem->getNodeIP();
+    
+    int lowestWrittenIndex = -1;
+    int highestWrittenIndex = -1;
+
+    string referenceForReplacementID = "NULL";
+    string referenceForReplacementIP = "NULL";
+    
+    for (int i = FINGER_TABLE_SIZE - 1; i >= 0; i--) {
+
+        if(fingerTable.find(i) != fingerTable.end())
+        {
+            string currID =  fingerTable[i].first;
+            string currIP =  fingerTable[i].second;
+
+            if (currID == nodeToRemID) {
+                break;
+            }
+            
+            //Why there is a NULL check here in java chord?
+            referenceForReplacementID = currID;
+            referenceForReplacementIP = currIP;
+        }
+    }
+
+    cout<<"Reference Replace ID: "<< referenceForReplacementID;
+    cout<<"Reference Replace IP: "<< referenceForReplacementIP;   
+
+    for (int i = 0; i < FINGER_TABLE_SIZE; i++) {
+
+        if(fingerTable.find(i) != fingerTable.end())
+        {
+            string currID = fingerTable[i].first;
+            string currIP = fingerTable[i].second;
+
+            if (currID == nodeToRemID) {
+                if (lowestWrittenIndex == -1) {
+                    lowestWrittenIndex = i;
+                }
+                highestWrittenIndex = i;
+
+                if (referenceForReplacementID == "NULL") {
+                    unsetEntry(i);
+                } else {
+                    setEntry(i, referenceForReplacementID, referenceForReplacementIP);
+                }
+            }
+        }
+    }
+    cout<<"After set and unset "<<endl;
+
+    //What is here in java code?
+
+    if (highestWrittenIndex == -1) {
+     cout<< "removeReference did not remove the given reference, "
+                    << "because it did not exist in finger table "
+                    << "anywhere!" << endl;
+    }
+    else if (highestWrittenIndex == lowestWrittenIndex) {
+        cout<<"Removed reference from finger table entry " << 
+                 highestWrittenIndex << endl;
+    }
+    else {
+       cout<<"Removed reference from finger table entries "
+                    << lowestWrittenIndex + " to "
+                    << highestWrittenIndex<<endl;
+    }
+
 }
 
 
@@ -1693,17 +1921,22 @@ void Chord::stabilize(){
     sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
 
     // Sleep to make sure that notify update has been done at successor.
-    //sleep(SLEEP_AFTER_NOTIFY);
+    sleep(SLEEP_AFTER_NOTIFY);
     
     // fix finger table
-    //buildFingerTable(succIP, succID, true);
+    buildFingerTable(succIP, succID, true);
 
     //cout << "After buildFinger table in stabilize\n";
     //cout.flush();
     if(pingSent){
+
+        //remove predecessor from finger table
+        removeReference(predecessor);
+
         if(predecessor){
-            delete predecessor;
+            delete predecessor;        
         }
+
         predecessor = NULL;
         pingSent = false;
     }

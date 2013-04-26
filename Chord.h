@@ -136,7 +136,13 @@ class Chord
 
         char* getLSClientMessage(int paramCount, int totalParamSize, int* lenArray, char* params, long& msgLen);
 
+        void removeReference(Node* nodeToRem);
 
+        void unsetEntry(int index);
+
+        void setEntry(int index,string referenceForReplacementID,string referenceForReplacementIP);
+
+        void addReference(Node* nodeToAdd);
 };
 
 
