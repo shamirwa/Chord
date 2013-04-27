@@ -176,8 +176,9 @@ void Chord::create(){
     Node* firstSucc = new Node;
     firstSucc->setNodeID(localNode->getNodeID());
     firstSucc->setNodeIP(localNode->getNodeIP());
-    successors.storeFirstSuccessor(firstSucc);
-
+   // successors.storeFirstSuccessor(firstSucc);
+    successors.storeSuccessor(firstSucc);
+ 
     this->createHelp();
 }
 
@@ -1040,7 +1041,8 @@ void Chord::handleRequestFromServer(char* msgRcvd, long messageLen, bool isForFi
         cout<<"My new successor is: "<<senderIP<<endl;
         cout.flush();
 
-        successors.storeFirstSuccessor(succ);
+        //successors.storeFirstSuccessor(succ);
+        successors.storeSuccessor(succ);
 
         // Ask new successor to build the finger table
         //buildFingerTable(senderIP, senderID, true);
@@ -1585,7 +1587,8 @@ void Chord::handleStabilizeResponse(char* maxMessage)
             firstSucc->setNodeID(predID);
             firstSucc->setNodeIP(predIP);
 
-            successors.storeFirstSuccessor(firstSucc);
+            //successors.storeFirstSuccessor(firstSucc);
+            successors.storeSuccessor(firstSucc);
 
             isSuccChanged = true;
         }
@@ -1655,12 +1658,12 @@ void Chord::unsetEntry(int index)
         fingerTable.erase(index);    
     }
 
-    if(overWrittenID == "NULL" && overWrittenIP == "NULL")
+    if((overWrittenID.compare("NULL") == 0) && overWrittenIP.compare("NULL") == 0)
     {
         cout<< "unsetEntry did not change anything because entry was null before " <<endl;
 
     }
-    else if(overWrittenID == "NULL" || overWrittenIP == "NULL")
+    else if((overWrittenID.compare("NULL") == 0) || (overWrittenIP.compare("NULL") == 0))
     {
         cout<<"Error : " << overWrittenID << " " << overWrittenIP << endl;
         //what is java Chord doing here?
@@ -1682,7 +1685,7 @@ void Chord::setEntry(int index,string referenceForReplacementID,string reference
             << FINGER_TABLE_SIZE << endl;
     }
 
-    if(referenceForReplacementIP == "NULL" || referenceForReplacementID == "NULL")
+    if((referenceForReplacementIP.compare("NULL") == 0) || (referenceForReplacementID.compare("NULL")==0))
     {
         cout<< "setEntry NULL passed to set" << endl;
     }
@@ -1705,12 +1708,21 @@ void Chord::addReference(Node* nodeToAdd)
     }
     else
     {
-        cout<<"Node ID to add is: "<< nodeToAdd->getNodeID();
-        cout<<"Node IP to add is: "<< nodeToAdd->getNodeIP();
+        cout<<"Node ID to add is: "<< nodeToAdd->getNodeID() <<endl;
+        cout<<"Node IP to add is: "<< nodeToAdd->getNodeIP() <<endl;
     }
 
     string nodeToAddID = nodeToAdd->getNodeID();
     string nodeToAddIP = nodeToAdd->getNodeIP();
+
+     
+    //store the node in successor list too
+    cout<<"Trying to add to successor List " << nodeToAddID << " " << nodeToAddIP << endl;
+
+    Node* newSucc = buildSuccessorNode(nodeToAddIP,nodeToAddID);    
+    successors.storeSuccessor(newSucc);
+
+
 
     int lowestWrittenIndex = -1;
     int highestWrittenIndex = -1;
@@ -1763,29 +1775,65 @@ void Chord::addReference(Node* nodeToAdd)
 
 }
 
+
 void Chord::removeReference(Node* nodeToRem)
 {
     functionEntryLog("removeReference");
 
-    if(nodeToRem == NULL)
+    if(!nodeToRem)
     {
         cout<<"Remove Reference cannot be invoked with value null! Returning"<<endl;
         return;
     }
     else
     {
-        cout<<"Node ID to remove is: "<< nodeToRem->getNodeID();
-        cout<<"Node IP to remove is: "<< nodeToRem->getNodeIP();    
+        cout<<"Node ID to remove is: "<< nodeToRem->getNodeID() << endl;
+        cout<<"Node IP to remove is: "<< nodeToRem->getNodeIP() << endl;    
+    }
+    
+    cout.flush();
+    
+    string nodeToRemID;
+    nodeToRemID.assign(nodeToRem->getNodeID());
+    string nodeToRemIP;
+    nodeToRemIP.assign(nodeToRem->getNodeIP());
+
+    //remove Reference From successor List
+    cout << " Current successor count: " << successors.getCurrentSuccessorCount() << endl;
+    successors.removeSuccessor(nodeToRem->getNodeIP());
+    cout << "After removeSuccessor" << endl;
+
+    if(predecessor){
+        cout << "Predecessor is: " << predecessor->getNodeIP();
+        cout.flush();    
     }
 
-    string nodeToRemID = nodeToRem->getNodeID();
-    string nodeToRemIP = nodeToRem->getNodeIP();
+   
+    if(predecessor)
+    {
+        string predIP =  predecessor->getNodeIP();
+        cout<< "PredIP " << predIP;
+        if(predIP.compare(nodeToRemIP) == 0)
+        {
+            cout << " IN pred cond" << endl;
+            delete predecessor;
+            predecessor = NULL;
+        }
+    }
     
+    cout<< "Alive after predecessor" << endl;
+    cout.flush();
+
+   
+    cout<< "Alive after getting node id and ip " <<endl;
+
     int lowestWrittenIndex = -1;
     int highestWrittenIndex = -1;
 
     string referenceForReplacementID = "NULL";
     string referenceForReplacementIP = "NULL";
+
+    cout<< " After declaration " <<endl;
     
     for (int i = FINGER_TABLE_SIZE - 1; i >= 0; i--) {
 
@@ -1794,7 +1842,7 @@ void Chord::removeReference(Node* nodeToRem)
             string currID =  fingerTable[i].first;
             string currIP =  fingerTable[i].second;
 
-            if (currID == nodeToRemID) {
+            if (currID.compare(nodeToRemID) == 0) {
                 break;
             }
             
@@ -1806,7 +1854,8 @@ void Chord::removeReference(Node* nodeToRem)
 
     cout<<"Reference Replace ID: "<< referenceForReplacementID;
     cout<<"Reference Replace IP: "<< referenceForReplacementIP;   
-
+    cout.flush();
+    
     for (int i = 0; i < FINGER_TABLE_SIZE; i++) {
 
         if(fingerTable.find(i) != fingerTable.end())
@@ -1814,13 +1863,13 @@ void Chord::removeReference(Node* nodeToRem)
             string currID = fingerTable[i].first;
             string currIP = fingerTable[i].second;
 
-            if (currID == nodeToRemID) {
+            if (currID.compare(nodeToRemID) == 0) {
                 if (lowestWrittenIndex == -1) {
                     lowestWrittenIndex = i;
                 }
                 highestWrittenIndex = i;
 
-                if (referenceForReplacementID == "NULL") {
+                if (referenceForReplacementID.compare("NULL") == 0) {
                     unsetEntry(i);
                 } else {
                     setEntry(i, referenceForReplacementID, referenceForReplacementIP);
@@ -1847,6 +1896,7 @@ void Chord::removeReference(Node* nodeToRem)
                     << highestWrittenIndex<<endl;
     }
 
+    cout.flush();
 }
 
 
@@ -1904,7 +1954,8 @@ void Chord::stabilize(){
             firstSucc->setNodeID(predID);
             firstSucc->setNodeIP(predIP);
 
-            successors.storeFirstSuccessor(firstSucc);
+            //successors.storeFirstSuccessor(firstSucc);
+            successors.storeSuccessor(firstSucc);
             isSuccChange = true;
         }
     }
@@ -1921,10 +1972,11 @@ void Chord::stabilize(){
     sendRequestToServer(NOTIFY_SUCCESSOR, succIP, localNode->getNodeID());
 
     // Sleep to make sure that notify update has been done at successor.
-    sleep(SLEEP_AFTER_NOTIFY);
+   // sleep(SLEEP_AFTER_NOTIFY);
     
     // fix finger table
-    buildFingerTable(succIP, succID, true);
+    if(isSuccChange)
+        buildFingerTable(succIP, succID, true);
 
     //cout << "After buildFinger table in stabilize\n";
     //cout.flush();

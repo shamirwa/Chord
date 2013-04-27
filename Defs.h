@@ -28,7 +28,7 @@ using namespace std;
 
 #define FILE_ALREADY_STORED "Error: File is already stored in the node"
 
-#define NUM_SUCCESSOR 1 // Number of successors to store in the list
+#define NUM_SUCCESSOR 4 // Number of successors to store in the list
 
 #define ID_WITH_DIFF_LENGTH "ID's with different length cannot be compared"
 

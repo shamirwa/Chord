@@ -9,7 +9,7 @@ class SuccessorList{
 
     private:
         int maxNumSuccessors;
-        list<Node*> successors;
+        list<Node*> successorList;
         list<Node*>::iterator myIterator;
         string localID;
     

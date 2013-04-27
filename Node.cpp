@@ -5,16 +5,18 @@ Node::Node(){
     entryList.clear();
 }
 
-Node::~Node(){}
+Node::~Node(){
+    entryList.clear();    
+}
 
 const string Node::getNodeID(){
 
-    return this->localID;
+    return localID;
 }
 
 const string Node::getNodeIP(){
 
-    return this->localIP;
+    return localIP;
 }
 
 void Node::setNodeID(string id){

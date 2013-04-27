@@ -3,7 +3,7 @@
 
 SuccessorList::SuccessorList(){
     maxNumSuccessors = 0;
-    this->successors.clear();
+    this->successorList.clear();
 }
 
 SuccessorList::SuccessorList(int capacity, string myLocalKey){
@@ -15,9 +15,9 @@ SuccessorList::SuccessorList(int capacity, string myLocalKey){
 
 SuccessorList::~SuccessorList(){
 
-    if(this->successors.size() != 0){
-        for(myIterator = successors.begin();
-            myIterator != successors.end();
+    if(this->successorList.size() != 0){
+        for(myIterator = successorList.begin();
+            myIterator != successorList.end();
             ++myIterator)
         {
             if(*myIterator){
@@ -26,7 +26,7 @@ SuccessorList::~SuccessorList(){
         }
     }
 
-    successors.clear();
+    successorList.clear();
 }
 
 void SuccessorList::setMaxNumSuccssor(int maxSuccCount){
@@ -44,8 +44,8 @@ bool SuccessorList::checkIfSuccessorExists(Node* successor){
     // Check if a node with the same IP exists in the
     // successor list. If its already there then just
     // update the ID of the node
-    for(myIterator = successors.begin();
-        myIterator != successors.end();
+    for(myIterator = successorList.begin();
+        myIterator != successorList.end();
         ++myIterator){
 
         if((*myIterator)->getNodeIP() == successor->getNodeIP()){
@@ -64,9 +64,9 @@ bool SuccessorList::checkIfSuccessorExists(Node* successor){
 Node* SuccessorList::getFirstSuccessor(){
     // Returns the first successor
     // First checks the count of the successor present in the list
-    if(successors.size() > 0){
+    if(successorList.size() > 0){
 
-        return successors.front();
+        return successorList.front();
     }
     else{
         return NULL;
@@ -78,18 +78,18 @@ Node* SuccessorList::getFirstSuccessor(){
 
 void SuccessorList::storeFirstSuccessor(Node* firstSucc){
 
-    if(successors.size() > 0){
-        Node* currSucc = successors.front();
-        successors.pop_front();
+    if(successorList.size() > 0){
+        Node* currSucc = successorList.front();
+        successorList.pop_front();
 
         delete currSucc;
 
         // store the new succ
-        successors.push_front(firstSucc);
+        successorList.push_front(firstSucc);
 
     }
-    else if(successors.size() == 0){
-        successors.push_front(firstSucc);
+    else if(successorList.size() == 0){
+        successorList.push_front(firstSucc);
 
     }
 
@@ -104,24 +104,24 @@ void SuccessorList::storeSuccessor(Node* newSuccessor){
     if(checkIfSuccessorExists(newSuccessor)){
         cout << "Successor is already present in the list\n";
     }
-    else if(successors.size() < maxNumSuccessors){
+    else if(successorList.size() < maxNumSuccessors){
 
         //Find the correct position of the newSuccessor
         list<Node*>::iterator myIter;
-        myIter = successors.begin();
+        myIter = successorList.begin();
 
-        while(myIter != successors.end())
+        while(myIter != successorList.end())
         {
             if(isInInterval(newSuccessor->getNodeID(),getLocalID(),(*myIter)->getNodeID()))
             {
                    cout<< "Found position for the new successor\n"; 
-                   successors.insert(myIter,newSuccessor);
+                   successorList.insert(myIter,newSuccessor);
                    break;
             }
             ++myIter;
         }
-        if(myIter == successors.end())
-            successors.push_back(newSuccessor);
+        if(myIter == successorList.end())
+            successorList.push_back(newSuccessor);
     }
     else{
         cout << " Successor list is already full\n";
@@ -135,7 +135,7 @@ string SuccessorList::getLocalID(){
 
 int SuccessorList::getCurrentSuccessorCount(){
     
-    return successors.size();
+    return successorList.size();
 }
 
 int SuccessorList::getMaxSuccessorCount(){
@@ -143,17 +143,57 @@ int SuccessorList::getMaxSuccessorCount(){
 }
 
 void SuccessorList::removeSuccessor(string ipToFind){
-
-    for(myIterator = successors.begin();
-        myIterator != successors.end();
+    //Node* nodeToRemove = NULL;
+    functionEntryLog("IN removeSuccessor");
+    /*
+    for(myIterator = successorList.begin();
+        myIterator != successorList.end();
         ++myIterator)
     {
 
         if((*myIterator) && 
-            (*myIterator)->getNodeIP() == ipToFind){
+            (*myIterator)->getNodeIP().compare(ipToFind)== 0){
 
             cout << "Successor found in the list. So now remove\n";
-            delete(*myIterator);
+            delete nodeToRemove;
+            successorList.erase(myIterator);
+        }
+    }*/
+
+    int count = 0;
+    string ipInList;
+    cout << "Count in success remove method " << successorList.size() << endl;
+
+    list<Node*>::iterator myIter = successorList.begin();
+    /*for(myIter = successorList.begin();
+        myIter != successorList.end();
+        ++myIter)
+    {
+
+
+        if((*myIter) && 
+                ipInList.compare(ipToFind)== 0){
+
+            cout << "Successor found in the list. So now remove\n";
+            delete nodeToRemove;
+            //successorList.erase(myIter);
+            break;
+        }
+    }*/
+
+    while(myIter != successorList.end()){
+
+        ipInList.assign((*myIter)->getNodeIP());
+        cout << "Count: " << count++ << "IP: " << ipInList << endl;
+        
+        if((*myIter) && ipInList.compare(ipToFind)== 0){
+
+            myIter = successorList.erase(myIter);
+        }
+        else{
+            ++myIter;
         }
     }
+
+    cout << "After erasing in remove method" << endl;
 }

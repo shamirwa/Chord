@@ -143,6 +143,7 @@ class Chord
         void setEntry(int index,string referenceForReplacementID,string referenceForReplacementIP);
 
         void addReference(Node* nodeToAdd);
+
 };
 
 
